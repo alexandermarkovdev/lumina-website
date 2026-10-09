@@ -1,0 +1,22 @@
+{
+  "desk": {
+    "file": "images/creative-desk.png",
+    "source": "Generated with the built-in image generation tool",
+    "prompt": "Use case: product-mockup. Asset type: photographic background for a small website portfolio tile. Create one polished editorial still-life photograph, landscape 3:2. A vivid sky-blue painted wall and pastel pink desktop, diagonal meeting line from lower left to upper right. On the RIGHT half: an open thin silver laptop with a dark black blank screen, keyboard visible, cut off naturally by right image edge, a leafy green plant in a small matte pale-pink cylindrical pot behind laptop, a simple white ceramic coffee mug in front of plant. One closed cream notebook and black pen near bottom center. Keep TOP LEFT QUARTER mostly empty solid blue wall for black headline overlay. Keep bottom left corner mostly empty pink desk for small text overlay. Photorealistic product photography, crisp fine texture, soft natural window light, gentle realistic shadows, eye-level three-quarter camera looking slightly down. Strong fresh blue and pink palette matching a playful modern web design studio. No text, no letters, no logos, no watermark, no borders, no graphic overlays. The objects should occupy the right 60 percent and lower third, leaving a genuinely clear top-left text area."
+  },
+  "interior": {
+    "file": "images/interior.jpg",
+    "source": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85"
+  },
+  "logo": {
+    "file": "images/lumina-logo.png",
+    "source": "User-provided lumina-logo.png"
+  },
+  "fonts": {
+    "families": [
+      "Manrope",
+      "Caveat"
+    ],
+    "source": "Google Fonts; self-hosted TrueType files"
+  }
+}

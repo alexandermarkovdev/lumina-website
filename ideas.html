@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Lumina — ideas, before and after</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="ideas/gallery.css">
+  <script src="ideas/data.js" defer></script>
+  <script src="ideas/gallery.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <p class="top-hand">for the Lumina site</p>
+    <h1><span id="idea-count">20</span> new ideas,<br>before and after.</h1>
+    <div class="top-text">
+      <p>Every frame below is your real site, live. The Before frame is the site as it is now; the After frame is the same page with one change applied on top. Nothing in your site files has been edited.</p>
+      <p>You can hover, click and scroll inside the frames. Tick the ideas you like, then look at all your picks together on the full site or copy the list and send it to me to build in.</p>
+    </div>
+  </header>
+
+  <nav class="bar" aria-label="Sections and picks">
+    <div class="bar-links" id="bar-links"></div>
+    <div class="bar-picks">
+      <span id="pick-count">Nothing picked yet</span>
+      <a id="pick-preview" class="bar-button" href="ideas-preview.html" target="_blank" rel="noopener" hidden>See picks together</a>
+      <button id="pick-copy" class="bar-button is-quiet" type="button" hidden>Copy list</button>
+    </div>
+  </nav>
+
+  <main id="ideas"></main>
+  <noscript><p class="top-text">This page needs JavaScript to load the previews.</p></noscript>
+</body>
+</html>

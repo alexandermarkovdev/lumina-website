@@ -1,0 +1,8 @@
+LUMINA — COMPLETE WEBSITE
+
+Open index.html in your browser to view the complete site.
+Keep index.html beside the styles, scripts, and assets folder.
+Upload this folder’s contents to a static website host to publish.
+
+Includes the homepage, business examples, connected services, portfolio gallery, and contact design.
+The contact form is a design demo and does not send requests. Portfolio projects are placeholders.

@@ -1,0 +1,8 @@
+# Local safety copies made before edits; kept on this computer only.
+backup-before-ideas/
+
+# Operating-system and editor leftovers.
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp

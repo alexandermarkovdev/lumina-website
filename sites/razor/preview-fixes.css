@@ -1,0 +1,40 @@
+/* The source retains a 96px desktop right gutter on small phones, which lets
+   the grid's intrinsic minimum clip the intro. Keep the site's mobile gutter
+   and allow its single column to fit the actual viewport. */
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:minmax(0,1fr);padding-right:var(--gutter)}
+  .hero-copy{min-width:0}
+}
+/* Skip delayed entrances only in Lumina; leave scroll effects and orbit running. */
+html[data-lumina-preview] .hero .open-pill,
+html[data-lumina-preview] .hero-kicker,
+html[data-lumina-preview] .hero h1 .w>span,
+html[data-lumina-preview] .hero-rule span,
+html[data-lumina-preview] .hero-rule .icon,
+html[data-lumina-preview] .hero-intro,
+html[data-lumina-preview] .hero-actions,
+html[data-lumina-preview] .hero-circle img,
+html[data-lumina-preview] .orbit-trail,
+html[data-lumina-preview] .orbit-scissors{animation:none}
+/* A device screen keeps its CSS width while scrolling, like a touch browser. */
+html[data-lumina-preview]{scrollbar-width:none;overscroll-behavior:none}
+html[data-lumina-preview]::-webkit-scrollbar{display:none}
+@media(max-width:860px){
+  html[data-lumina-preview] .hero-copy{max-width:none}
+  html[data-lumina-preview] .hero-rule{width:100%;max-width:none}
+}
+
+/* Embedded previews do not need a full-screen animated noise texture. On high-DPR
+   phones its oversized fixed layer is rasterized separately in every iframe. */
+html[data-lumina-preview] body::after{content:none!important;display:none!important;animation:none!important;background-image:none!important}
+html[data-lumina-preview] .site-header.is-scrolled{-webkit-backdrop-filter:none;backdrop-filter:none}
+/* Keep the scissors, but avoid large image-mask repaints in the three small tours. */
+html[data-lumina-thumbnail] [data-clip] img,
+html[data-lumina-thumbnail] .map[data-clip]{clip-path:none;transition:none}
+html[data-lumina-thumbnail] [data-reveal]{translate:none;transition:opacity .35s ease}
+html[data-lumina-thumbnail] .float-cta{display:none}
+/* Keep the page height fixed during the automatic camera move. */
+html[data-lumina-thumbnail] .header-inner{height:84px!important;transition:none}
+html[data-lumina-thumbnail] .site-header .logo{transform:none;transition:none}
+@media(max-width:1180px){html[data-lumina-thumbnail] .header-inner{height:72px!important}}
+html[data-lumina-preview] .orbit-scissors{left:0;top:0;will-change:transform}

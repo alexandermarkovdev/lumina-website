@@ -1,0 +1,44 @@
+/* Online booking demo for the portfolio copy of the site (see booking-demo.js).
+   The form sits beside the intro; the working-hours card moves under the intro text. */
+.booking .wrap{align-items:start;row-gap:36px}
+.book-online{grid-column:2;grid-row:1/span 2}
+.booking .wrap>#rabotno-vreme{grid-column:1;grid-row:2}
+@media(max-width:1000px){.book-online,.booking .wrap>#rabotno-vreme{grid-column:auto;grid-row:auto}}
+
+.book-online form{display:flex;flex-direction:column;gap:22px}
+.bk-label{display:block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;padding:0}
+.bk-group{border:0;margin:0;padding:0;min-width:0}
+.bk-days{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.bk-day{flex:0 0 58px;height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:700 12px/1 var(--sans);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.bk-day strong{font-size:19px;font-variant-numeric:tabular-nums}
+.bk-day:hover:not(:disabled){border-color:var(--slate)}
+.bk-day[aria-pressed=true]{background:var(--charcoal);border-color:var(--charcoal);color:#fff}
+.bk-day:disabled{background:var(--light);color:#a4acb2;text-decoration:line-through;cursor:not-allowed}
+.bk-day:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
+.bk-slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:6px}
+.bk-slot{position:relative}
+.bk-slot input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.bk-slot input:disabled{cursor:not-allowed}
+.bk-slot span{display:flex;align-items:center;justify-content:center;height:44px;border:1px solid var(--line);border-radius:10px;font-size:14px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;transition:background .2s,color .2s,border-color .2s}
+.bk-slot input:hover:not(:disabled)+span{border-color:var(--slate)}
+.bk-slot input:checked+span{background:var(--charcoal);border-color:var(--charcoal);color:#fff}
+.bk-slot input:disabled+span{background:var(--light);color:#a4acb2;text-decoration:line-through}
+.bk-slot input:focus-visible+span{outline:2px solid var(--slate);outline-offset:2px}
+.bk-status{font-size:13px;line-height:1.5;color:var(--muted);margin:10px 0 0}
+.bk-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bk-fields input{width:100%;height:52px;border:1px solid #c9cfd3;border-radius:10px;padding:0 16px;font:500 16px var(--sans);color:var(--ink);background:#fff}
+.bk-fields input::placeholder{color:#8a949b}
+.bk-fields input:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
+.bk-fields input[aria-invalid=true]{border-color:#b3261e}
+.bk-message{font-size:14px;line-height:1.55;color:var(--body);margin:0}
+.bk-message:empty{display:none}
+.bk-message.error{color:#b3261e;font-weight:600}
+.bk-message.ok{background:var(--light);border-radius:10px;padding:14px 16px}
+.book-online button.btn{border:0;font-family:inherit;cursor:pointer}
+.book-online button.btn:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:560px){.bk-fields{grid-template-columns:1fr}}
+
+/* The main heading is longer than the line it replaced. */
+.hero h1{font-size:76px}
+@media(max-width:1180px){.hero h1{font-size:58px}}
+@media(max-width:560px){.hero h1{font-size:40px}}
