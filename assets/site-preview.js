@@ -243,7 +243,7 @@
     frame.addEventListener('load',()=>{screen.resettingHome=false;screen.el.dataset.loads=String(Number(screen.el.dataset.loads||0)+1);checking=false;check();});
     frame.addEventListener('error',fail);
     const url=new URL(screen.project.url,document.baseURI);
-    url.searchParams.set('lumina-revision','preview-core-29');
+    url.searchParams.set('lumina-revision','preview-core-30');
     if(screen.project.smoothTour&&!interactive)url.searchParams.set('lumina-thumbnail','1');
     if(screen.project.previewParam)url.searchParams.set(screen.project.previewParam,'1');
     frame.src=url.href;screen.display.append(frame);
@@ -281,6 +281,9 @@
     if(show){
       const modes=dialog.open?[state.mode]:SCENE_MODES;
       modes.forEach(mode=>wanted.add(getScreen(registry.get(active),mode)));
+      // The stage's own screen stays loaded behind the viewer, so closing returns to a live
+      // page instead of a reload (which showed as a blank flash in the card).
+      const stage=dialog.open&&screens.get(active+'/'+SCENE_MODES[0]);if(stage?.frame)wanted.add(stage);
     }
     const changed=[...screens.values()].some(s=>!!s.frame!==wanted.has(s));
     if(changed&&!dialog.open){
@@ -648,7 +651,9 @@
   }
   function cleanup() {
     if(dialog.open||!state.project)return;
-    const compact=compactPreview();
+    const stage=screens.get(active+'/'+SCENE_MODES[0]);
+    // The release-and-reload cycle is only needed when the stage has no live screen to return to.
+    const compact=compactPreview()&&!stage?.ready;
     if(compact)rotation.holds.add('viewer-return');
     ++state.seq;stopViewerTour();cancelAnimations();screens.forEach(s=>s.presentation?.stop());
     document.documentElement.style.overflow=state.saved.overflow;
@@ -664,6 +669,8 @@
     const resetLanding=()=>{
       if(dialog.open||state.seq!==closedVersion)return;
       screens.forEach(restoreScroll);window.scrollTo({...returnPosition,behavior:'instant'});layoutThumbnails();
+      // Back from the phone view: move the stage's page to the same part before it is painted.
+      if(stage?.ready&&stage.pendingPlace)applyPlace(stage);
     };
     history.replaceState(history.state,'',location.pathname+location.search+saved.hash);
     if(compact){
@@ -687,7 +694,18 @@
     state.closing=true;const seq=++state.seq,screen=state.screen,from=rect(screen.el);
     stopViewerTour();cancelAnimations();rememberScroll(screen);if(screen.frame)screen.frame.inert=true;
     // Closing from the phone view: the stage's desktop card picks up at the same part.
-    const shown=getScreen(screen.project,SCENE_MODES[0]);if(shown!==screen&&screen.ready)setPlace(shown,capturePlace(screen));
+    const shown=getScreen(screen.project,SCENE_MODES[0]);
+    if(shown!==screen&&screen.ready){
+      const spot=capturePlace(screen);setPlace(shown,spot);
+      if(shown.ready){
+        // The stage's screen is still loaded: bring it back under the fading viewer and move it
+        // now and over its first frames, so it is already in place when revealed.
+        placeThumbnail(shown);applyPlace(shown);
+        // A page that was hidden can snap back to its old position on its first frames.
+        const again=left=>requestAnimationFrame(()=>{if(seq!==state.seq||!shown.ready)return;setPlace(shown,spot);applyPlace(shown);if(left)again(left-1);});
+        again(3);
+      }
+    }
     const device=deviceFor(screen),target=device?rect(device.box):null;
     let animation;
     if(!compactPreview()&&motion()&&visible(target)){
