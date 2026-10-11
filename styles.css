@@ -207,3 +207,6 @@ html,body{overflow-x:clip}
   .pink-note .note-wide{display:none}
   .pink-note .note-phone{display:block}
 }
+
+/* "Защо ви е сайт?" leads to the section below, so its arrow points down and nudges down on hover. */
+.hero-intro .text-link:hover .icon{transform:translateY(3px)}
