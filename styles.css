@@ -193,3 +193,17 @@ html{-webkit-text-size-adjust:100%}
 
 /* The page itself never pans sideways on a phone; only the rows meant to be swiped do. */
 html,body{overflow-x:clip}
+
+/* Phone-only top of the page: heading, the example site, then the words. The note on the
+   picture is the demo offer (yellow) and links to the form; the big yellow note and the small
+   label are dropped, and the yellow bar at the bottom of the screen appears on scrolling. */
+.pink-note .note-phone{display:none}
+@media(max-width:600px){
+  .hero .hero-heading{order:1;padding-bottom:0}
+  .hero .hero-caption,.hero .demo-note,.hero .process-note{display:none}
+  .hero .showcase{order:2;margin:24px -5px 0}
+  .hero .hero-intro{order:3;margin-top:30px}
+  .pink-note{background:var(--yellow)}
+  .pink-note .note-wide{display:none}
+  .pink-note .note-phone{display:block}
+}
