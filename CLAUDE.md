@@ -26,6 +26,7 @@ Header (sticky on desktop, hamburger under 850px) → hero → service strip wit
 | `assets/site-preview.js` / `.css` | Engine that loads the sites in iframes, auto-scrolls them and opens the desktop/phone viewer (which keeps scrolling until the visitor clicks, scrolls or presses a key, has play/pause and restart buttons, and keeps the same section in view when switching between desktop and phone). Adapted from `archive/preview-engine-original/`; read `Lumina-embedded-tech-guide.md` before changing it. |
 | `contact.css` / `contact.js` | Contact form; the JS builds the markup. |
 | `demo-cta.css` | The yellow demo note's entrance and periodic jiggle. |
+| `cookies.css` / `cookies.js` | Cookie notice and the „Бисквитки“ link in the footer that reopens it. Google Analytics loads only after „Приемам“, and only once `GA_ID` at the top of `cookies.js` is filled in (it was empty when this was written). |
 | `sites/` | Static copies of the four client sites (razor, vsi, jtn, mypizza). `sites/razor` has a demo booking form added (`booking-demo.js/.css`) that says clearly it makes no real booking. |
 
 Several CSS files still contain rules for layout variants that were discarded long ago; they are dead, not load-bearing.

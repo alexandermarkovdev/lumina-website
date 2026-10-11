@@ -1,0 +1,23 @@
+/* Cookie notice (built by cookies.js) and the "Бисквитки" link in the footer that reopens it. */
+.cookie-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; background: var(--ink); color: var(--paper); padding: 18px 0 calc(18px + env(safe-area-inset-bottom, 0px)); box-shadow: 0 -10px 30px #0b0c0e2e; }
+.cookie-bar[hidden] { display: none; }
+.cookie-bar-inner { width: min(1274px, calc(100% - 128px)); margin: 0 auto; display: flex; align-items: center; gap: 32px; }
+.cookie-bar p { flex: 1; font-size: 14px; line-height: 1.55; max-width: 78ch; }
+.cookie-bar-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.cookie-bar button { border: 0; padding: 12px 20px 13px; font: 800 14px/1 Manrope, sans-serif; letter-spacing: -.01em; color: var(--ink); background: var(--yellow); cursor: pointer; clip-path: polygon(2% 8%,98% 0,100% 92%,0 100%); }
+.cookie-bar button.cookie-decline { background: var(--paper); }
+.cookie-bar button:hover { filter: brightness(.93); }
+.cookie-bar button:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; clip-path: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .cookie-bar { animation: cookie-bar-in .45s var(--ease) backwards; }
+  @keyframes cookie-bar-in { from { transform: translateY(100%); } }
+}
+.cookie-settings { grid-column: 1 / -1; justify-self: start; border: 0; padding: 6px 0; background: none; font: inherit; font-size: 13px; color: var(--muted); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.cookie-settings:hover { color: var(--ink); }
+@media (max-width: 1180px) { .cookie-bar-inner { width: calc(100% - 64px); } }
+@media (max-width: 700px) {
+  .cookie-bar { padding-top: 16px; }
+  .cookie-bar-inner { width: calc(100% - 36px); display: block; }
+  .cookie-bar p { font-size: 13px; margin-bottom: 14px; }
+  .cookie-bar-actions button { flex: 1; padding: 14px 10px 15px; }
+}
