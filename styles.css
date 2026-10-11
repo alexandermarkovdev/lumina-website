@@ -190,3 +190,6 @@ html{-webkit-text-size-adjust:100%}
 
 /* The hero heading is longer since "Сайт за вашия бизнес, изцяло от нас."; a little smaller so its widest line clears the intro text and the phone gutter. */
 #hero-title span{font-size:.9em}
+
+/* The page itself never pans sideways on a phone; only the rows meant to be swiped do. */
+html,body{overflow-x:clip}

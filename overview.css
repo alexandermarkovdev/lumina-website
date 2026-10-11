@@ -143,3 +143,9 @@
   .overview-dots i { width: 20px; height: 6px; background: #0b0c0e2e; clip-path: polygon(0 18%,100% 0,97% 100%,3% 82%); transition: width .25s var(--ease), background .25s; }
   .overview-dots i.on { width: 38px; background: var(--ink); }
 }
+
+/* Phones: one example fills the row and the swipe stops on each one, so nothing is left half-way and no strip of the next example shows. */
+@media (max-width: 600px) {
+  .overview-grid { gap: 36px; }
+  .overview-grid > .business-preview { flex: 0 0 100%; scroll-snap-stop: always; }
+}

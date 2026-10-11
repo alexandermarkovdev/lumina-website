@@ -243,7 +243,7 @@
     frame.addEventListener('load',()=>{screen.resettingHome=false;screen.el.dataset.loads=String(Number(screen.el.dataset.loads||0)+1);checking=false;check();});
     frame.addEventListener('error',fail);
     const url=new URL(screen.project.url,document.baseURI);
-    url.searchParams.set('lumina-revision','preview-core-28');
+    url.searchParams.set('lumina-revision','preview-core-29');
     if(screen.project.smoothTour&&!interactive)url.searchParams.set('lumina-thumbnail','1');
     if(screen.project.previewParam)url.searchParams.set(screen.project.previewParam,'1');
     frame.src=url.href;screen.display.append(frame);
@@ -522,8 +522,11 @@
       return {y,height:doc.scrollingElement.scrollHeight,anchors};
     }catch{return null;}
   }
+  // While a screen loads for a spot further down, its still picture (the top of the page)
+  // would flash first and then jump; show the site's background colour instead.
+  function setPlace(screen,place){screen.pendingPlace=place;screen.el.classList.toggle('is-placing',!!place&&place.y>40);}
   function applyPlace(screen){
-    const place=screen.pendingPlace;screen.pendingPlace=null;if(!place)return;
+    const place=screen.pendingPlace;setPlace(screen,null);if(!place)return;
     try{
       const win=screen.frame.contentWindow,doc=win.document,now=win.scrollY,height=doc.scrollingElement.scrollHeight;
       // Matching landmarks as [old top, new top], kept in page order in both layouts.
@@ -629,9 +632,9 @@
     state.project=registry.get(id);state.mode=MODES.includes(mode)?mode:autoMode();state.screen=getScreen(state.project,state.mode);state.opener=opener;state.closing=false;++state.seq;
     state.source=devices.find(d=>d.button===opener)||deviceFor(state.screen);
     const source=state.source,from=source?rect(source.box):null;
-    cancelAnimations();screens.forEach(s=>{s.presentation?.stop();rememberScroll(s);s.pendingPlace=null;});
+    cancelAnimations();screens.forEach(s=>{s.presentation?.stop();rememberScroll(s);setPlace(s,null);});
     // A phone opens the phone view from the stage's desktop card: start at the same part.
-    const shown=screens.get(id+'/'+SCENE_MODES[0]);if(shown&&shown!==state.screen&&shown.ready)state.screen.pendingPlace=capturePlace(shown);
+    const shown=screens.get(id+'/'+SCENE_MODES[0]);if(shown&&shown!==state.screen&&shown.ready)setPlace(state.screen,capturePlace(shown));
     state.saved={overflow:document.documentElement.style.overflow,x:scrollX,y:scrollY,hash:location.hash};
     document.documentElement.style.overflow='hidden';
     dialog.querySelector('#lp-title').textContent=state.project.name+' — преглед на сайта';
@@ -684,7 +687,7 @@
     state.closing=true;const seq=++state.seq,screen=state.screen,from=rect(screen.el);
     stopViewerTour();cancelAnimations();rememberScroll(screen);if(screen.frame)screen.frame.inert=true;
     // Closing from the phone view: the stage's desktop card picks up at the same part.
-    const shown=getScreen(screen.project,SCENE_MODES[0]);if(shown!==screen&&screen.ready)shown.pendingPlace=capturePlace(screen);
+    const shown=getScreen(screen.project,SCENE_MODES[0]);if(shown!==screen&&screen.ready)setPlace(shown,capturePlace(screen));
     const device=deviceFor(screen),target=device?rect(device.box):null;
     let animation;
     if(!compactPreview()&&motion()&&visible(target)){
@@ -697,7 +700,7 @@
   function switchMode(mode) {
     if(!MODES.includes(mode)||mode===state.mode||!dialog.open||state.closing)return;
     const before=rect(state.screen.el),touring=!!viewerTour.screen,place=capturePlace(state.screen);cancelAnimations();state.screen.presentation?.stop();rememberScroll(state.screen);
-    state.mode=mode;state.screen=getScreen(state.project,mode);state.screen.pendingPlace=place;syncScreens();layoutViewer();restoreScroll(state.screen);
+    state.mode=mode;state.screen=getScreen(state.project,mode);setPlace(state.screen,place);syncScreens();layoutViewer();restoreScroll(state.screen);
     if(state.screen.ready)applyPlace(state.screen);
     if(touring)startViewerTour(state.screen);
     state.screen.presentation?.run({cursor:false});

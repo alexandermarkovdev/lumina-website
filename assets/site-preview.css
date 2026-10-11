@@ -125,3 +125,5 @@ html{scrollbar-gutter:stable}
 .lp-playback svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .lp-playback .lp-solid{fill:currentColor}
 @media (max-width:650px){.lp-playback{height:42px;padding:3px}.lp-playback button{width:36px;height:36px}}
+/* A screen loading for a spot further down the page: no still picture of the top (see setPlace). */
+.lp-surface.is-placing:not(.is-live) .lp-poster{opacity:0}
