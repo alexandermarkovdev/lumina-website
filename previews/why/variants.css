@@ -133,3 +133,5 @@ body[data-variant] .why-overview { margin-top: 30px; border-top: 0; padding-bott
   .v3-search { position: relative; top: 0; left: 0; width: auto; max-width: 260px; margin: 0 0 14px 6px; }
   [data-variant="4"] .overview-lead ol { grid-template-columns: 1fr; gap: 12px; }
 }
+/* The real page's phone tabs only belong where the swipe row is kept. */
+body[data-variant="1"] .overview-tabs, body[data-variant="2"] .overview-tabs, body[data-variant="3"] .overview-tabs { display: none; }

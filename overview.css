@@ -149,3 +149,20 @@
   .overview-grid { gap: 36px; }
   .overview-grid > .business-preview { flex: 0 0 100%; scroll-snap-stop: always; }
 }
+
+/* Phones: tabs name the three examples above the swipe row (see overview.js). */
+.overview-tabs { display: none; }
+@media (max-width: 600px) {
+  .overview-tabs { display: flex; gap: 8px; margin: 0 0 20px; }
+  .overview-tabs button { flex: 1 1 0; min-width: 0; border: 0; padding: 11px 4px 12px; background: var(--warm); color: var(--ink); font: 800 15px/1 Manrope, sans-serif; letter-spacing: -.02em; transform: rotate(-1.5deg); clip-path: polygon(3% 8%,97% 0,100% 90%,0 100%); transition: background .2s; }
+  .overview-tabs button:nth-child(2) { transform: rotate(1deg); }
+  .overview-tabs button:nth-child(1)[aria-pressed=true] { background: var(--pale-blue); }
+  .overview-tabs button:nth-child(2)[aria-pressed=true] { background: var(--pink); }
+  .overview-tabs button:nth-child(3)[aria-pressed=true] { background: var(--yellow); }
+  .overview-tabs button:focus-visible { outline: 2px solid #1765a1; outline-offset: 2px; }
+  .overview-grid .preview-kind { display: none; }
+}
+@media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
+  .overview-grid.is-nudging > .business-preview { animation: overview-nudge 1.2s var(--ease); }
+  @keyframes overview-nudge { 40% { transform: translateX(-96px); } }
+}

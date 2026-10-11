@@ -121,5 +121,33 @@
     const middle = grid.scrollLeft + grid.clientWidth / 2;
     const nearest = cards.reduce((best, card, index) => Math.abs(centre(card) - middle) < Math.abs(centre(cards[best]) - middle) ? index : best, 0);
     dots.forEach((dot, index) => dot.classList.toggle('on', index === nearest));
+    tabs.forEach((tab, index) => tab.setAttribute('aria-pressed', String(index === nearest)));
   }, { passive: true });
+
+  // Phones: the three examples are named above the row, so it is plain there is more than one; a tap switches.
+  const tabRow = document.createElement('div');
+  tabRow.className = 'overview-tabs';
+  tabRow.setAttribute('role', 'group');
+  tabRow.setAttribute('aria-label', 'Примерни сайтове');
+  const tabs = cards.map((card, index) => {
+    const tab = document.createElement('button');
+    tab.type = 'button';
+    tab.textContent = card.querySelector('.preview-kind').textContent;
+    tab.setAttribute('aria-pressed', String(index === 0));
+    tab.addEventListener('click', () => grid.scrollTo({ left: centre(card) - grid.clientWidth / 2, behavior: reducedMotion.matches ? 'auto' : 'smooth' }));
+    tabRow.append(tab);
+    return tab;
+  });
+  grid.before(tabRow);
+  // The first time the row comes into view it slides aside for a moment and shows the edge of the next example.
+  if (!reducedMotion.matches) {
+    const nudge = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) return;
+      nudge.disconnect();
+      if (!matchMedia('(max-width: 600px)').matches || grid.scrollLeft > 4) return;
+      grid.classList.add('is-nudging');
+      setTimeout(() => grid.classList.remove('is-nudging'), 1400);
+    }, { threshold: .45 });
+    nudge.observe(grid);
+  }
 })();
