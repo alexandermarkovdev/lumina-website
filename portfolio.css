@@ -155,3 +155,6 @@
   .gallery-pick[aria-pressed="true"]>svg{transform:rotate(-135deg)}
   .gallery-pick:focus-visible{outline:none;box-shadow:inset 0 0 0 3px var(--ink)}
 }
+
+/* Portfolio intro line: even line lengths so no single word is left alone on a phone. */
+.portfolio-intro .intro-aside p{text-wrap:balance}

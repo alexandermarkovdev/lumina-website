@@ -6,7 +6,7 @@ Live: https://alexandermarkovdev.github.io/lumina-website/ (GitHub Pages serves 
 
 ## How the owner likes to work
 
-- Wants options before changes: for anything visual, offer several variants as before/after previews in `ideas.html`, let them pick, then build the pick into the site.
+- Wants options before changes: for anything visual, offer several variants as before/after previews, let them pick, then build the pick into the site.
 - For copy, give a numbered list of about 10 options with an English gloss and a recommendation; they answer with a number.
 - Keep the existing look: cut-paper shapes, yellow/pink/blue paper colours, heavy Manrope headings, Caveat handwriting, hand-drawn arrows.
 - Do not change the four service cards under the hero (`.service-strip`) without being asked. They want them straight, with the hover lift and icon nod only.
@@ -23,7 +23,7 @@ Header (sticky on desktop, hamburger under 850px) → hero → service strip wit
 | `services-refined.css` / `services-ideas.js` | Services section; the JS builds the markup. |
 | `portfolio.css` / `portfolio.js` | Portfolio stage, tabs and caption. |
 | `assets/projects.js` | Registry of the four portfolio sites (viewport sizes, posters, captions). |
-| `assets/site-preview.js` / `.css` | Engine that loads the sites in iframes, auto-scrolls them and opens the desktop/phone viewer. Adapted from `preview-engine-original/`; read `Lumina-embedded-tech-guide.md` before changing it. |
+| `assets/site-preview.js` / `.css` | Engine that loads the sites in iframes, auto-scrolls them and opens the desktop/phone viewer (which keeps scrolling until the visitor clicks, scrolls or presses a key, has play/pause and restart buttons, and keeps the same section in view when switching between desktop and phone). Adapted from `archive/preview-engine-original/`; read `Lumina-embedded-tech-guide.md` before changing it. |
 | `contact.css` / `contact.js` | Contact form; the JS builds the markup. |
 | `demo-cta.css` | The yellow demo note's entrance and periodic jiggle. |
 | `sites/` | Static copies of the four client sites (razor, vsi, jtn, mypizza). `sites/razor` has a demo booking form added (`booking-demo.js/.css`) that says clearly it makes no real booking. |
@@ -34,12 +34,14 @@ Several CSS files still contain rules for layout variants that were discarded lo
 
 The portfolio previews need http(s): opened from `file://` they show still posters only. Locally run `start-site.cmd` (Python server on port 8765), or just use the live address.
 
-## The ideas gallery
+## The archive folder
 
-`ideas.html` + `ideas/` show proposals as before/after frames of the real page. Each idea in `ideas/data.js` is a CSS/JS patch applied on top of `ideas-preview.html`.
+`archive/` holds things the live page does not use (moved there 2026-10-11 at the owner's request). Nothing in it is loaded by `index.html`.
 
-- `ideas-preview.html` is a copy of `index.html` with `ideas/data.js`, `ideas/preview.js` and a `noindex` meta added before `</head>`. Regenerate it after any change to `index.html`.
-- When an idea is chosen, build it into the real files and remove it from `ideas/data.js`.
+- `archive/ideas-gallery/`: the old proposals gallery (`ideas.html`, `ideas-preview.html`, `ideas/`). It showed ideas as before/after frames of the real page, each idea in `ideas/data.js` being a CSS/JS patch on top of `ideas-preview.html` (a copy of `index.html` with `ideas/data.js`, `ideas/preview.js` and a `noindex` meta added before `</head>`). Its paths assume the repo root, so to use it again move the three items back and regenerate `ideas-preview.html` from the current `index.html`.
+- `archive/preview-engine-original/`: the untouched preview engine.
+- `archive/unused-assets/`: `sources.json`, `why-image-prompts.json`, `vendor/qrcode.js`. Next to them, `archive/START-HERE.txt` is an outdated readme.
+- `archive/backup-before-ideas/`: local safety copy, in `.gitignore`, on this computer only.
 
 ## Known open items
 

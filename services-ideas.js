@@ -17,7 +17,7 @@
   const art = service => `<span class="si-art si-${service.color}">${icon(service.icon)}</span>`;
   const number = index => String(index+1).padStart(2,'0');
   const heading = (title,text) => `<header class="si-heading draw-swipe"><h2 id="services-title">${title}</h2><p>${text}</p></header>`;
-  const care = () => `<div class="si-care-bridge" aria-hidden="true"><span>Пускаме сайта.<br>Оставаме до вас.</span>${handArrow}</div><aside class="si-care" id="support" tabindex="-1" aria-labelledby="si-care-title"><div class="si-care-lead">${icon('gear')}<div><h3 id="si-care-title">Поддръжка.<br>Грижата продължава.</h3><p>Бизнесът се развива. Сайтът — с него.</p></div></div><ul><li>Обновявания и сигурност</li><li>Промени по текстове и снимки</li><li>Съдействие при въпроси</li></ul><a href="#contact">Да поговорим за вашия сайт ${arrow}</a></aside>`;
+  const care = () => `<div class="si-care-bridge" aria-hidden="true"><span>След пускането<br>оставаме до вас.</span>${handArrow}</div><aside class="si-care" id="support" tabindex="-1" aria-labelledby="si-care-title"><div class="si-care-lead">${icon('gear')}<div><h3 id="si-care-title">Поддръжка.<br>Грижата продължава.</h3><p>Когато бизнесът ви расте, сайтът расте с него.</p></div></div><ul><li>Обновявания и сигурност</li><li>Промени по текстове и снимки</li><li>Съдействие при въпроси</li></ul><a href="#contact">Да поговорим за вашия сайт ${arrow}</a></aside>`;
 
   const outcomes = ['Разпознаваема визия','Удобно преживяване','Вашият адрес онлайн','Сайт, готов за работа','Основа за откриваемост','Посока към нови клиенти'];
   stage.dataset.servicesVariant = '2';

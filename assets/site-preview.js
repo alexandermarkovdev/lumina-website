@@ -1,5 +1,5 @@
 /* Live site previews for the portfolio: adapted from the Lumina-site-viewer engine (desktop and phone only).
-   See Lumina-embedded-tech-guide.md. The untouched original is in preview-engine-original/. */
+   See Lumina-embedded-tech-guide.md. The untouched original is in archive/preview-engine-original/. */
 (() => {
   'use strict';
   const MODES = ['desktop', 'mobile'];
@@ -47,6 +47,7 @@
   dialog.setAttribute('aria-hidden','true');dialog.inert = true;
   dialog.innerHTML = `<div class="lp-backdrop"></div><div class="lp-stage" data-mode="desktop">
     <h2 id="lp-title" class="lp-sr"></h2><div class="lp-toolbar">
+    <div class="lp-playback" role="group" aria-label="Автоматично превъртане"><button type="button" class="lp-play"></button><button type="button" class="lp-restart" aria-label="Пусни отначало" title="Пусни отначало"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.6 10.6a5.5 5.5 0 1 0 1.6-4.5M4.2 3.4v3.2h3.2"/></svg></button></div>
     <div class="lp-segment" role="group" aria-label="Изглед на сайта"><span class="lp-thumb" aria-hidden="true"></span>
     ${MODES.map(mode=>`<button type="button" data-mode="${mode}" aria-pressed="false">${LABELS[mode]}</button>`).join('')}</div>
     <button class="lp-close" type="button" aria-label="Затвори прегледа" autofocus><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button></div>
@@ -54,7 +55,7 @@
     <div class="lp-failure" hidden><p>Сайтът не се зареди. Опитайте отново или го отворете отделно.</p><a target="_blank" rel="noopener">Отвори сайта</a><button type="button">Опитай отново</button></div></div>
     <a class="lp-live-link" target="_blank" rel="noopener noreferrer">Отвори сайта ${arrow}</a></div>`;
   document.body.append(dialog);
-  const V = Object.fromEntries(['backdrop','stage','toolbar','segment','thumb','close','port','loading','failure','live-link'].map(k=>[k,dialog.querySelector(`.lp-${k}`)]));
+  const V = Object.fromEntries(['backdrop','stage','toolbar','playback','segment','thumb','close','port','loading','failure','live-link'].map(k=>[k,dialog.querySelector(`.lp-${k}`)]));
   const rect = el => {
     const r=el.getBoundingClientRect();return {left:r.left,top:r.top,width:r.width,height:r.height,right:r.right,bottom:r.bottom};
   };
@@ -215,6 +216,7 @@
       restoreScroll(screen);
       requestAnimationFrame(()=>{if(version===screen.version&&!rotation.started)restoreScroll(screen);});
     }
+    if(dialog.open?state.screen===screen:screen.project.id===active)applyPlace(screen);
     if(dialog.open&&state.screen===screen)screen.presentation?.run({cursor:false});
   }
   function loadScreen(screen) {
@@ -241,7 +243,7 @@
     frame.addEventListener('load',()=>{screen.resettingHome=false;screen.el.dataset.loads=String(Number(screen.el.dataset.loads||0)+1);checking=false;check();});
     frame.addEventListener('error',fail);
     const url=new URL(screen.project.url,document.baseURI);
-    url.searchParams.set('lumina-revision','preview-core-27');
+    url.searchParams.set('lumina-revision','preview-core-28');
     if(screen.project.smoothTour&&!interactive)url.searchParams.set('lumina-thumbnail','1');
     if(screen.project.previewParam)url.searchParams.set(screen.project.previewParam,'1');
     frame.src=url.href;screen.display.append(frame);
@@ -476,6 +478,93 @@
     const ids=[...registry.keys()],id=ids[(ids.indexOf(active)+step+ids.length)%ids.length],project=registry.get(id);
     rotation.holds.delete('project-tab');select(id,{automatic});
   }
+  // The opened viewer keeps the stage's slow pan going until the visitor takes over.
+  const viewerTour={frame:0,last:0,screen:null,doc:null,carry:0,wait:0,off:null};
+  function stopViewerTour(){
+    cancelAnimationFrame(viewerTour.frame);viewerTour.frame=0;viewerTour.off?.abort();viewerTour.off=null;viewerTour.screen=null;viewerTour.doc=null;
+    updatePlayback();
+  }
+  function startViewerTour(screen,wait=0){
+    stopViewerTour();
+    Object.assign(viewerTour,{screen,wait,last:0,carry:0,off:new AbortController()});
+    viewerTour.frame=requestAnimationFrame(viewerTourFrame);updatePlayback();
+  }
+  function updatePlayback(){
+    const playing=!!viewerTour.screen,button=V.playback.querySelector('.lp-play');
+    if(button.dataset.playing===String(playing))return;
+    button.dataset.playing=String(playing);button.title=playing?'Спри превъртането':'Пусни превъртането';button.setAttribute('aria-label',button.title);
+    button.innerHTML=playing?'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4.5v11M13 4.5v11"/></svg>':'<svg viewBox="0 0 20 20" aria-hidden="true"><path class="lp-solid" d="m7.5 4.5 8 5.5-8 5.5Z"/></svg>';
+  }
+  function restartViewerTour(){
+    const s=state.screen;if(!s?.ready||state.closing)return;
+    stopViewerTour();
+    try{s.frame.contentWindow.scrollTo({left:0,top:0,behavior:'instant'});s.scroll={x:0,y:0};}catch{}
+    s.presentation?.run({cursor:false});
+    startViewerTour(s,s.project.presentation==='jtn-doors'?1800:900);
+  }
+  function toggleViewerTour(){
+    const s=state.screen;if(!s||state.closing)return;
+    if(viewerTour.screen){stopViewerTour();return;}
+    // Play at the very bottom starts the page again.
+    try{const win=s.frame.contentWindow;if(win.scrollY>=win.document.scrollingElement.scrollHeight-s.view.height-2){restartViewerTour();return;}}catch{}
+    startViewerTour(s);
+  }
+  // Desktop and phone lay the same sections out at different heights. Switching keeps
+  // the visitor between the same two section starts, the same share of the way through.
+  const LANDMARKS='section[id],article[id],footer[id]';
+  function capturePlace(screen){
+    try{
+      const win=screen.frame.contentWindow,doc=win.document,y=win.scrollY;
+      const anchors=[...doc.querySelectorAll(LANDMARKS)].map(el=>{
+        const r=el.getBoundingClientRect();
+        return r.height&&!/fixed|sticky/.test(win.getComputedStyle(el).position)?{id:el.id,top:r.top+y}:null;
+      }).filter(Boolean).sort((a,b)=>a.top-b.top);
+      return {y,height:doc.scrollingElement.scrollHeight,anchors};
+    }catch{return null;}
+  }
+  function applyPlace(screen){
+    const place=screen.pendingPlace;screen.pendingPlace=null;if(!place)return;
+    try{
+      const win=screen.frame.contentWindow,doc=win.document,now=win.scrollY,height=doc.scrollingElement.scrollHeight;
+      // Matching landmarks as [old top, new top], kept in page order in both layouts.
+      const pairs=[[0,0]],add=(from,to)=>{const last=pairs[pairs.length-1];if(from>last[0]&&to>last[1])pairs.push([from,to]);};
+      place.anchors.forEach(a=>{
+        const el=doc.getElementById(a.id),r=el?.getBoundingClientRect();
+        if(r?.height&&!/fixed|sticky/.test(win.getComputedStyle(el).position))add(a.top,r.top+now);
+      });
+      add(place.height,height);
+      let i=0;while(i<pairs.length-1&&pairs[i+1][0]<=place.y)i++;
+      const from=pairs[i],to=pairs[i+1];
+      const target=to?from[1]+(place.y-from[0])/(to[0]-from[0])*(to[1]-from[1]):from[1]+place.y-from[0];
+      const top=Math.round(Math.max(0,Math.min(height-screen.view.height,target)));
+      win.scrollTo({left:0,top,behavior:'instant'});screen.scroll={x:0,y:top};
+    }catch{}
+  }
+  function viewerTourFrame(now){
+    const t=viewerTour,s=t.screen;t.frame=0;
+    if(!s||!dialog.open||state.closing||state.screen!==s){stopViewerTour();return;}
+    const dt=t.last?Math.min(now-t.last,50):0;t.last=now;
+    if(s.ready&&s.tourGeometry){
+      try{
+        const win=s.frame.contentWindow,doc=win.document,geometry=s.tourGeometry;
+        if(t.doc!==doc){
+          t.doc=doc;
+          ['pointerdown','wheel','keydown','touchstart'].forEach(type=>doc.addEventListener(type,stopViewerTour,{capture:true,passive:true,signal:t.off.signal}));
+        }
+        if(t.wait>0)t.wait-=dt;
+        else{
+          if(geometry.dirty){geometry.end=Math.max(0,doc.scrollingElement.scrollHeight-s.view.height);geometry.dirty=false;}
+          // Just under half a screen per second, close to the stage's pace. Step from the
+          // page's real position: its own layout shifts may nudge the scroll between frames.
+          t.carry+=s.view.height*.00045*dt;
+          const step=Math.floor(t.carry),top=Math.min(geometry.end,win.scrollY+step);t.carry-=step;
+          if(step){win.scrollTo({left:0,top,behavior:'instant'});s.scroll={x:0,y:top};}
+          if(top>=geometry.end){stopViewerTour();return;}
+        }
+      }catch{stopViewerTour();return;}
+    }
+    t.frame=requestAnimationFrame(viewerTourFrame);
+  }
   function layoutViewer() {
     V.stage.dataset.mode=state.mode;
     const view=state.screen.size,narrow=innerWidth<=650,W=V.stage.clientWidth,H=V.stage.clientHeight;
@@ -535,16 +624,20 @@
     if(dialog.open||!registry.has(id))return;
     clearTimeout(returnTimer);rotation.holds.delete('viewer-return');
     if(id!==active)select(id);
+    const touring=canTour(),hold=registry.get(active).presentation==='jtn-doors'?4800:1800,wait=rotation.started?Math.max(0,hold-rotation.elapsed):hold;
     stopTour();document.body.dataset.previewRotation='paused';
     state.project=registry.get(id);state.mode=MODES.includes(mode)?mode:autoMode();state.screen=getScreen(state.project,state.mode);state.opener=opener;state.closing=false;++state.seq;
     state.source=devices.find(d=>d.button===opener)||deviceFor(state.screen);
     const source=state.source,from=source?rect(source.box):null;
-    cancelAnimations();screens.forEach(s=>{s.presentation?.stop();rememberScroll(s);});
+    cancelAnimations();screens.forEach(s=>{s.presentation?.stop();rememberScroll(s);s.pendingPlace=null;});
+    // A phone opens the phone view from the stage's desktop card: start at the same part.
+    const shown=screens.get(id+'/'+SCENE_MODES[0]);if(shown&&shown!==state.screen&&shown.ready)state.screen.pendingPlace=capturePlace(shown);
     state.saved={overflow:document.documentElement.style.overflow,x:scrollX,y:scrollY,hash:location.hash};
     document.documentElement.style.overflow='hidden';
     dialog.querySelector('#lp-title').textContent=state.project.name+' — преглед на сайта';
     dialog.inert=false;dialog.removeAttribute('aria-hidden');dialog.showModal();syncScreens();layoutViewer();V.close.focus({preventScroll:true});screens.forEach(restoreScroll);
     state.screen.presentation?.run({cursor:false});
+    if(touring)startViewerTour(state.screen,wait);else updatePlayback();
     if(!compactPreview()&&motion()&&visible(from))animateFrom(state.screen,from,rect(state.screen.el),600);
     else state.screen.el.animate({opacity:[0,1]},{duration:150});
     V.backdrop.animate({opacity:[0,1]},{duration:motion()?420:150});
@@ -554,7 +647,7 @@
     if(dialog.open||!state.project)return;
     const compact=compactPreview();
     if(compact)rotation.holds.add('viewer-return');
-    ++state.seq;cancelAnimations();screens.forEach(s=>s.presentation?.stop());
+    ++state.seq;stopViewerTour();cancelAnimations();screens.forEach(s=>s.presentation?.stop());
     document.documentElement.style.overflow=state.saved.overflow;
     const saved=state.saved,returnPosition={left:saved.x,top:saved.y};
     window.scrollTo({...returnPosition,behavior:'instant'});
@@ -589,7 +682,9 @@
   async function close() {
     if(!dialog.open||state.closing)return;
     state.closing=true;const seq=++state.seq,screen=state.screen,from=rect(screen.el);
-    cancelAnimations();rememberScroll(screen);if(screen.frame)screen.frame.inert=true;
+    stopViewerTour();cancelAnimations();rememberScroll(screen);if(screen.frame)screen.frame.inert=true;
+    // Closing from the phone view: the stage's desktop card picks up at the same part.
+    const shown=getScreen(screen.project,SCENE_MODES[0]);if(shown!==screen&&screen.ready)shown.pendingPlace=capturePlace(screen);
     const device=deviceFor(screen),target=device?rect(device.box):null;
     let animation;
     if(!compactPreview()&&motion()&&visible(target)){
@@ -601,8 +696,10 @@
   }
   function switchMode(mode) {
     if(!MODES.includes(mode)||mode===state.mode||!dialog.open||state.closing)return;
-    const before=rect(state.screen.el);cancelAnimations();state.screen.presentation?.stop();rememberScroll(state.screen);
-    state.mode=mode;state.screen=getScreen(state.project,mode);syncScreens();layoutViewer();restoreScroll(state.screen);
+    const before=rect(state.screen.el),touring=!!viewerTour.screen,place=capturePlace(state.screen);cancelAnimations();state.screen.presentation?.stop();rememberScroll(state.screen);
+    state.mode=mode;state.screen=getScreen(state.project,mode);state.screen.pendingPlace=place;syncScreens();layoutViewer();restoreScroll(state.screen);
+    if(state.screen.ready)applyPlace(state.screen);
+    if(touring)startViewerTour(state.screen);
     state.screen.presentation?.run({cursor:false});
     if(motion()){
       const after=rect(state.screen.el),scale=Math.min(before.width/after.width,before.height/after.height);
@@ -614,6 +711,7 @@
     requestAnimationFrame(()=>{resizeQueued=false;if(dialog.open){if(!state.closing){cancelAnimations();layoutViewer();}}else layoutThumbnails();});
   }
   V.segment.addEventListener('click',e=>{const b=e.target.closest('button[data-mode]');if(b)switchMode(b.dataset.mode);});
+  V.playback.querySelector('.lp-play').addEventListener('click',toggleViewerTour);V.playback.querySelector('.lp-restart').addEventListener('click',restartViewerTour);
   V.close.addEventListener('click',close);V.backdrop.addEventListener('click',close);
   V.failure.querySelector('button').addEventListener('click',()=>{if(!state.closing){loadScreen(state.screen);layoutViewer();}});
   dialog.addEventListener('cancel',e=>{e.preventDefault();close();});dialog.addEventListener('close',cleanup);

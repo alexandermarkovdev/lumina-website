@@ -187,3 +187,6 @@ html{-webkit-text-size-adjust:100%}
   .sticky-demo>span{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--yellow);padding:16px 20px 17px;font-size:16px;font-weight:800;letter-spacing:-.02em;clip-path:polygon(1% 7%,99% 0,100% 92%,0 100%)}
   .sticky-demo .icon{width:26px;height:26px}
 }
+
+/* The hero heading is longer since "Сайт за вашия бизнес, изцяло от нас."; a little smaller so its widest line clears the intro text and the phone gutter. */
+#hero-title span{font-size:.9em}

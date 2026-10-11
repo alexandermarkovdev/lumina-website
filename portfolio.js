@@ -13,7 +13,7 @@
       <p class="live-blurb"></p>
     </div>
     <div class="gallery-index">
-      <div class="gallery-note">Натиснете сайта —<br>той е жив.<svg viewBox="0 0 100 90" aria-hidden="true"><path class="gallery-arrow-wide" d="M85 8C93 45 53 78 9 66m10-9L9 66l15 6"/><path class="gallery-arrow-stacked" d="M85 8C28 11 16 46 17 82m-9-11 9 11 11-10"/></svg></div>
+      <div class="gallery-note">Това е истинският сайт.<br>Натиснете го.<svg viewBox="0 0 100 90" aria-hidden="true"><path class="gallery-arrow-wide" d="M85 8C93 45 53 78 9 66m10-9L9 66l15 6"/><path class="gallery-arrow-stacked" d="M85 8C28 11 16 46 17 82m-9-11 9 11 11-10"/></svg></div>
       <div class="gallery-picks" role="group" aria-label="Избери проект">${projects.map(project => `<button type="button" class="gallery-pick" data-select="${project.id}" aria-pressed="false" aria-label="Покажи ${project.name}"><span class="gallery-pick-image"><img src="${project.modes.desktop.poster}" alt="" width="1440" height="900" loading="lazy" decoding="async"></span><span><strong>${project.name}</strong><span>${project.kind}</span></span>${arrow}</button>`).join('')}</div>
       <div class="live-controls"></div>
       <p>Сайтът се превърта сам. Натиснете го, за да го разгледате на цял екран — като на компютър или като на телефон.</p>

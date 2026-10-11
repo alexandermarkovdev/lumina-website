@@ -36,9 +36,9 @@ window.LUMINA_PROJECTS = [
     bookingSelector: '[data-nm-booking]',
     modes: {
       // The dolphin artwork fills the margin outside the site's 1280px content column,
-      // so it grows with the viewport. 1536px is a common laptop width; at 1920px the
-      // dolphins looked far larger than the site does on an ordinary screen.
-      desktop: { width: 1536, height: 960, poster: 'assets/previews/vsi-desktop.jpg' },
+      // so it grows with the viewport: about 190px wide at 1536px (too small), 300px at
+      // 1680px, 480px at 1920px (too large). Keep the 16:10 shape when changing this.
+      desktop: { width: 1680, height: 1050, poster: 'assets/previews/vsi-desktop.jpg' },
       mobile: { width: 402, height: 778, poster: 'assets/previews/vsi-mobile.jpg' }
     }
   },
