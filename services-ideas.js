@@ -17,7 +17,7 @@
   const art = service => `<span class="si-art si-${service.color}">${icon(service.icon)}</span>`;
   const number = index => String(index+1).padStart(2,'0');
   const heading = (title,text) => `<header class="si-heading draw-swipe"><h2 id="services-title">${title}</h2><p>${text}</p></header>`;
-  const care = () => `<div class="si-care-bridge" aria-hidden="true"><span>След пускането<br>оставаме до вас.</span>${handArrow}</div><aside class="si-care" id="support" tabindex="-1" aria-labelledby="si-care-title"><div class="si-care-lead">${icon('gear')}<div><h3 id="si-care-title">Поддръжка.<br>Грижата продължава.</h3><p>Когато бизнесът ви расте, сайтът расте с него.</p></div></div><ul><li>Обновявания и сигурност</li><li>Промени по текстове и снимки</li><li>Съдействие при въпроси</li></ul><a href="#contact">Да поговорим за вашия сайт ${arrow}</a></aside>`;
+  const care = () => `<div class="si-care-bridge" aria-hidden="true"><span>След пускането<br>оставаме до вас.</span>${handArrow}</div><aside class="si-care" id="support" tabindex="-1" aria-labelledby="si-care-title"><div class="si-care-lead">${icon('gear')}<div><h3 id="si-care-title">Поддръжка.<br>Грижата продължава.</h3><p>Сайтът ви остава обновен и защитен, а съдържанието му — винаги актуално.</p></div></div><ul><li>Обновявания и сигурност</li><li>Промени по текстове и снимки</li><li>Съдействие при въпроси</li></ul><a href="#contact">Да поговорим за вашия сайт ${arrow}</a></aside>`;
 
   const outcomes = ['Разпознаваема визия','Удобно преживяване','Вашият адрес онлайн','Сайт, готов за работа','Основа за откриваемост','Посока към нови клиенти'];
   stage.dataset.servicesVariant = '2';
@@ -25,7 +25,12 @@
     + '<div class="sr-journey sr-benefit-journey"><i class="sr-spine-fill" aria-hidden="true"></i>'
     + '<ol class="sr-benefit-grid" role="list">'
     + services.map((service,index) => '<li id="' + service.id + '" tabindex="-1"><header class="si-' + service.color + '"><span class="sr-number">' + number(index) + '</span>' + icon(service.icon) + '<h3>' + service.name + '</h3></header><div class="sr-benefit-copy"><h4>' + outcomes[index] + '.</h4><p>' + service.benefit + '</p>' + list(service) + '</div></li>').join('')
-    + '</ol></div>' + care();
+    // English versions as an extra, on a paper strip between the six services and the maintenance block.
+    + '</ol></div>'
+    + '<div class="sr-english"><div><p>Имате чуждестранни клиенти? <span>Правим сайта и на английски.</span></p>'
+    + '<p class="sr-english-more">Преводачите ни говорят свободно английски и български. Без машинен превод и без изкуствен интелект. Не вярвате? Обадете ни се и ще поговорим на езика, който изберете.</p></div>'
+    + '<span class="sr-english-chip" aria-hidden="true"><b>BG</b><i>|</i><b class="on">EN</b></span></div>'
+    + care();
 
   // The central line fills as the section scrolls past; each step lights up when the ink reaches it.
   const journey = stage.querySelector('.sr-benefit-journey');

@@ -12,7 +12,8 @@
   .cookie-bar { animation: cookie-bar-in .45s var(--ease) backwards; }
   @keyframes cookie-bar-in { from { transform: translateY(100%); } }
 }
-.cookie-settings { grid-column: 1 / -1; justify-self: start; border: 0; padding: 6px 0; background: none; font: inherit; font-size: 13px; color: var(--muted); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+/* It sits where the footer's closing link used to be, so the footer stays one row tall on wide screens. */
+.cookie-settings { justify-self: end; border: 0; padding: 6px 0; background: none; font: inherit; font-size: 13px; color: var(--muted); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .cookie-settings:hover { color: var(--ink); }
 @media (max-width: 1180px) { .cookie-bar-inner { width: calc(100% - 64px); } }
 @media (max-width: 700px) {
@@ -21,3 +22,4 @@
   .cookie-bar p { font-size: 13px; margin-bottom: 14px; }
   .cookie-bar-actions button { flex: 1; padding: 14px 10px 15px; }
 }
+@media (max-width: 1180px) { .cookie-settings { justify-self: start; } }

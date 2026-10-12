@@ -1,6 +1,6 @@
 # Lumina website
 
-Landing page for Lumina, a small Bulgarian web-design studio selling websites to local businesses (restaurants, hairdressers, shops). One static page, no build step, no framework. All visitor-facing copy is Bulgarian; the owner writes to Claude in English, often with typos and Bulgarian in Latin letters.
+Landing page for Lumina, a small Bulgarian web-design studio selling websites to local businesses (restaurants, hairdressers, shops). One static page, no build step, no framework. Visitor-facing copy is written in Bulgarian, with an English version switched on from the header (`i18n.js`); the owner writes to Claude in English, often with typos and Bulgarian in Latin letters.
 
 Live: https://alexandermarkovdev.github.io/lumina-website/ (GitHub Pages serves `main` from the repo root, so every push to `main` is published within a couple of minutes).
 
@@ -19,15 +19,23 @@ Header (sticky on desktop, hamburger under 850px) → hero → service strip wit
 | File | What it holds |
 |---|---|
 | `styles.css` | Base, header, hero, service strip, footer. Later blocks override earlier ones; new work is appended with a comment. |
-| `overview.css` / `overview.js` | The "why a site" section and its interactive example sites. |
-| `services-refined.css` / `services-ideas.js` | Services section; the JS builds the markup. |
-| `portfolio.css` / `portfolio.js` | Portfolio stage, tabs and caption. |
-| `assets/projects.js` | Registry of the four portfolio sites (viewport sizes, posters, captions). |
+| `overview-clear-callouts.css` / `.js` | The "why a site" section: three interactive example businesses (Форно pizza, Лиора salon, Терон building materials) with handwritten feature arrows and phone tabs. Scoped to `#why-sites`. Photos in `assets/clear-callouts/*.webp`. Right of the heading sits a short paragraph with three colour tags (`.reasons-note`, in `index.html`), chosen from `previews/why-reasons/`. |
+| `services-refined.css` / `services-ideas.js` | Services section; the JS builds the markup. After the six services comes a pink strip offering English versions of clients' sites (`.sr-english`); the owner chose it from `previews/english-note/` on 2026-10-11. Its text promises "no machine or AI translation" and says "call us", so the site's own English must be human-checked and a phone number is still missing. |
+| `portfolio-story.css` / `.js` | Portfolio layout: live preview, project picker on the right, caption, and for some projects service labels plus the Google search animation. `portfolio.css` still supplies the browser-frame styling. |
+| `assets/project-stories.js` | Portfolio copy per project. A `proof` entry turns on the labels and the search animation; a project with only `deliverables` gets the labels and a plain summary in the same space, so the preview keeps one size. All four have a proof. JTN and MyPizza are not first on Google, so theirs carries `"ranked": false`: same searches, but no #1 badge, the heading „Направен, за да го намират.“ and a plain „SEO оптимизация“ label (owner's choice, 2026-10-11). MyPizza has no live address, so its result shows no domain. With a proof: it types each query in `queries` in turn, shows the site as #1 after each, and loops while the block is on screen. Rankings are the owner's claims, not verified. |
+| `assets/projects.js` | Registry of the four portfolio sites (viewport sizes, posters, captions). VSI is first. |
 | `assets/site-preview.js` / `.css` | Engine that loads the sites in iframes, auto-scrolls them and opens the desktop/phone viewer (which keeps scrolling until the visitor clicks, scrolls or presses a key, has play/pause and restart buttons, and keeps the same section in view when switching between desktop and phone). Adapted from `archive/preview-engine-original/`; read `Lumina-embedded-tech-guide.md` before changing it. |
-| `contact.css` / `contact.js` | Contact form; the JS builds the markup. |
+| `contact-postcard.css` / `.js` | Contact form (blue postcard); the JS builds the markup. `contact.css` stays loaded because it also styles the header and portfolio. |
 | `demo-cta.css` | The yellow demo note's entrance and periodic jiggle. |
 | `cookies.css` / `cookies.js` | Cookie notice and the „Бисквитки“ link in the footer that reopens it. Google Analytics loads only after „Приемам“, and only once `GA_ID` at the top of `cookies.js` is filled in (it was empty when this was written). |
+| `i18n.js` | The BG \| EN switch in the header. Bulgarian stays the source: all scripts write Bulgarian and this file swaps visible text and labels for English from one dictionary (plus patterns for sentences built from pieces) while EN is chosen, watching the page for new text. Anything missing from the dictionary simply stays Bulgarian, so **new or changed Bulgarian copy needs its English entry here**. The client sites, the Google searches and their result titles stay Bulgarian on purpose. The choice is kept in `localStorage` (`lumina_lang`); `?lang=en` forces it. One note is written by CSS (`.reasons:after`) and is translated at the end of `styles.css`, next to the header spacing rules that make room for the switch. |
 | `sites/` | Static copies of the four client sites (razor, vsi, jtn, mypizza). `sites/razor` has a demo booking form added (`booking-demo.js/.css`) that says clearly it makes no real booking. |
+
+Projects in the portfolio change only when the visitor picks one (`data-auto-advance="false"` on `#portfolio`); the preview inside keeps scrolling.
+
+`overview.css/js`, `portfolio.js` and `contact.js` are the previous versions of these sections; they are kept but no longer loaded. The new sections were designed in a separate Codex copy of the project and merged in on 2026-10-11; its standalone variation pages were deliberately not brought over.
+
+Two scrolling traps, both fixed 2026-10-11 and easy to reintroduce: (1) a client site inside a preview frame that calls a plain `focus()` (the VSI cookie bar did) makes Firefox scroll the whole Lumina page to it, so menu links land hundreds of pixels too low; use `focus({ preventScroll: true })` in the site copies. (2) The sticky header shrinks from 105px to 70px; `.is-scrolled .site-header` carries a matching `margin-bottom` so the page does not shift mid-scroll. The owner browses in Firefox, so check scrolling there, not only in Chrome.
 
 Several CSS files still contain rules for layout variants that were discarded long ago; they are dead, not load-bearing.
 
@@ -46,6 +54,6 @@ The portfolio previews need http(s): opened from `file://` they show still poste
 
 ## Known open items
 
-- The contact form does not send anything; it only shows a "not sent" message. There is no phone or email on the page. This blocks real use.
+- The contact form does not send anything; it only shows a "not sent" message. Under it is a row with the phone (0877 776 563) and a Viber link, set in `CONTACT` at the top of `contact-postcard.js`. The Viber link opens a chat with the owner's Viber number, +44 7842 833363 (set by the owner 2026-10-11; a different number from the phone shown); the email is empty (so hidden) until the studio has an address on its own domain, which the form should then use too.
 - Fonts are seven TTF files (about 1 MB); converting to WOFF2 would halve page weight.
 - A design review is saved in `.impeccable/critique/`. The owner chose to act only on removing the "demo form" note for now.

@@ -117,9 +117,9 @@
 :is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-hardware::before{display:none}
 :is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-glass{border-radius:10px 10px 2px 2px}
 :is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-status{display:flex;justify-content:flex-start;gap:9px;padding:0 18px;background:#f0efec;color:#514f47}
-:is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-status i{width:11px;height:11px;border-radius:50%;background:#e98c7c}
-:is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-status i:nth-child(2){background:#d5b966}
-:is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-status i:nth-child(3){background:#8daa7e}
+:is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-status i{width:11px;height:11px;border-radius:50%;background:#fbc4d7}
+:is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-status i:nth-child(2){background:#ffe74c}
+:is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-status i:nth-child(3){background:#45b4f7}
 :is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-status b{margin:0 auto;padding-right:51px;font:500 15px/1 var(--sans);letter-spacing:.02em}
 :is(.lp-surface,.lp-miniature)[data-mode=desktop] :is(.lp-camera,.lp-stand){display:none}
 .lp-surface[data-mode=desktop]::after,.lp-device--desktop::after{display:none}

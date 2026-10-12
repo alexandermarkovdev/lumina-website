@@ -30,7 +30,7 @@
   }
   let bar = null;
   function show() {
-    if (bar) { bar.hidden = false; bar.querySelector('button').focus(); return; }
+    if (bar) { bar.hidden = false; bar.querySelector('button').focus({ preventScroll: true }); return; }
     bar = document.createElement('div');
     bar.className = 'consent-bar';
     bar.setAttribute('role', 'region');
@@ -51,11 +51,13 @@
       bar.hidden = true;
       if (choice === 'granted') loadAnalytics(); else forgetGoogleCookies();
     });
-    bar.querySelector('button').focus();
+    // No scrolling: inside the Lumina portfolio preview a plain focus() made the browser scroll the host page.
+    bar.querySelector('button').focus({ preventScroll: true });
   }
   const choice = read();
   if (choice === 'granted') loadAnalytics();
-  else if (!choice) show();
+  // Inside the Lumina portfolio preview (a frame) the bar stays closed unless the footer link opens it.
+  else if (!choice && window.self === window.top) show();
   document.addEventListener('click', event => {
     if (event.target.closest('[data-consent-open]')) { event.preventDefault(); show(); }
   });
