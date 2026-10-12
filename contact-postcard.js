@@ -51,6 +51,16 @@
   const status = form.querySelector('.cp-status');
   form.noValidate = true; // Use the page language for validation messages.
   const message = (bg, en) => document.documentElement.lang === 'en' ? en : bg;
+  // The message box grows with the text, so the whole message stays visible while it is written.
+  const note = form.querySelector('textarea');
+  const fitNote = () => {
+    note.style.height = '';   // back to the size from the stylesheet, which is the smallest it gets
+    const rest = note.offsetHeight;
+    note.style.height = 'auto';
+    note.style.height = Math.max(rest, note.scrollHeight + 2) + 'px';
+  };
+  note.addEventListener('input', fitNote);
+  form.addEventListener('reset', () => { note.style.height = ''; });
   form.addEventListener('input', event => {
     if (!(event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement)) return;
     event.target.setCustomValidity('');

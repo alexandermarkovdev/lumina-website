@@ -102,3 +102,4 @@
 @media(max-width:760px){#contact .cp-direct{margin-top:22px;gap:10px 20px}#contact .cp-direct p{flex-basis:100%;font-size:26px}#contact .cp-direct-phone{font-size:24px}}
 #contact .cp-trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
 #contact .cp-submit:disabled{opacity:.6;cursor:progress}
+#contact .cp-field textarea{resize:none;overflow:hidden;max-height:none}

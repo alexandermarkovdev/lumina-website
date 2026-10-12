@@ -184,7 +184,7 @@ html{-webkit-text-size-adjust:100%}
 @media(max-width:850px){
   .sticky-demo{display:block;position:fixed;left:14px;right:14px;bottom:max(12px,env(safe-area-inset-bottom));z-index:25;filter:drop-shadow(0 9px 12px #0b0c0e38);transform:translateY(150%);visibility:hidden;transition:transform .5s var(--ease),visibility 0s .5s}
   .sticky-demo.is-shown{transform:none;visibility:visible;transition:transform .5s var(--ease)}
-  .sticky-demo>span{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--yellow);padding:16px 20px 17px;font-size:16px;font-weight:800;letter-spacing:-.02em;clip-path:polygon(1% 7%,99% 0,100% 92%,0 100%)}
+  .sticky-demo-paper{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--yellow);padding:16px 20px 17px;font-size:16px;font-weight:800;letter-spacing:-.02em;clip-path:polygon(1% 7%,99% 0,100% 92%,0 100%)}
   .sticky-demo .icon{width:26px;height:26px}
 }
 

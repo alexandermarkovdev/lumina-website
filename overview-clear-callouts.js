@@ -131,10 +131,25 @@ mobileTabs.className='mobile-tabs';mobileTabs.setAttribute('aria-label','Изб�
 mobileTabs.innerHTML=Object.entries(description).map(([type,d],i)=>`<button type="button" data-mobile-business="${type}" aria-pressed="${i===0}">${d.kind}</button>`).join('');
 section.querySelector('.example-grid').before(mobileTabs);
 section.querySelector('[data-business="restaurant"]').classList.add('mobile-active');
+// Phones and tablets show one example at a time. A handwritten hint above the tabs and a button under the example lead to the other two.
+const mobileHint=section.querySelector('.mobile-hint')||document.createElement('p');
+mobileHint.className='mobile-hint';mobileHint.innerHTML='<span>Три примера. Натиснете и вижте.</span><svg viewBox="0 0 44 40" fill="none" aria-hidden="true"><path d="M5 5c15 1 25 9 27 27m-9-8 9 10 8-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+mobileTabs.before(mobileHint);
+const mobileNext=section.querySelector('.mobile-next')||document.createElement('button');
+mobileNext.type='button';mobileNext.className='mobile-next';
+section.querySelector('.example-grid').after(mobileNext);
+function showMobile(type){const types=Object.keys(description),next=types[(types.indexOf(type)+1)%types.length];
+ section.querySelectorAll('[data-mobile-business]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.mobileBusiness===type));
+ section.querySelectorAll('.business').forEach(x=>x.classList.toggle('mobile-active',x.dataset.business===type));
+ mobileNext.dataset.mobileNext=next;
+ mobileNext.innerHTML=`<span class="mobile-next-label"><span>Следващ пример:</span> <b>${description[next].kind}</b></span><svg viewBox="0 0 32 24" fill="none" aria-hidden="true"><path d="M2 12h27M19 3l10 9-10 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+ scheduleArrows()}
+showMobile('restaurant');
 const compactTimers=new WeakMap();
 function compactNotice(root,text){let status=root.querySelector('.site-status');if(!status){status=document.createElement('p');status.className='site-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');root.querySelector('.site-canvas').append(status)}clearTimeout(compactTimers.get(status));status.textContent=text;compactTimers.set(status,setTimeout(()=>status.textContent='',3500))}
 section.addEventListener('click',event=>{const b=event.target.closest('button');if(!b)return;
- if(b.dataset.mobileBusiness){section.querySelectorAll('[data-mobile-business]').forEach(x=>x.setAttribute('aria-pressed',x===b));section.querySelectorAll('.business').forEach(x=>x.classList.toggle('mobile-active',x.dataset.business===b.dataset.mobileBusiness));scheduleArrows();return}
+ if(b.dataset.mobileBusiness){showMobile(b.dataset.mobileBusiness);return}
+ if(b.dataset.mobileNext){showMobile(b.dataset.mobileNext);mobileHint.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});return}
  if(b.hasAttribute('data-food-cart')){event.stopImmediatePropagation();const t=foodTotals();compactNotice(b.closest('[data-site]'),t.count?`В кошницата: ${t.count} артикула · ${euro(t.total)}.`:'Добавете нещо от менюто.');return}
  if(b.hasAttribute('data-book')){event.stopImmediatePropagation();salon.confirmed=false;updateSalon();compactNotice(b.closest('[data-site]'),`Избран час: ${salonDate()}.`);return}
  if(b.hasAttribute('data-product-cart')){event.stopImmediatePropagation();compactNotice(b.closest('[data-site]'),`Избрано количество: ${materials.quantity} палет${materials.quantity===1?'':'а'} · ${euro(materialUnitPrice()*materials.quantity)}.`);return}

@@ -22,3 +22,23 @@
 .demo-note:focus-visible{outline:3px solid var(--ink);outline-offset:8px}
 @media(max-width:600px){.demo-note{right:24px}}
 @media(prefers-reduced-motion:reduce){.demo-note,.demo-note:hover,.demo-note:focus-visible{transform:rotate(-9deg)}}
+
+/* The demo bar on phones and tablets: the same three ink marks and periodic nudge as the yellow note on wide screens.
+   The angles are smaller because the bar is much wider than the note. */
+@media(max-width:850px){
+  .sticky-demo-surface{display:block;position:relative;transform-origin:50% 60%}
+  .sticky-marks{position:absolute;left:10px;top:-19px;width:46px;height:20px}
+  .sticky-marks i{position:absolute;bottom:2px;width:15px;height:4px;border-radius:4px;background:var(--ink)}
+  .sticky-marks i:nth-child(1){left:0;transform:rotate(38deg)}
+  .sticky-marks i:nth-child(2){left:15px;bottom:6px;transform:rotate(90deg)}
+  .sticky-marks i:nth-child(3){right:0;transform:rotate(-38deg)}
+  .sticky-demo:active .sticky-demo-surface{transform:rotate(-2deg) scale(.98)}
+  @media(min-width:600px){.sticky-demo-surface{--tilt:.5}}
+}
+@media(max-width:850px) and (prefers-reduced-motion:no-preference){
+  .sticky-demo.is-shown .sticky-demo-surface{animation:sticky-nudge 5.4s 1.6s ease-in-out infinite}
+  @keyframes sticky-nudge{0%,11.7%,100%{transform:rotate(0)}2.6%{transform:rotate(calc(var(--tilt,1)*-2.4deg))}5.8%{transform:rotate(calc(var(--tilt,1)*1.9deg))}9.1%{transform:rotate(calc(var(--tilt,1)*-1deg))}}
+  .sticky-demo.is-shown .sticky-marks i{animation:demo-mark .25s .55s backwards}
+  .sticky-demo.is-shown .sticky-marks i:nth-child(2){animation-delay:.63s}
+  .sticky-demo.is-shown .sticky-marks i:nth-child(3){animation-delay:.71s}
+}

@@ -47,7 +47,7 @@
   dialog.setAttribute('aria-hidden','true');dialog.inert = true;
   dialog.innerHTML = `<div class="lp-backdrop"></div><div class="lp-stage" data-mode="desktop">
     <h2 id="lp-title" class="lp-sr"></h2><div class="lp-toolbar">
-    <div class="lp-playback" role="group" aria-label="Автоматично превъртане"><button type="button" class="lp-play"></button><button type="button" class="lp-restart" aria-label="Пусни отначало" title="Пусни отначало"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.6 10.6a5.5 5.5 0 1 0 1.6-4.5M4.2 3.4v3.2h3.2"/></svg></button></div>
+    <div class="lp-playback" role="group" aria-label="Автоматично превъртане"><button type="button" class="lp-play"></button><button type="button" class="lp-restart" aria-label="Пусни отначало" title="Пусни отначало"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.6 10.6a5.5 5.5 0 1 0 1.6-4.5M4.2 3.4v3.2h3.2"/></svg></button><p class="lp-tip" hidden>Натиснете пауза и разгледайте целия сайт сами.</p></div>
     <div class="lp-segment" role="group" aria-label="Изглед на сайта"><span class="lp-thumb" aria-hidden="true"></span>
     ${MODES.map(mode=>`<button type="button" data-mode="${mode}" aria-pressed="false">${LABELS[mode]}</button>`).join('')}</div>
     <button class="lp-close" type="button" aria-label="Затвори прегледа" autofocus><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button></div>
@@ -56,6 +56,11 @@
     <a class="lp-live-link" target="_blank" rel="noopener noreferrer">Отвори сайта ${arrow}</a></div>`;
   document.body.append(dialog);
   const V = Object.fromEntries(['backdrop','stage','toolbar','playback','segment','thumb','close','port','loading','failure','live-link'].map(k=>[k,dialog.querySelector(`.lp-${k}`)]));
+  // A short note by the pause button when the viewer opens: the visitor can stop the tour and browse the whole site themselves.
+  // It goes away after a few seconds or as soon as the tour stops, and shows at most three times per visit.
+  const tip=dialog.querySelector('.lp-tip');let tipTimer=0,tipShows=0;
+  function hideTip(){clearTimeout(tipTimer);tip.classList.remove('is-on');tip.hidden=true;}
+  function showTip(){if(tipShows>=3)return;tipShows++;tip.hidden=false;requestAnimationFrame(()=>tip.classList.add('is-on'));clearTimeout(tipTimer);tipTimer=setTimeout(hideTip,7000);}
   const rect = el => {
     const r=el.getBoundingClientRect();return {left:r.left,top:r.top,width:r.width,height:r.height,right:r.right,bottom:r.bottom};
   };
@@ -505,6 +510,7 @@
   }
   function updatePlayback(){
     const playing=!!viewerTour.screen,button=V.playback.querySelector('.lp-play');
+    if(!playing)hideTip();
     if(button.dataset.playing===String(playing))return;
     button.dataset.playing=String(playing);button.title=playing?'Спри превъртането':'Пусни превъртането';button.setAttribute('aria-label',button.title);
     button.innerHTML=playing?'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4.5v11M13 4.5v11"/></svg>':'<svg viewBox="0 0 20 20" aria-hidden="true"><path class="lp-solid" d="m7.5 4.5 8 5.5-8 5.5Z"/></svg>';
@@ -657,6 +663,7 @@
     dialog.inert=false;dialog.removeAttribute('aria-hidden');dialog.showModal();syncScreens();layoutViewer();V.close.focus({preventScroll:true});screens.forEach(restoreScroll);
     state.screen.presentation?.run({cursor:false});
     if(touring)startViewerTour(state.screen,wait);else updatePlayback();
+    if(viewerTour.screen)showTip();
     if(!compactPreview()&&motion()&&visible(from)){
       const to=rect(state.screen.el),scale=from.width/to.width;
       animateFrom(state.screen,from,to,600,insetPath(cardInset(source,from.height),scale));
@@ -760,7 +767,7 @@
   V.playback.querySelector('.lp-play').addEventListener('click',toggleViewerTour);V.playback.querySelector('.lp-restart').addEventListener('click',restartViewerTour);
   V.close.addEventListener('click',close);V.backdrop.addEventListener('click',close);
   V.failure.querySelector('button').addEventListener('click',()=>{if(!state.closing){loadScreen(state.screen);layoutViewer();}});
-  dialog.addEventListener('cancel',e=>{e.preventDefault();close();});dialog.addEventListener('close',cleanup);
+  dialog.addEventListener('cancel',e=>{e.preventDefault();close();});dialog.addEventListener('close',cleanup);dialog.addEventListener('close',hideTip);
   addEventListener('resize',()=>{syncScreens();queueLayout();scheduleRotation();});addEventListener('load',queueLayout);document.fonts?.ready.then(queueLayout);
   // Content changes can move a device without resizing the device itself.
   const pageContent=document.querySelector('main');

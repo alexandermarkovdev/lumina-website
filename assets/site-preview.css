@@ -127,3 +127,16 @@ html{scrollbar-gutter:stable}
 @media (max-width:650px){.lp-playback{height:42px;padding:3px}.lp-playback button{width:36px;height:36px}}
 /* A screen loading for a spot further down the page: no still picture of the top (see setPlace). */
 .lp-surface.is-placing:not(.is-live) .lp-poster{opacity:0}
+
+/* Note by the pause button when the viewer opens: under it on phones and tablets, to its left on wide screens. */
+.lp-playback{position:relative}
+.lp-tip{position:absolute;left:2px;top:calc(100% + 13px);z-index:2;width:max-content;max-width:min(250px,calc(100vw - 80px));margin:0;padding:9px 13px 10px;background:#ffe74c;color:#0b0c0e;font:800 13px/1.35 Manrope,var(--sans,system-ui);letter-spacing:-.01em;text-align:left;box-shadow:0 10px 24px -8px rgba(0,0,0,.45);pointer-events:none;opacity:0;transform:translateY(-6px) rotate(-1.5deg);transition:opacity .3s,transform .3s}
+.lp-tip:before{content:'';position:absolute;left:13px;bottom:100%;border:8px solid transparent;border-top:0;border-bottom-color:#ffe74c}
+.lp-tip.is-on{opacity:1;transform:rotate(-1.5deg)}
+.lp-tip[hidden]{display:none}
+@media (min-width:1100px){
+ .lp-tip{left:auto;right:calc(100% + 18px);top:50%;max-width:none;white-space:nowrap;transform:translate(6px,-50%) rotate(-1.5deg)}
+ .lp-tip.is-on{transform:translateY(-50%) rotate(-1.5deg)}
+ .lp-tip:before{left:100%;bottom:auto;top:50%;margin-top:-8px;border:8px solid transparent;border-right:0;border-left-color:#ffe74c}
+}
+@media (prefers-reduced-motion:reduce){.lp-tip{transition:none}}
