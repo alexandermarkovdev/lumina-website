@@ -42,6 +42,10 @@ Two scrolling traps, both fixed 2026-10-11 and easy to reintroduce: (1) a client
 
 Several CSS files still contain rules for layout variants that were discarded long ago; they are dead, not load-bearing.
 
+## Search and link previews
+
+Added 2026-10-12. The `<head>` of `index.html` has the description, canonical address, Open Graph and Twitter tags, and a JSON-LD block describing the studio (phone, email, Bulgaria). The picture shown when the link is pasted in a chat is `assets/share-card.jpg` (1200×630), a screenshot of the real desktop hero with the menu, cookie bar and service strip hidden; retake it when the hero changes. Icons: `assets/favicon.svg` is the source, with `favicon.ico`, `assets/apple-touch-icon.png`, `assets/icon-192.png` / `icon-512.png` and `site.webmanifest` made from it. `robots.txt` keeps `archive/`, `previews/` and `sites/` out of search and points to `sitemap.xml`. **All full addresses in these tags and files use the GitHub Pages address; when the site moves to luminastudio.bg they must all be changed**, and `robots.txt` only takes effect there (on GitHub Pages it is not at the domain root). Chats cache the preview picture, so after changing it add a `?v=` to its address in the tags.
+
 ## Running it
 
 The portfolio previews need http(s): opened from `file://` they show still posters only. Locally run `start-site.cmd` (Python server on port 8765), or just use the live address.
