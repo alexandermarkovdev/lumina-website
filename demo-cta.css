@@ -13,8 +13,8 @@
   .attention-marks i:nth-child(2){animation-delay:1.53s}
   .attention-marks i:nth-child(3){animation-delay:1.61s}
   @keyframes demo-mark{from{opacity:0}}
-  .demo-motion-surface{animation:demo-nudge 5.4s 4s ease-in-out infinite}
-  @keyframes demo-nudge{0%,11.7%,100%{transform:rotate(0)}2.6%{transform:rotate(-5deg)}5.8%{transform:rotate(4deg)}9.1%{transform:rotate(-2deg)}}
+  .demo-motion-surface{animation:demo-nudge 4.7s 4s ease-in-out infinite}
+  @keyframes demo-nudge{0%,13.5%,100%{transform:rotate(0)}3%{transform:rotate(-5deg)}6.7%{transform:rotate(4deg)}10.5%{transform:rotate(-2deg)}}
   .demo-note:hover .demo-motion-surface{animation:demo-wiggle .55s ease-in-out}
   @keyframes demo-wiggle{0%,100%{transform:rotate(0)}30%{transform:rotate(-4deg)}65%{transform:rotate(3deg)}}
 }
@@ -36,8 +36,8 @@
   @media(min-width:600px){.sticky-demo-surface{--tilt:.5}}
 }
 @media(max-width:850px) and (prefers-reduced-motion:no-preference){
-  .sticky-demo.is-shown .sticky-demo-surface{animation:sticky-nudge 5.4s 1.6s ease-in-out infinite}
-  @keyframes sticky-nudge{0%,11.7%,100%{transform:rotate(0)}2.6%{transform:rotate(calc(var(--tilt,1)*-2.4deg))}5.8%{transform:rotate(calc(var(--tilt,1)*1.9deg))}9.1%{transform:rotate(calc(var(--tilt,1)*-1deg))}}
+  .sticky-demo.is-shown .sticky-demo-surface{animation:sticky-nudge 4.7s 1.6s ease-in-out infinite}
+  @keyframes sticky-nudge{0%,13.5%,100%{transform:rotate(0)}3%{transform:rotate(calc(var(--tilt,1)*-2.4deg))}6.7%{transform:rotate(calc(var(--tilt,1)*1.9deg))}10.5%{transform:rotate(calc(var(--tilt,1)*-1deg))}}
   .sticky-demo.is-shown .sticky-marks i{animation:demo-mark .25s .55s backwards}
   .sticky-demo.is-shown .sticky-marks i:nth-child(2){animation-delay:.63s}
   .sticky-demo.is-shown .sticky-marks i:nth-child(3){animation-delay:.71s}
@@ -56,11 +56,11 @@
   .pink-note:active{transform:rotate(-10deg) scale(.97)}
 }
 @media(max-width:600px) and (prefers-reduced-motion:no-preference){
-  .pink-note{animation:note-drop .75s .6s var(--ease) backwards,note-nudge 5.4s 4s ease-in-out infinite}
+  .pink-note{animation:note-drop .75s .6s var(--ease) backwards,note-nudge 4.7s 4s ease-in-out infinite}
   @keyframes note-drop{from{opacity:0;transform:rotate(2deg) translateY(-46px) scale(1.18)}}
-  @keyframes note-nudge{0%,11.7%,100%{transform:rotate(-7deg)}2.6%{transform:rotate(-12deg)}5.8%{transform:rotate(-3deg)}9.1%{transform:rotate(-9deg)}}
-  .note-marks{animation:note-marks-nudge 5.4s 4s ease-in-out infinite}
-  @keyframes note-marks-nudge{0%,11.7%,100%{transform:rotate(0)}2.6%{transform:rotate(-5deg)}5.8%{transform:rotate(4deg)}9.1%{transform:rotate(-2deg)}}
+  @keyframes note-nudge{0%,13.5%,100%{transform:rotate(-7deg)}3%{transform:rotate(-12deg)}6.7%{transform:rotate(-3deg)}10.5%{transform:rotate(-9deg)}}
+  .note-marks{animation:note-marks-nudge 4.7s 4s ease-in-out infinite}
+  @keyframes note-marks-nudge{0%,13.5%,100%{transform:rotate(0)}3%{transform:rotate(-5deg)}6.7%{transform:rotate(4deg)}10.5%{transform:rotate(-2deg)}}
   .note-marks i{animation:demo-mark .25s 1.45s backwards}
   .note-marks i:nth-child(2){animation-delay:1.53s}
   .note-marks i:nth-child(3){animation-delay:1.61s}
