@@ -106,3 +106,7 @@
 
 /* Projects that show searches without claiming a position have no #1 badge. */
 #portfolio .ps-google-rank[hidden]{display:none}
+
+/* Where the Google note sits under the search result (phones and tablets), its arrow is mirrored so it curves
+   up and to the left, at the result. Before it curved up and to the right, off the edge of the screen. */
+@media(max-width:950px){#portfolio .ps-google-note h4 svg{transform:rotate(-100deg) scaleX(-1)}}
