@@ -42,3 +42,26 @@
   .sticky-demo.is-shown .sticky-marks i:nth-child(2){animation-delay:.63s}
   .sticky-demo.is-shown .sticky-marks i:nth-child(3){animation-delay:.71s}
 }
+
+/* The yellow "Безплатно демо до 24 часа" note on the phone hero picture: the same three ink marks, drop-in and
+   periodic nudge as the yellow note on wide screens. The marks sit outside the note because the note is clipped
+   to its paper shape; they turn around the note's centre so the two move as one piece. */
+.note-marks{display:none}
+@media(max-width:600px){
+  .note-marks{display:block;position:absolute;z-index:4;left:60cqw;top:-3.5cqw;width:13cqw;height:9cqw;transform-origin:25cqw 20cqw;pointer-events:none}
+  .note-marks i{position:absolute;width:4.6cqw;height:1.2cqw;border-radius:1.2cqw;background:var(--ink)}
+  .note-marks i:nth-child(1){left:0;bottom:0;transform:rotate(12deg)}
+  .note-marks i:nth-child(2){left:3.2cqw;bottom:3.6cqw;transform:rotate(48deg)}
+  .note-marks i:nth-child(3){right:0;bottom:5.4cqw;transform:rotate(84deg)}
+  .pink-note:active{transform:rotate(-10deg) scale(.97)}
+}
+@media(max-width:600px) and (prefers-reduced-motion:no-preference){
+  .pink-note{animation:note-drop .75s .6s var(--ease) backwards,note-nudge 5.4s 4s ease-in-out infinite}
+  @keyframes note-drop{from{opacity:0;transform:rotate(2deg) translateY(-46px) scale(1.18)}}
+  @keyframes note-nudge{0%,11.7%,100%{transform:rotate(-7deg)}2.6%{transform:rotate(-12deg)}5.8%{transform:rotate(-3deg)}9.1%{transform:rotate(-9deg)}}
+  .note-marks{animation:note-marks-nudge 5.4s 4s ease-in-out infinite}
+  @keyframes note-marks-nudge{0%,11.7%,100%{transform:rotate(0)}2.6%{transform:rotate(-5deg)}5.8%{transform:rotate(4deg)}9.1%{transform:rotate(-2deg)}}
+  .note-marks i{animation:demo-mark .25s 1.45s backwards}
+  .note-marks i:nth-child(2){animation-delay:1.53s}
+  .note-marks i:nth-child(3){animation-delay:1.61s}
+}
