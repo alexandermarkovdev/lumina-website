@@ -5,8 +5,8 @@ const article=section?.querySelector('[data-business=materials]'),site=article?.
 if(!canvas)return;
 const group={
   "caption": [
-    "Покривни материали",
-    "Roofing materials"
+    "Строителни материали",
+    "Building materials"
   ],
   "products": [
     {

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lumina — services intro layouts</title>
+<style>
+  body{margin:0;background:#e9e6df;color:#0b0c0e;font-family:Arial,Helvetica,sans-serif}
+  .wrap{max-width:1500px;margin:0 auto;padding:28px 16px 70px}
+  h1{font-size:24px;margin:0 0 6px}
+  .lead{margin:0 0 26px;font-size:14px;color:#35343c;line-height:1.5;max-width:75ch}
+  .opt{margin:0 0 34px}
+  .opt h2{font-size:15px;margin:0 0 8px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+  .opt h2 b{background:#0b0c0e;color:#fffefa;padding:3px 9px;border-radius:99px;font-size:13px}
+  .opt h2 span{font-weight:400;color:#35343c;font-size:13px}
+  .opt h2 a{font-size:13px;color:#086697;margin-left:auto}
+  .row{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:12px;align-items:start}
+  .row img{display:block;width:100%;height:auto;background:#fffefa}
+  .desk{aspect-ratio:1650/400;overflow:hidden;background:#fffefa}
+  .desk img{width:116.4%;max-width:none;margin-left:-9.1%}
+  .cap{font-size:11px;color:#6a6860;margin:5px 0 0;letter-spacing:.04em;text-transform:uppercase}
+  @media(max-width:800px){.row{grid-template-columns:1fr}.row>div:last-child{max-width:300px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Services intro: four layouts</h1>
+  <p class="lead">The line „Всяка услуга решава конкретна задача…“ next to the heading „Какво правим? Всичко!“. Each row shows a computer and a phone. „Open the page“ shows that layout on the whole site. Nothing on the real site has changed. Tell me a number.</p>
+  <script>
+    const rows = [
+      ['Now', 'now', 'small grey text far away on the right', '../../index.html#services'],
+      ['1', 'idea1', 'straight under the heading, bigger and darker', 'idea1.html#services'],
+      ['2', 'idea2', 'beside the heading, close to it, with a thin ink line', 'idea2.html#services'],
+      ['3', 'idea3', 'handwritten note with an arrow pointing down at the services', 'idea3.html#services'],
+      ['4', 'idea4', 'on a pale-blue paper slip, like the colour tags', 'idea4.html#services']
+    ];
+    document.write(rows.map(([n, file, text, link]) => `
+  <section class="opt">
+    <h2><b>${n}</b><span>${text}</span><a href="${link}">Open the page</a></h2>
+    <div class="row">
+      <div><div class="desk"><img src="shots/${file}-desktop.png" alt=""></div><p class="cap">Computer</p></div>
+      <div><img src="shots/${file}-phone.png" alt=""><p class="cap">Phone</p></div>
+    </div>
+  </section>`).join(''));
+  </script>
+</div>
+</body>
+</html>
