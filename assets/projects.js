@@ -3,30 +3,12 @@
    kind, blurb and paper are used by portfolio.js for the tab, caption and stage colour. */
 window.LUMINA_PROJECTS = [
   {
-    id: 'razor',
-    name: 'Razor Barbershop',
-    kind: 'Бръснарница',
-    blurb: 'Тъмна, уверена визия с услуги и цени, работно време и бутон за обаждане на първия екран.',
-    paper: 'pale-blue',
-    url: 'sites/razor/index.html',
-    liveUrl: 'https://barbershoprazor.com/',
-    previewParam: 'lumina-preview',
-    smoothTour: true,
-    readySelector: 'main',
-    background: '#191c1e',
-    modes: {
-      desktop: { width: 1440, height: 900, poster: 'assets/previews/razor-desktop.jpg' },
-      // Display 402 × 874; reserve 62px status area and 34px home area.
-      mobile: { width: 402, height: 778, poster: 'assets/previews/razor-mobile.jpg', preserveViewOnClose: true }
-    }
-  },
-  {
     id: 'vsi',
     name: 'VSI Sports Complex',
     kind: 'Плувен комплекс',
     blurb: 'График, треньори, цени и новини за спортен комплекс с два басейна — подредени така, че родителят да намери всичко за минута.',
     paper: 'yellow',
-    url: 'sites/vsi/index.html',
+    url: 'sites/vsi/index.html?v=3', // v=3: skips browser-cached copies that still open the cookie bar inside the preview
     liveUrl: 'https://vsiswimming.com/',
     readySelector: 'main',
     background: '#edf7fa',
@@ -40,6 +22,24 @@ window.LUMINA_PROJECTS = [
       // 1680px, 480px at 1920px (too large). Keep the 16:10 shape when changing this.
       desktop: { width: 1680, height: 1050, poster: 'assets/previews/vsi-desktop.jpg' },
       mobile: { width: 402, height: 778, poster: 'assets/previews/vsi-mobile.jpg' }
+    }
+  },
+  {
+    id: 'razor',
+    name: 'Razor Barbershop',
+    kind: 'Мъжки фризьорски салон',
+    blurb: 'Тъмна, уверена визия с услуги и цени, работно време и бутон за обаждане на първия екран.',
+    paper: 'pale-blue',
+    url: 'sites/razor/index.html',
+    liveUrl: 'https://barbershoprazor.com/',
+    previewParam: 'lumina-preview',
+    smoothTour: true,
+    readySelector: 'main',
+    background: '#191c1e',
+    modes: {
+      desktop: { width: 1440, height: 900, poster: 'assets/previews/razor-desktop.jpg' },
+      // Display 402 × 874; reserve 62px status area and 34px home area.
+      mobile: { width: 402, height: 778, poster: 'assets/previews/razor-mobile.jpg', preserveViewOnClose: true }
     }
   },
   {

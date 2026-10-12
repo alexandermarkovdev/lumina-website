@@ -53,3 +53,18 @@
   .sr-benefit-grid>li:nth-child(even):not(.is-on)>header{transform:translateX(10px)}
 }
 @media(max-width:700px){.sr-spine-fill{display:none}}
+
+/* English-version offer: pink paper strip after the six services, with a small picture of the BG | EN switch. */
+.sr-english{display:flex;align-items:center;justify-content:space-between;gap:28px;max-width:940px;margin:54px auto 6px;padding:24px 38px 26px;background:var(--pink);clip-path:polygon(0 9%,99.4% 0,100% 89%,.7% 100%);transform:rotate(-.7deg)}
+.sr-english p{margin:0;font-size:21px;line-height:1.25;font-weight:800;letter-spacing:-.03em}
+.sr-english p>span{font-weight:500}
+.sr-english p.sr-english-more{margin-top:9px;max-width:66ch;font-size:13.5px;line-height:1.6;font-weight:400;letter-spacing:0}
+.sr-english-chip{display:flex;align-items:center;gap:9px;flex-shrink:0;background:var(--paper);padding:11px 18px;font-size:15px;font-weight:700;transform:rotate(3deg);clip-path:polygon(2% 6%,98% 0,100% 92%,0 100%)}
+.sr-english-chip i{font-style:normal;font-weight:400;color:#b5b1a6}
+.sr-english-chip b{position:relative;isolation:isolate;color:#6f6c63}
+.sr-english-chip b.on{color:var(--ink)}
+.sr-english-chip b.on:after{content:"";position:absolute;left:-4px;right:-4px;bottom:1px;height:9px;background:var(--yellow);z-index:-1;transform:rotate(-2deg)}
+@media(max-width:760px){.sr-english{flex-direction:column;align-items:flex-start;gap:18px;margin-top:38px;padding:26px 22px 28px;clip-path:polygon(0 3%,99% 0,100% 97%,1% 100%)}.sr-english p{font-size:19px}.sr-english p.sr-english-more{font-size:13px}}
+
+/* The 01–06 tags light up in the colour of their own service (yellow, pink, pale blue, blue…) instead of all yellow. */
+@media(min-width:701px){.sr-benefit-grid>li.is-on .sr-number{background:var(--si-color,var(--yellow))}}

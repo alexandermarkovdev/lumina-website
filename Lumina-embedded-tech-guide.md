@@ -243,6 +243,8 @@ Exact desktop interpolation helper:
   }
 ```
 
+The stage card shows the screen cropped by its `.live-stage` (a `clip-path` set in `placeThumbnail()`), while the viewer shows it whole. `animateFrom()` therefore also takes the crop at each end (`cardInset()` / `insetPath()`) and animates `clip-path` together with the transform; without it the screen appears as a taller, uncropped box at the card end of the movement (the snippet above shows the earlier, transform-only version). Closing from the phone view, which has no card of its own, shrinks into the stage's card while fading.
+
 Close through the controller, including Escape and backdrop clicks. `close()` captures iframe scroll before animation and delegates restoration to `cleanup()`. Avoid removing the dialog or iframe directly from another handler.
 
 ## 7. Scroll restoration and resuming the loop

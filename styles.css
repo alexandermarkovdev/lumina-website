@@ -210,3 +210,49 @@ html,body{overflow-x:clip}
 
 /* "Защо ви е сайт?" leads to the section below, so its arrow points down and nudges down on hover. */
 .hero-intro .text-link:hover .icon{transform:translateY(3px)}
+
+/* The sticky header shrinks from 105px to 70px once the page scrolls. Without this margin the whole page
+   moved up 35px mid-scroll, so menu links clicked from the top landed 35px too low. */
+@media(min-width:851px){.site-header{transition:height .35s var(--ease),margin-bottom .35s var(--ease)}.is-scrolled .site-header{margin-bottom:35px}}
+
+/* BG | EN switch in the header; i18n.js does the translating. The chosen language gets the menu's yellow marker. */
+.lang-switch{display:flex;align-items:center;gap:7px;flex-shrink:0;margin-left:auto;font-size:13px;font-weight:700}
+.lang-switch button{position:relative;isolation:isolate;background:none;border:0;padding:10px 3px;font:inherit;color:#6f6c63;cursor:pointer}
+.lang-switch button[aria-pressed="true"]{color:var(--ink)}
+.lang-switch button:after{content:"";position:absolute;left:-3px;right:-3px;bottom:9px;height:9px;background:var(--yellow);z-index:-1;transform:scaleX(0) rotate(-1.5deg);clip-path:polygon(0 22%,99% 0,100% 74%,1% 100%);transition:transform .3s var(--ease)}
+.lang-switch button[aria-pressed="true"]:after,.lang-switch button:hover:after{transform:scaleX(1) rotate(-1.5deg)}
+.lang-switch button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.lang-switch span{color:#b5b1a6;font-weight:400}
+@media(min-width:851px){.lang-switch{margin-left:0}}
+/* The one handwritten note that a stylesheet writes (overview-clear-callouts.css), so i18n.js cannot reach it. */
+html[lang="en"] #why-sites.compact .reasons:after{content:'Try it yourself.'}
+/* Making room for the switch where the header is tight. The Bulgarian menu is the widest, so it sets the limits.
+   "header.site-header" outranks the menu spacing that contact.css sets later. */
+@media(min-width:1181px) and (max-width:1419px){.site-header{gap:20px}header.site-header .desktop-nav{padding-left:0;gap:20px}.brand img{width:210px}}
+@media(min-width:851px) and (max-width:1180px){.site-header{gap:18px}header.site-header .desktop-nav{margin-right:0}}
+@media(min-width:851px) and (max-width:1229px){.brand>span{display:none}}
+@media(min-width:851px) and (max-width:1000px){.site-header{gap:12px}header.site-header .desktop-nav{gap:11px}header.site-header .desktop-nav a{font-size:11px}.header-cta{font-size:12px;padding-left:10px;padding-right:10px}}
+@media(max-width:600px){.lang-switch{gap:4px;font-size:12px}.lang-switch button{padding:10px 1px}}
+@media(max-width:400px){.brand>span{display:none}}
+/* From phone testing: a wider touch area for BG and EN without moving anything, and the sticky demo bar steps aside while the big site viewer is open. */
+.lang-switch button:before{content:"";position:absolute;inset:-4px -6px}
+body:has(dialog.lp-viewer[open]) .sticky-demo{transform:translateY(150%)!important;visibility:hidden!important}
+
+/* No rule lines between the sections (owner, 2026-10-12). The footer keeps its own line. "html" outranks the section files loaded later. */
+html #why-sites.compact,html #services,html #portfolio,html #contact{border-top:0}
+
+/* The three window dots on the SOLA mock-up in the paper colours instead of the macOS red, amber and green. */
+.traffic-lights i{background:var(--pink)}
+.traffic-lights i:nth-child(2){background:var(--yellow)}
+.traffic-lights i:nth-child(3){background:var(--blue)}
+
+/* The 24-hour promise in the hero: a pale-blue cut-paper note of its own, shaped like the yellow demo note and
+   sitting clear of the blue shape (it used to be a white card lying on it). Positions are shares of the showcase. */
+.process-note{left:15.5%;right:auto;top:89%;bottom:auto;width:auto;padding:13px 22px 15px 20px;background:none;box-shadow:none;font-size:23px;line-height:1;transform:rotate(6deg);z-index:4;isolation:isolate;filter:drop-shadow(0 9px 9px #2723110f)}
+.process-note:before{content:"";position:absolute;inset:0;z-index:-1;background:var(--pale-blue);clip-path:polygon(7% 12%,58% 0,97% 16%,100% 62%,84% 100%,22% 94%,0 55%)}
+.process-note-arrow{left:97%;right:auto;top:auto;bottom:22%;width:118px;height:44px}
+@media(max-width:1365px){.process-note{left:15.5%;right:auto;top:89%;bottom:auto;width:auto;font-size:21px;padding:11px 18px 13px 16px}.process-note-arrow{width:96px;height:36px}}
+/* Tablet-width layouts have no free spot beside the picture (the yellow "Идеите оживяват онлайн" note and the demo note
+   fill the bottom left), so there the promise keeps its old place at the foot of the blue shape, by the phone. */
+@media(max-width:1180px){.process-note{left:auto;right:182px;top:auto;bottom:-8px;transform:rotate(-7deg)}.process-note-arrow{display:none}}
+@media(max-width:850px){.process-note{right:150px}}

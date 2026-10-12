@@ -1,0 +1,104 @@
+/* Approved contact variant 5. All styles stay inside the contact section. */
+#contact .cp-panel{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:6%;align-items:center;min-height:clamp(520px,calc(100svh - 188px),690px);padding:30px 38px;position:relative;isolation:isolate;background:var(--blue);line-height:1.5}
+#contact .cp-story{position:relative;min-width:0}
+#contact .cp-headline{font-size:clamp(40px,4vw,59px);line-height:1.06;letter-spacing:-.04em;font-weight:800;margin:0;text-wrap:balance}
+#contact .cp-description{font-size:14px;line-height:1.75;max-width:34ch;margin:23px 0 0;color:#353b3d}
+#contact .cp-offer{position:relative;isolation:isolate;display:flex;align-items:center;gap:18px;width:fit-content;padding:19px 22px;margin-top:28px;transform:rotate(-2deg)}
+#contact .cp-offer:before{content:"";position:absolute;inset:0;z-index:-1;background:var(--yellow);clip-path:polygon(1% 4%,97% 0,100% 94%,0 100%)}
+#contact .cp-offer strong{font-weight:800;font-size:29px;line-height:1.05;letter-spacing:-.03em;white-space:nowrap}
+#contact .cp-offer strong span{display:block;font-size:14px;line-height:1.4;margin-top:7px}
+#contact .cp-offer p{font-size:12px;line-height:1.6;margin:0;max-width:19ch}
+#contact .cp-signature{font:600 29px/1.08 Caveat,cursive;transform:rotate(-3deg);margin:30px 0 0 12px;position:relative;width:fit-content}
+#contact .cp-signature svg{position:absolute;width:95px;height:64px;right:-118px;top:-5px}
+#contact svg{display:block;flex-shrink:0}
+#contact .cp-letter{min-width:0;position:relative;background:var(--paper);padding:29px 31px;box-shadow:0 14px 30px #163c4a25;transform:rotate(1deg)}
+#contact .cp-letter-head{padding-right:54px}
+#contact .cp-address{font-size:11px;display:block;width:fit-content;padding:0 35px 8px 0;margin-bottom:26px;border-bottom:1px solid #0b0c0e40}
+#contact .cp-form-title{font:600 36px/1 Caveat,cursive;letter-spacing:0;margin:0 0 8px}
+#contact .cp-form-lead{font-size:12px;color:#57544b;line-height:1.6;margin:0 0 20px}
+#contact .cp-field{display:block;min-width:0;margin:0 0 17px}
+#contact .cp-field>span{display:flex;gap:7px;align-items:baseline;flex-wrap:wrap;font-size:12px;font-weight:800;line-height:1.5;margin-bottom:7px}
+#contact .cp-field small{font-size:11px;font-weight:400;color:#57544b}
+#contact .cp-field input,#contact .cp-field textarea{display:block;width:100%;min-width:0;border:0;border-bottom:1px solid #837e71;border-radius:0;padding:8px 0 10px;background:transparent;font:400 13px/1.5 Manrope,Arial,sans-serif;color:var(--ink);caret-color:#086697;outline-offset:4px}
+#contact .cp-field input::placeholder,#contact .cp-field textarea::placeholder{color:#676255;opacity:1}
+#contact .cp-field textarea{resize:vertical;height:75px;min-height:64px;max-height:160px;scrollbar-color:#716a5c var(--paper)}
+#contact .cp-field input:focus,#contact .cp-field textarea:focus{outline:2px solid #086697;outline-offset:3px;border-bottom-color:transparent}
+#contact .cp-field-pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+#contact .cp-submit{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;min-height:54px;padding:15px 20px;background:var(--pink);color:var(--ink);border:0;text-align:left;font-size:13px;font-weight:800;line-height:1.5}
+#contact .cp-submit svg{width:29px;height:23px}
+#contact .cp-submit:hover{background:var(--yellow)}
+#contact .cp-submit:focus-visible{outline:3px solid #086697;outline-offset:4px}
+#contact .cp-status{background:var(--pale-blue);padding:13px 16px;margin:13px 0 0;font-size:12px;line-height:1.65;outline-offset:3px}
+#contact .cp-stamp{position:absolute;right:23px;top:20px;width:64px;height:75px;display:grid;place-content:center;justify-items:center;background:var(--yellow);transform:rotate(5deg);-webkit-mask:linear-gradient(#000 0 0) center/calc(100% - 8px) calc(100% - 8px) no-repeat,radial-gradient(4px at 4px 4px,#0000 97%,#000) -4px -4px/12px 12px;mask:linear-gradient(#000 0 0) center/calc(100% - 8px) calc(100% - 8px) no-repeat,radial-gradient(4px at 4px 4px,#0000 97%,#000) -4px -4px/12px 12px}
+#contact .cp-stamp:before{content:"";position:absolute;inset:8px;border:1px solid var(--ink)}
+#contact .cp-stamp b{font-size:22px;line-height:1.2;font-weight:800;letter-spacing:-.03em}
+#contact .cp-stamp span{font:600 17px/1 Caveat,cursive}
+#contact .cp-postmark{position:absolute;right:62px;top:25px;width:106px;height:63px;fill:none;stroke:var(--ink);stroke-width:1.3;opacity:.52;transform:rotate(-9deg);pointer-events:none}
+#contact .cp-postmark text{fill:var(--ink);stroke:none;font:800 8px Manrope,sans-serif}
+@media(max-width:1150px){
+  #contact .cp-panel{padding:28px;gap:5%}
+  #contact .cp-headline{font-size:45px}
+  #contact .cp-letter{padding:26px}
+  #contact .cp-signature svg{display:none}
+  #contact .cp-offer{padding:18px;gap:14px}
+  #contact .cp-offer strong{font-size:25px}
+  #contact .cp-offer p{font-size:11px}
+}
+@media(min-width:761px) and (max-height:760px){
+  #contact .cp-panel{padding-block:22px}
+  #contact .cp-field{margin-bottom:13px}
+  #contact .cp-address{margin-bottom:23px}
+  #contact .cp-form-lead{margin-bottom:17px}
+}
+@media(max-width:950px){
+  #contact .cp-panel{min-height:580px;padding:29px 24px;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+  #contact .cp-headline{font-size:39px}
+  #contact .cp-letter{padding:25px}
+  #contact .cp-offer{display:block}
+  #contact .cp-offer p{margin-top:12px;max-width:25ch}
+  #contact .cp-field-pair{gap:15px}
+  #contact .cp-stamp{right:19px;width:56px;height:66px}
+  #contact .cp-postmark{right:53px;width:91px}
+  #contact .cp-address{padding-right:0}
+}
+@media(max-width:760px){
+  #contact .cp-panel{grid-template-columns:minmax(0,1fr);min-height:0;gap:29px;padding:26px 17px}
+  #contact .cp-story{padding-inline:7px}
+  #contact .cp-headline{font-size:clamp(35px,9vw,45px)}
+  #contact .cp-description{font-size:14px;margin-top:19px;max-width:36ch}
+  #contact .cp-offer{display:flex;gap:17px;margin-top:23px;max-width:100%}
+  #contact .cp-offer p{font-size:11px;margin-top:0;max-width:20ch}
+  #contact .cp-signature{font-size:27px;margin-top:26px}
+  #contact .cp-letter{padding:24px 20px;transform:rotate(.5deg)}
+  #contact .cp-letter-head{padding-right:28px}
+  #contact .cp-form-title{font-size:32px}
+  #contact .cp-address{margin-bottom:30px;max-width:57%}
+  #contact .cp-form-lead{margin-bottom:21px}
+  #contact .cp-field{margin-bottom:21px}
+  #contact .cp-field input,#contact .cp-field textarea{font-size:16px}
+  #contact .cp-field textarea{height:95px}
+  #contact .cp-field-pair{grid-template-columns:minmax(0,1fr);gap:0}
+  #contact .cp-stamp{right:16px;top:18px;width:54px;height:63px}
+  #contact .cp-postmark{right:48px;top:26px;width:89px;height:51px}
+  #contact .cp-submit{min-height:56px;padding:16px 18px}
+}
+@media(max-width:370px){
+  #contact .cp-offer{display:block}
+  #contact .cp-offer p{margin-top:12px;max-width:none}
+  #contact .cp-headline{font-size:32px}
+  #contact .cp-form-title{font-size:29px}
+}
+
+/* Direct contacts under the postcard: phone, Viber and (once it exists) email. Values live at the top of contact-postcard.js. */
+#contact .cp-direct{display:flex;align-items:center;flex-wrap:wrap;gap:12px 28px;margin:26px 0 0;padding:0 4px}
+#contact .cp-direct p{margin:0 4px 0 0;font:600 28px/1 Caveat,cursive;transform:rotate(-3deg)}
+#contact .cp-direct a{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--ink);text-decoration:none;font-weight:800}
+#contact .cp-direct svg{width:22px;height:22px;flex-shrink:0}
+#contact .cp-direct-phone{font-size:25px;letter-spacing:-.03em}
+#contact .cp-direct-phone span{background:linear-gradient(transparent 60%,var(--yellow) 60% 94%,transparent 94%);padding:0 3px}
+#contact .cp-direct-tag{font-size:15px;padding:0 17px;background:var(--pale-blue);clip-path:polygon(2% 6%,98% 0,100% 93%,0 100%);transition:transform .25s var(--ease)}
+#contact .cp-direct-tag:hover{transform:rotate(-2deg)}
+#contact .cp-direct a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media(max-width:760px){#contact .cp-direct{margin-top:22px;gap:10px 20px}#contact .cp-direct p{flex-basis:100%;font-size:26px}#contact .cp-direct-phone{font-size:24px}}
+#contact .cp-trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+#contact .cp-submit:disabled{opacity:.6;cursor:progress}

@@ -307,13 +307,18 @@
     Object.assign(screen.el.style,{left:box.left-origin.left+'px',top:box.top-origin.top+'px',width:box.width+'px',height:screen.size.height*scale+'px',clipPath:clip});
     screen.shell.style.transform=`scale(${scale})`;
   }
+  // How much of a card's screen its stage cuts off on each side (top, right, bottom, left), in page pixels.
+  function cardInset(device,height) {
+    const box=rect(device.box),boundary=rect(device.box.closest('.live-stage')||device.box),bottom=box.top+(height??box.height);
+    return [Math.max(0,boundary.top-box.top),Math.max(0,box.right-boundary.right),Math.max(0,bottom-boundary.bottom),Math.max(0,boundary.left-box.left)];
+  }
+  const insetPath=(inset,scale=1)=>`inset(${inset.map(n=>n/scale+'px').join(' ')})`;
   function placeThumbnail(screen) {
     rememberScroll(screen);
     const device=deviceFor(screen);
     if(!device){screen.el.hidden=true;return;}
-    const box=rect(device.box),boundary=rect(device.box.closest('.live-stage'));
-    const inset=[Math.max(0,boundary.top-box.top),Math.max(0,box.right-boundary.right),Math.max(0,box.bottom-boundary.bottom),Math.max(0,boundary.left-box.left)];
-    place(screen,box,`inset(${inset.map(n=>n+'px').join(' ')})`);
+    const box=rect(device.box),inset=cardInset(device,box.height);
+    place(screen,box,insetPath(inset));
     if(device.scene){
       const scale=device.scene.clientWidth/1672;
       screen.el.classList.add('is-scene-screen');screen.el.dataset.anchor='projects';
@@ -358,6 +363,7 @@
   // Host binding for this site: portfolio.js builds the stage; the two devices live inside it.
   const host=document.querySelector('#portfolio .live-stage');
   if(!host){dialog.remove();return;}
+  const autoAdvance=host.closest('#portfolio').dataset.autoAdvance!=='false';
   SCENE_MODES.forEach(mode=>createDevice(mode,host));
   document.querySelector('#portfolio .live-controls')?.append(createRotationControls());
   function select(id,{automatic=false}={}) {
@@ -456,14 +462,18 @@
     });
     // Finish layout reads in every document before moving any viewport.
     scrolls.forEach(({win,top,geometry})=>{win.scrollTo({left:0,top,behavior:'instant'});geometry.lastTop=top;});
-    if(rotation.elapsed>=rotation.interval){advance(1,true);return;}
+    if(rotation.elapsed>=rotation.interval){
+      if(autoAdvance)advance(1,true);
+      else{restartTour();scheduleRotation();}
+      return;
+    }
     rotation.frame=requestAnimationFrame(tourFrame);
   }
   function scheduleRotation(){
     const ids=[...registry.keys()],index=ids.indexOf(active);
     rotation.controls.forEach(group=>{
       group.hidden=ids.length<2;group.querySelector('.lp-project-position').textContent=`${index+1} / ${ids.length}`;
-      const toggle=group.querySelector('.lp-rotation-toggle');toggle.setAttribute('aria-pressed',String(rotation.paused));toggle.setAttribute('aria-label',rotation.paused?'Пусни автоматичната смяна':'Спри автоматичната смяна');toggle.title=rotation.paused?'Пусни 15-секундния преглед':'Спри 15-секундния преглед';
+      const toggle=group.querySelector('.lp-rotation-toggle');toggle.setAttribute('aria-pressed',String(rotation.paused));toggle.setAttribute('aria-label',autoAdvance?(rotation.paused?'Пусни автоматичната смяна':'Спри автоматичната смяна'):(rotation.paused?'Пусни превъртането на сайта':'Спри превъртането на сайта'));toggle.title=toggle.getAttribute('aria-label');
       if(toggle.dataset.paused!==String(rotation.paused)){
         toggle.dataset.paused=String(rotation.paused);
         toggle.innerHTML=rotation.paused?'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6Z"/></svg>':'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4v12M13 4v12"/></svg>';
@@ -482,9 +492,10 @@
     rotation.holds.delete('project-tab');select(id,{automatic});
   }
   // The opened viewer keeps the stage's slow pan going until the visitor takes over.
-  const viewerTour={frame:0,last:0,screen:null,doc:null,carry:0,wait:0,off:null};
+  // ended: the scroll stopped by itself at the bottom of the page (not because the visitor stopped it).
+  const viewerTour={frame:0,last:0,screen:null,doc:null,carry:0,wait:0,off:null,ended:false};
   function stopViewerTour(){
-    cancelAnimationFrame(viewerTour.frame);viewerTour.frame=0;viewerTour.off?.abort();viewerTour.off=null;viewerTour.screen=null;viewerTour.doc=null;
+    cancelAnimationFrame(viewerTour.frame);viewerTour.frame=0;viewerTour.off?.abort();viewerTour.off=null;viewerTour.screen=null;viewerTour.doc=null;viewerTour.ended=false;
     updatePlayback();
   }
   function startViewerTour(screen,wait=0){
@@ -565,7 +576,7 @@
           t.carry+=s.view.height*.00045*dt;
           const step=Math.floor(t.carry),top=Math.min(geometry.end,win.scrollY+step);t.carry-=step;
           if(step){win.scrollTo({left:0,top,behavior:'instant'});s.scroll={x:0,y:top};}
-          if(top>=geometry.end){stopViewerTour();return;}
+          if(top>=geometry.end){stopViewerTour();viewerTour.ended=true;return;}
         }
       }catch{stopViewerTour();return;}
     }
@@ -590,11 +601,13 @@
   function cancelAnimations() {
     [V.toolbar,V.backdrop,V.port,...[...screens.values()].map(s=>s.el)].forEach(el=>el.getAnimations().forEach(a=>a.cancel()));
   }
-  function animateFrom(screen,from,to,duration) {
+  // The screen is laid out at "to" and drawn from "from". clipFrom/clipTo are the card's crop at either end
+  // (in the laid-out element's own pixels), so the visible shape changes with the size instead of snapping.
+  function animateFrom(screen,from,to,duration,clipFrom='inset(0px 0px 0px 0px)',clipTo='inset(0px 0px 0px 0px)') {
     const scale=from.width/to.width;
     return screen.el.animate([
-      {transformOrigin:'0 0',transform:`translate(${from.left-to.left}px,${from.top-to.top}px) scale(${scale})`},
-      {transformOrigin:'0 0',transform:'none'}
+      {transformOrigin:'0 0',transform:`translate(${from.left-to.left}px,${from.top-to.top}px) scale(${scale})`,clipPath:clipFrom},
+      {transformOrigin:'0 0',transform:'none',clipPath:clipTo}
     ],{duration,easing:EASE});
   }
   function rememberScroll(screen) {
@@ -644,7 +657,10 @@
     dialog.inert=false;dialog.removeAttribute('aria-hidden');dialog.showModal();syncScreens();layoutViewer();V.close.focus({preventScroll:true});screens.forEach(restoreScroll);
     state.screen.presentation?.run({cursor:false});
     if(touring)startViewerTour(state.screen,wait);else updatePlayback();
-    if(!compactPreview()&&motion()&&visible(from))animateFrom(state.screen,from,rect(state.screen.el),600);
+    if(!compactPreview()&&motion()&&visible(from)){
+      const to=rect(state.screen.el),scale=from.width/to.width;
+      animateFrom(state.screen,from,to,600,insetPath(cardInset(source,from.height),scale));
+    }
     else state.screen.el.animate({opacity:[0,1]},{duration:150});
     V.backdrop.animate({opacity:[0,1]},{duration:motion()?420:150});
     V.toolbar.animate({opacity:[0,1],transform:motion()?['translateY(-6px)','none']:['none','none']},{duration:220,easing:EASE});
@@ -708,8 +724,16 @@
     }
     const device=deviceFor(screen),target=device?rect(device.box):null;
     let animation;
+    const card=!device&&deviceFor(shown),cardBox=card?rect(card.box):null;
     if(!compactPreview()&&motion()&&visible(target)){
-      place(screen,target);animation=animateFrom(screen,from,target,380);
+      const inset=cardInset(device,target.height);
+      place(screen,target,insetPath(inset));animation=animateFrom(screen,from,target,380,undefined,insetPath(inset));
+    }else if(!compactPreview()&&motion()&&visible(cardBox)){
+      // No card of its own to return to (the phone view): shrink into the stage's card while fading out.
+      const stage=rect(card.box.closest('.live-stage')||card.box),top=Math.max(cardBox.top,stage.top),height=Math.min(cardBox.bottom,stage.bottom)-top;
+      const scale=Math.min(cardBox.width/from.width,height/from.height);
+      const x=cardBox.left+(cardBox.width-from.width*scale)/2-from.left,y=top+(height-from.height*scale)/2-from.top;
+      animation=screen.el.animate([{transformOrigin:'0 0',transform:'none',opacity:1},{transformOrigin:'0 0',transform:`translate(${x}px,${y}px) scale(${scale})`,opacity:0}],{duration:380,easing:EASE,fill:'forwards'});
     }else animation=screen.el.animate({opacity:[1,0]},{duration:150,fill:'forwards'});
     V.toolbar.animate({opacity:[1,0]},{duration:150,fill:'forwards'});V.backdrop.animate({opacity:[1,0]},{duration:!compactPreview()&&motion()?380:150,fill:'forwards'});
     await Promise.race([animation.finished.catch(()=>{}),new Promise(r=>setTimeout(r,500))]);
@@ -717,7 +741,8 @@
   }
   function switchMode(mode) {
     if(!MODES.includes(mode)||mode===state.mode||!dialog.open||state.closing)return;
-    const before=rect(state.screen.el),touring=!!viewerTour.screen,place=capturePlace(state.screen);cancelAnimations();state.screen.presentation?.stop();rememberScroll(state.screen);
+    // A page that ran out on one device usually has more to show on the other (the phone page is longer), so carry on there.
+    const before=rect(state.screen.el),touring=!!viewerTour.screen||viewerTour.ended,place=capturePlace(state.screen);cancelAnimations();state.screen.presentation?.stop();rememberScroll(state.screen);
     state.mode=mode;state.screen=getScreen(state.project,mode);setPlace(state.screen,place);syncScreens();layoutViewer();restoreScroll(state.screen);
     if(state.screen.ready)applyPlace(state.screen);
     if(touring)startViewerTour(state.screen);
@@ -740,6 +765,9 @@
   // Content changes can move a device without resizing the device itself.
   const pageContent=document.querySelector('main');
   if(pageContent)new ResizeObserver(queueLayout).observe(pageContent);
+  // The sticky header changes height without resizing main; keep its live surface aligned.
+  const siteHeader=document.querySelector('.site-header');
+  if(siteHeader)new ResizeObserver(queueLayout).observe(siteHeader);
   // Closed previews and their photographed anchors share document coordinates;
   // they move together natively. Scrolling the parent needs no geometry writes
   // or stop/restart cycle. Reposition only when the visible showcase changes.

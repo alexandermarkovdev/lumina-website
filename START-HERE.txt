@@ -1,0 +1,11 @@
+LUMINA — FINAL SITE
+
+Double-click start-site.cmd to open the site locally. Python must be installed.
+The site opens at http://127.0.0.1:8765/index.html
+Keep the server window open while viewing it.
+
+For hosting, upload index.html, the CSS and JavaScript files, assets, and sites together.
+The embedded portfolio sites need a web server; opening index.html directly does not load them correctly.
+
+Bulgarian is the default language. English is available from the language switch.
+The contact form is a demo and does not send enquiries.

@@ -1,0 +1,61 @@
+
+/* Approved seaside guesthouse hero. All rules are scoped to the device screens. */
+.gh-screen{--gh-ink:#163d49;--gh-paper:#fffdf7;--gh-soft:#ece9df;--gh-rule:#cdcfc8;position:relative;width:100%;height:100%;background:var(--gh-paper);color:var(--gh-ink);font-family:Manrope,sans-serif;container-type:inline-size;overflow:hidden;text-align:left;isolation:isolate}
+.gh-screen *{box-sizing:border-box}.gh-screen p{margin:0}.gh-screen [hidden]{display:none!important}.gh-screen button,.gh-screen input,.gh-screen select{font-family:inherit;color:inherit}.gh-screen button{cursor:pointer}.gh-screen button:focus-visible,.gh-screen select:focus-visible{outline:2px solid #006aaa;outline-offset:2px}.gh-screen button{border:0}.gh-screen svg{display:block;width:3cqw;height:3cqw;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}.gh-screen img{display:block;max-width:100%}
+.gh-desktop-shell{height:calc(100% - 29px)}.gh-phone-shell{padding:0!important}.gh-top{height:12%;display:flex;align-items:center;justify-content:space-between;padding:0 5cqw;position:relative;z-index:4;background:var(--gh-paper)}.gh-top nav{display:flex;align-items:center;gap:4cqw}.gh-top button{background:none;padding:0;font-size:2.05cqw;line-height:1.3;min-height:5cqw}.gh-top .gh-home{padding:0;display:flex}.gh-home svg{width:6cqw;height:6cqw;stroke-width:1.3}.gh-content{height:88%;position:relative;overflow:hidden}.gh-picture{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}.gh-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,36,45,.73),rgba(8,36,45,.12));pointer-events:none}.gh-head{position:relative;z-index:1;padding:6cqw 5cqw;width:83%;color:#fffefa}.gh-headline{font-family:Georgia,serif;font-weight:400;font-size:7.6cqw;line-height:1.07;letter-spacing:-.025em;text-wrap:balance}.gh-booking{position:absolute;z-index:2;left:5cqw;bottom:4cqw;width:66%;padding:3cqw;background:var(--gh-paper);color:var(--gh-ink);margin:0}.gh-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.6cqw}.gh-field{min-width:0;display:flex;flex-direction:column;gap:1.3cqw;position:relative;padding-bottom:2cqw}.gh-field>span{font-size:1.75cqw;line-height:1.25;color:#41616a;white-space:nowrap}.gh-date-value,.gh-field select{font-size:2.5cqw;font-weight:600;line-height:1.3}.gh-field select{border:0;background:none;padding:0 0 0 0;width:100%;cursor:pointer;border-radius:0;outline-offset:1px}.gh-date input{position:absolute;inset:0;width:100%;height:100%;opacity:.001;cursor:pointer;border:0;padding:0}.gh-date:focus-within{outline:2px solid #006aaa;outline-offset:2px}.gh-submit{display:flex;align-items:center;justify-content:space-between;gap:3cqw;width:100%;background:var(--gh-ink);color:#fffdf7!important;font-size:2.4cqw;font-weight:600;padding:2.5cqw 3cqw;margin-top:2cqw}.gh-submit:hover{background:#235a68}.gh-submit svg{width:3cqw;height:3cqw}.gh-form-title{font-weight:600;font-size:2.6cqw;margin:0 0 3cqw!important}.gh-error{font-size:2cqw;line-height:1.4;color:#9c291b;background:#fff4ee;padding:2cqw;margin-top:2cqw!important}.gh-room-tabs{display:flex;gap:2cqw;padding-bottom:3cqw}.gh-room-tabs button{flex:1;min-width:0;background:transparent;border:1px solid var(--gh-rule);padding:2cqw 1cqw;font-size:2.05cqw;white-space:nowrap}.gh-room-tabs button[aria-pressed=true]{background:var(--gh-ink);color:var(--gh-paper);border-color:var(--gh-ink)}
+/* 1 — full photograph, horizontal date fields, one booking action. */
+.gh-panorama .gh-head{padding-top:5.5cqw}.gh-panorama .gh-booking{box-shadow:0 2cqw 5cqw #0d273022}
+/* Portrait versions use fewer columns and larger relative control sizes. */
+.gh-phone .gh-top{height:17%;padding:6cqw 6cqw 0}.gh-phone .gh-home svg{width:12cqw;height:12cqw}.gh-phone .gh-top nav{gap:5cqw}.gh-phone .gh-top nav button{font-size:4.5cqw;min-height:12cqw}.gh-phone .gh-top nav button:last-child{display:none}.gh-phone .gh-content{height:83%}.gh-phone .gh-picture{object-position:60% center}.gh-phone .gh-head{width:100%;padding:8cqw 7cqw}.gh-phone .gh-headline{font-size:12.2cqw;line-height:1.06;text-wrap:pretty}.gh-phone .gh-booking{left:6cqw;bottom:6cqw;width:88%;padding:5cqw}.gh-phone .gh-fields{grid-template-columns:1fr 1fr;gap:4cqw}.gh-phone .gh-field{gap:2cqw;padding-bottom:1.5cqw}.gh-phone .gh-field>span{font-size:4cqw}.gh-phone .gh-date-value,.gh-phone .gh-field select{font-size:5.4cqw}.gh-phone .gh-field:last-child:not(.gh-room-select){grid-column:1/-1;display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:3cqw}.gh-phone .gh-field:last-child select{width:51%;text-align:right}.gh-phone .gh-submit{font-size:5.4cqw;padding:5cqw 5cqw;margin-top:3cqw}.gh-phone .gh-submit svg{width:6cqw;height:6cqw}.gh-phone .gh-error{font-size:4.5cqw;padding:3cqw;margin-top:3cqw!important}.gh-phone .gh-form-title{font-size:5.2cqw;line-height:1.2;margin-bottom:5cqw!important}.gh-phone .gh-room-tabs{gap:3cqw;padding-bottom:4cqw}.gh-phone .gh-room-tabs button{font-size:4cqw;padding:4cqw 1.5cqw}.gh-phone.gh-panorama .gh-head{padding-top:8cqw}.gh-phone.gh-panorama .gh-headline{font-size:12.2cqw}.gh-phone.gh-panorama .gh-booking{padding:5cqw}
+@media(max-width:600px){.gh-desktop-shell{height:93%}}
+/* Final fit: visible date affordances and guest count in the portrait room selector. */
+.gh-date .gh-calendar{position:absolute;right:0;bottom:2.4cqw;width:2.8cqw;height:2.8cqw;color:#41616a;pointer-events:none}.gh-phone .gh-date .gh-calendar{width:5cqw;height:5cqw;bottom:2cqw}
+/* Panorama: keep the navigation on the photograph. */
+.gh-panorama .gh-top{position:absolute;inset:0 0 auto;height:12%;background:transparent;color:#fffefa;justify-content:flex-start}
+.gh-panorama .gh-top nav{gap:4cqw}
+.gh-panorama .gh-content{height:100%}
+.gh-panorama .gh-head{padding-top:15cqw}
+.gh-phone.gh-panorama .gh-top{height:17%;padding:7cqw 7cqw 0}
+.gh-phone.gh-panorama .gh-top nav{gap:5cqw}
+.gh-phone.gh-panorama .gh-head{padding-top:42cqw}
+
+
+
+/* Lumina blue palette; the guesthouse screens are decorative. */
+.gh-screen{--gh-ink:#08283e;--gh-paper:var(--pale-blue,#c7e8fa);--gh-soft:#addafb;--gh-rule:#7cb9dc}
+.gh-shade{background:linear-gradient(90deg,rgba(6,32,55,.74),rgba(6,32,55,.04))}
+.gh-top nav>span{font-size:2.05cqw;line-height:1.3;display:flex;align-items:center;min-height:5cqw}
+.gh-top nav>span:last-child{color:var(--pale-blue);font-weight:700}
+.gh-field>span{font-size:1.85cqw;color:#254b66}
+.gh-date-value,.gh-selected{font-size:3.1cqw;font-weight:600;line-height:1.3;letter-spacing:-.025em}
+.gh-selected{display:flex;align-items:center;justify-content:space-between;gap:1cqw}
+.gh-date .gh-calendar{color:#254b66;width:2.5cqw;height:2.5cqw;bottom:2.7cqw}
+.gh-selected svg{width:2.5cqw;height:2.5cqw}
+.gh-submit{color:#08283e!important;background:var(--blue);font-size:2.4cqw;font-weight:700;cursor:default}
+.gh-submit:hover{background:var(--blue)}
+.gh-panorama .gh-booking{box-shadow:none}
+.gh-phone .gh-top nav>span{font-size:4.5cqw;min-height:12cqw}
+.gh-phone .gh-top nav>span:last-child{display:none}
+.gh-phone .gh-field>span{font-size:4cqw}
+.gh-phone .gh-date-value,.gh-phone .gh-selected{font-size:6cqw}
+.gh-phone .gh-field:last-child .gh-selected{width:51%}
+.gh-phone .gh-date .gh-calendar,.gh-phone .gh-selected svg{width:5cqw;height:5cqw}
+.gh-phone .gh-date .gh-calendar{bottom:2cqw}
+/* Reservation details sit directly on the photo. */
+.gh-minimal .gh-booking{left:5cqw;bottom:4cqw;width:66%;padding:0;background:transparent;color:#fffefa}
+.gh-minimal .gh-shade{background:linear-gradient(90deg,rgba(6,32,55,.73),rgba(6,32,55,.04)),linear-gradient(0deg,rgba(6,32,55,.8),transparent 58%)}
+.gh-minimal .gh-fields{border-bottom:1px solid #c7e8fa99;padding:0 0 1.6cqw;gap:3cqw}
+.gh-minimal .gh-field>span,.gh-minimal .gh-date .gh-calendar{color:#dcefff}
+.gh-minimal .gh-date-value,.gh-minimal .gh-selected{font-size:3.5cqw;font-weight:500}
+.gh-minimal .gh-submit{margin-top:3cqw;padding:2.7cqw 3.3cqw}
+.gh-phone.gh-minimal .gh-booking{left:7cqw;bottom:7cqw;width:86%;padding:0}
+.gh-phone.gh-minimal .gh-fields{gap:4cqw;padding-bottom:3cqw}
+.gh-phone.gh-minimal .gh-date-value,.gh-phone.gh-minimal .gh-selected{font-size:6.3cqw}
+.gh-phone.gh-minimal .gh-submit{margin-top:5cqw;padding:5.5cqw}
+
+/* Selected finish: white reservation buttons on both screens. */
+.gh-screen .gh-submit,.gh-screen .gh-submit:hover{background:#fffefa;color:#08283e!important}
+
+/* Dark backing prevents pale seams at the rounded phone screen edge. */
+.gh-phone-shell,.gh-phone-shell>.gh-screen{background:#0a0b0b}
+.gh-phone .gh-picture{inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);max-width:none}
