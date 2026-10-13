@@ -211,6 +211,7 @@
     clearTimeout(screen.timer);clearInterval(screen.poll);
     screen.ready=true;screen.failed=false;screen.el.classList.add('is-live');
     screen.el.dataset.readyAt=Math.round(performance.now());
+    if(screen.project.id===active&&!dialog.open){clearTimeout(switchTimer);delete document.body.dataset.previewSwitching;}
     attachEscape(screen,doc);prepareDocument(screen,doc);deviceFor(screen)?.box.classList.add('is-live');
     if(state.screen===screen)updateStatus();
     scheduleRotation();
@@ -371,10 +372,18 @@
   const autoAdvance=host.closest('#portfolio').dataset.autoAdvance!=='false';
   SCENE_MODES.forEach(mode=>createDevice(mode,host));
   document.querySelector('#portfolio .live-controls')?.append(createRotationControls());
+  let switchTimer=0;
   function select(id,{automatic=false}={}) {
     const project=registry.get(id);if(!project)throw new Error(`Unknown project: ${id}`);
     if(dialog.open)return;
     const changed=active!==id;
+    // Picking another project: the still picture shows the finished page, and the live site then plays its own
+    // opening from the start, which read as a jump. Hold the picture back and show the site's background colour;
+    // it only appears if loading takes longer than this.
+    if(changed&&rotation.project!==null){
+      document.body.dataset.previewSwitching='1';clearTimeout(switchTimer);
+      switchTimer=setTimeout(()=>{delete document.body.dataset.previewSwitching;},2500);
+    }
     active=id;
     document.body.dataset.previewProject=id;
     devices.forEach(device=>{

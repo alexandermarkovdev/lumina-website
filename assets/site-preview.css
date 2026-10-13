@@ -140,3 +140,8 @@ html{scrollbar-gutter:stable}
  .lp-tip:before{left:100%;bottom:auto;top:50%;margin-top:-8px;border:8px solid transparent;border-right:0;border-left-color:#ffe74c}
 }
 @media (prefers-reduced-motion:reduce){.lp-tip{transition:none}}
+
+/* While another project is being picked (site-preview.js sets this for up to 2.5s): no still picture, only the
+   site's background colour, so a quick load goes straight to the live site's own opening. */
+body[data-preview-switching] .lp-device>img,body[data-preview-switching] .lp-miniature .lp-poster,body[data-preview-switching] .lp-surface:not(.is-live) .lp-poster{opacity:0}
+body[data-preview-switching] .lp-scene-plane{background:var(--lp-site-bg,#191c1e)}

@@ -42,6 +42,8 @@ Projects in the portfolio change only when the visitor picks one (`data-auto-adv
 
 `overview.css/js`, `portfolio.js` and `contact.js` are the previous versions of these sections; they are kept but no longer loaded. The new sections were designed in a separate Codex copy of the project and merged in on 2026-10-11; its standalone variation pages were deliberately not brought over.
 
+Picking another project used to flash the still poster (the finished landing page) before the live site played its own opening, which read as a jump (reported by the owner on a phone, 2026-10-14). `select()` in `assets/site-preview.js` now sets `body[data-preview-switching]` for up to 2.5s or until the new site is live, and the CSS hides the posters meanwhile. To test the previews without a local server, serve the working copy through Playwright's `context.route` on a made-up https address.
+
 Two scrolling traps, both fixed 2026-10-11 and easy to reintroduce: (1) a client site inside a preview frame that calls a plain `focus()` (the VSI cookie bar did) makes Firefox scroll the whole Lumina page to it, so menu links land hundreds of pixels too low; use `focus({ preventScroll: true })` in the site copies. (2) The sticky header shrinks from 105px to 70px; `.is-scrolled .site-header` carries a matching `margin-bottom` so the page does not shift mid-scroll. The owner browses in Firefox, so check scrolling there, not only in Chrome.
 
 Several CSS files still contain rules for layout variants that were discarded long ago; they are dead, not load-bearing.
