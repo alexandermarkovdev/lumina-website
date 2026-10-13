@@ -61,6 +61,14 @@
   const tip=dialog.querySelector('.lp-tip');let tipTimer=0,tipShows=0;
   function hideTip(){clearTimeout(tipTimer);tip.classList.remove('is-on');tip.hidden=true;}
   function showTip(){if(tipShows>=3)return;tipShows++;tip.hidden=false;requestAnimationFrame(()=>tip.classList.add('is-on'));clearTimeout(tipTimer);tipTimer=setTimeout(hideTip,7000);}
+  // While the tour plays, the site in the viewer cannot be touched or scrolled (owner's rule, 2026-10-14: scrolling
+  // against the moving page glitched). A tap or scroll on it points at the pause button instead.
+  function nudgeTip(){
+    tip.hidden=false;tip.classList.add('is-on');clearTimeout(tipTimer);tipTimer=setTimeout(hideTip,4500);
+    if(!motion())return;
+    tip.animate([{scale:'1'},{scale:'1.09'},{scale:'1'}],{duration:320});
+    V.playback.querySelector('.lp-play').animate([{scale:'1'},{scale:'1.3'},{scale:'1'}],{duration:320});
+  }
   const rect = el => {
     const r=el.getBoundingClientRect();return {left:r.left,top:r.top,width:r.width,height:r.height,right:r.right,bottom:r.bottom};
   };
@@ -519,6 +527,7 @@
   }
   function updatePlayback(){
     const playing=!!viewerTour.screen,button=V.playback.querySelector('.lp-play');
+    dialog.toggleAttribute('data-touring',playing);
     if(!playing)hideTip();
     if(button.dataset.playing===String(playing))return;
     button.dataset.playing=String(playing);button.title=playing?'Спри превъртането':'Пусни превъртането';button.setAttribute('aria-label',button.title);
@@ -581,7 +590,8 @@
         const win=s.frame.contentWindow,doc=win.document,geometry=s.tourGeometry;
         if(t.doc!==doc){
           t.doc=doc;
-          ['pointerdown','wheel','keydown','touchstart'].forEach(type=>doc.addEventListener(type,stopViewerTour,{capture:true,passive:true,signal:t.off.signal}));
+          // The page takes no pointer input while it plays (see nudgeTip); a key press still hands it over.
+          doc.addEventListener('keydown',stopViewerTour,{capture:true,passive:true,signal:t.off.signal});
         }
         if(t.wait>0)t.wait-=dt;
         else{
@@ -775,6 +785,7 @@
   V.segment.addEventListener('click',e=>{const b=e.target.closest('button[data-mode]');if(b)switchMode(b.dataset.mode);});
   V.playback.querySelector('.lp-play').addEventListener('click',toggleViewerTour);V.playback.querySelector('.lp-restart').addEventListener('click',restartViewerTour);
   V.close.addEventListener('click',close);V.backdrop.addEventListener('click',close);
+  ['pointerdown','wheel'].forEach(type=>dialog.addEventListener(type,e=>{if(viewerTour.screen&&e.target.closest?.('.lp-surface'))nudgeTip();},{passive:true}));
   V.failure.querySelector('button').addEventListener('click',()=>{if(!state.closing){loadScreen(state.screen);layoutViewer();}});
   dialog.addEventListener('cancel',e=>{e.preventDefault();close();});dialog.addEventListener('close',cleanup);dialog.addEventListener('close',hideTip);
   addEventListener('resize',()=>{syncScreens();queueLayout();scheduleRotation();});addEventListener('load',queueLayout);document.fonts?.ready.then(queueLayout);

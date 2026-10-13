@@ -263,3 +263,22 @@ html #why-sites.compact,html #services,html #portfolio,html #contact{border-top:
  .lang-switch button:first-of-type:before{left:-18px;right:-8px}
  .lang-switch button:last-of-type:before{left:-8px;right:-18px}
 }
+
+/* Opened phone menu: each link on its own paper slip in the paper colours (owner's pick 3 from previews/menu-panel/,
+   2026-10-14). The arrows point down because the links scroll down the page. */
+@media(max-width:850px){
+ .expanded-menu{background:var(--paper);padding:20px 20px 24px;box-shadow:0 20px 38px #1010102e;border:1.5px solid var(--ink)}
+ .expanded-menu a{position:relative;isolation:isolate;border:0;margin:0 0 9px;padding:13px 18px;font-size:22px}
+ .expanded-menu a:before{content:"";position:absolute;inset:0;z-index:-1;background:var(--yellow);clip-path:polygon(1% 7%,99% 0,100% 92%,0 100%)}
+ .expanded-menu a:nth-of-type(1){transform:rotate(-1deg)}
+ .expanded-menu a:nth-of-type(2){transform:rotate(.8deg)}
+ .expanded-menu a:nth-of-type(2):before{background:var(--pink)}
+ .expanded-menu a:nth-of-type(3){transform:rotate(-.6deg)}
+ .expanded-menu a:nth-of-type(3):before{background:var(--pale-blue)}
+ .expanded-menu a:nth-of-type(4){transform:rotate(1deg)}
+ .expanded-menu a:nth-of-type(4):before{background:var(--blue)}
+ .expanded-menu a:nth-of-type(5){transform:rotate(-.8deg)}
+ .expanded-menu a .icon,.expanded-menu a:hover .icon{width:20px;height:20px;transform:rotate(135deg)}
+ .expanded-menu a:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+ .menu-note{font:600 23px/1.1 Caveat,cursive;margin-top:14px;max-width:none}
+}

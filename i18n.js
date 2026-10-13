@@ -356,6 +356,7 @@
     'Всеки от тези сайтове е направен по мярка за бизнеса си.': "Each site is made to measure for the business.",
     'Това е истинският сайт.': 'This is the real website.',
     'Натиснете го.': 'Click it.',
+    'Натиснете екрана и разгледайте сайта сами.': 'Tap the screen and explore the site yourself.',
     'Изберете проект': 'Choose a project',
     'Отворете сайта': 'Open the website',
     'Плувен комплекс': 'Swimming complex',

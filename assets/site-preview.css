@@ -145,3 +145,7 @@ html{scrollbar-gutter:stable}
    site's background colour, so a quick load goes straight to the live site's own opening. */
 body[data-preview-switching] .lp-device>img,body[data-preview-switching] .lp-miniature .lp-poster,body[data-preview-switching] .lp-surface:not(.is-live) .lp-poster{opacity:0}
 body[data-preview-switching] .lp-scene-plane{background:var(--lp-site-bg,#191c1e)}
+
+/* The site in the viewer takes no touches or scrolling while its tour is playing; pause hands it over. */
+.lp-viewer[data-touring] .lp-surface iframe{pointer-events:none}
+.lp-viewer[data-touring] .lp-surface{cursor:default}

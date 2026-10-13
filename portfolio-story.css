@@ -126,3 +126,15 @@
    (2026-10-14): people mistook them for part of the button. "Отворете сайта" under the preview still opens the site. */
 #portfolio .ps-row{grid-template-columns:minmax(0,1fr)}
 #portfolio .ps-pick{padding-right:12px}
+
+/* Phones: a handwritten line between the project buttons and the preview says the preview can be opened
+   (owner's wording, 2026-10-14). Wider screens have their own note beside the preview, so it is hidden there. */
+#portfolio .ps-hint{display:none}
+@media(max-width:760px){
+#portfolio .ps-hint{display:flex;align-items:flex-end;gap:10px;grid-row:2;margin:-6px 0 -8px 4px;font:600 25px/1.05 Caveat,cursive;color:var(--ink)}
+#portfolio .ps-hint svg{flex:none;width:34px;height:34px;margin-bottom:-12px;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#portfolio .live-stage{grid-row:3}
+#portfolio .ps-caption{grid-row:4}
+#portfolio .ps-story,#portfolio .ps-below{grid-row:5}
+#portfolio .live-controls{grid-row:6}
+}
