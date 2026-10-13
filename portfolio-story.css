@@ -121,3 +121,8 @@
 #portfolio .ps-pick{min-height:64px;padding:9px 5px 9px 10px}
 #portfolio .ps-row-open{min-height:44px}
 }
+
+/* The small arrows that opened each client's site from the project list were removed at the owner's request
+   (2026-10-14): people mistook them for part of the button. "Отворете сайта" under the preview still opens the site. */
+#portfolio .ps-row{grid-template-columns:minmax(0,1fr)}
+#portfolio .ps-pick{padding-right:12px}
