@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Lumina share card</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+/* The picture chats show for the link. 1200x630; Instagram cuts it to the middle square,
+   so everything that matters sits inside the middle 630px (.safe). Open with ?v=1, 2 or 3. */
+:root{--paper:#fffefa;--ink:#0b0c0e;--yellow:#ffe74c;--pink:#fbc4d7;--blue:#45b4f7;--pale-blue:#c7e8fa}
+*{box-sizing:border-box}
+body{margin:0;background:#888}
+.card{position:relative;width:1200px;height:630px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:Manrope,Arial,sans-serif}
+.safe{position:absolute;left:285px;top:0;width:630px;height:630px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.shape{position:absolute}
+.logo{width:230px;height:auto;display:block}
+h1{margin:0;font-weight:800;letter-spacing:-.07em;line-height:.96}
+.cap{font-size:13px;font-weight:800;letter-spacing:.2em}
+.note{font:700 38px/.95 Caveat,cursive;display:flex;align-items:center;justify-content:center;text-align:center;background:var(--yellow);clip-path:polygon(7% 12%,58% 0,100% 30%,92% 86%,38% 100%,0 60%)}
+.card:not([data-v="1"]) .v1,.card:not([data-v="2"]) .v2,.card:not([data-v="3"]) .v3{display:none}
+
+/* 1: the heading */
+.v1.blue{left:-150px;top:60px;width:470px;height:520px;background:var(--blue);clip-path:polygon(9% 10%,51% 0,91% 11%,100% 47%,88% 79%,61% 100%,10% 85%,0 41%)}
+.v1.pink{right:-120px;top:-70px;width:400px;height:380px;background:var(--pink);clip-path:polygon(9% 4%,80% 0,100% 24%,94% 84%,27% 100%,0 48%);transform:rotate(-7deg)}
+.v1.pale{right:-60px;bottom:-90px;width:330px;height:260px;background:var(--pale-blue);clip-path:polygon(4% 20%,70% 0,100% 45%,80% 100%,12% 88%);transform:rotate(6deg)}
+[data-v="1"] .logo{width:200px;margin-bottom:34px}
+[data-v="1"] h1{font-size:76px}
+[data-v="1"] .note{width:250px;height:150px;margin-top:26px;transform:rotate(-5deg);padding:0 30px}
+
+/* 2: the example site on blue paper */
+.v2.blue{left:240px;top:138px;width:720px;height:490px;background:var(--blue);clip-path:polygon(9% 10%,51% 0,91% 11%,100% 47%,88% 79%,61% 100%,10% 85%,0 41%)}
+.v2.pink{left:-70px;top:330px;width:300px;height:280px;background:var(--pink);clip-path:polygon(9% 4%,80% 0,100% 24%,94% 84%,27% 100%,0 48%);transform:rotate(9deg)}
+.v2.pale{right:-80px;top:-60px;width:330px;height:270px;background:var(--pale-blue);clip-path:polygon(4% 20%,70% 0,100% 45%,80% 100%,12% 88%);transform:rotate(-8deg)}
+[data-v="2"] .safe{justify-content:flex-start;padding-top:34px}
+[data-v="2"] .logo{width:190px}
+[data-v="2"] h1{font-size:33px;margin-top:14px;letter-spacing:-.06em;white-space:nowrap}
+.browser{position:relative;width:440px;margin-top:62px;border-radius:9px 9px 0 0;overflow:hidden;box-shadow:0 18px 30px #0b0c0e33;text-align:left}
+.browser .bar{height:26px;background:#ecebe6;display:flex;align-items:center;gap:6px;padding-left:12px}
+.browser .bar i{width:8px;height:8px;border-radius:50%;background:#f1707a}.browser .bar i:nth-child(2){background:#ffe74c}.browser .bar i:nth-child(3){background:#45b4f7}
+.browser .view{height:236px;background:url(../../assets/images/seaside-hero.webp) center/cover;color:#fff;padding:26px 28px;font:400 30px/1.12 Georgia,serif}
+.browser .view span{display:block;max-width:11em;text-shadow:0 1px 14px #0006}
+[data-v="2"] .note{position:absolute;right:26px;bottom:34px;width:215px;height:135px;font-size:33px;transform:rotate(-7deg);padding:0 26px}
+
+/* 3: the logo */
+.v3.blue{left:-170px;top:-120px;width:520px;height:520px;background:var(--blue);clip-path:polygon(9% 10%,51% 0,91% 11%,100% 47%,88% 79%,61% 100%,10% 85%,0 41%)}
+.v3.pink{right:-110px;bottom:-110px;width:440px;height:400px;background:var(--pink);clip-path:polygon(9% 4%,80% 0,100% 24%,94% 84%,27% 100%,0 48%);transform:rotate(-7deg)}
+.v3.yellow{left:60px;bottom:-70px;width:250px;height:200px;background:var(--yellow);clip-path:polygon(7% 12%,58% 0,100% 30%,92% 86%,38% 100%,0 60%);transform:rotate(8deg)}
+[data-v="3"] .logo{width:264px}
+[data-v="3"] .cap{margin-top:30px;font-size:15px}
+[data-v="3"] h1{font-size:34px;letter-spacing:-.05em;margin-top:26px;line-height:1.1}
+</style>
+</head>
+<body>
+<div class="card" data-v="1">
+  <i class="shape blue v1"></i><i class="shape pink v1"></i><i class="shape pale v1"></i>
+  <i class="shape blue v2"></i><i class="shape pink v2"></i><i class="shape pale v2"></i>
+  <i class="shape blue v3"></i><i class="shape pink v3"></i><i class="shape yellow v3"></i>
+  <div class="safe">
+    <img class="logo" src="../../assets/images/lumina-logo.png" alt="LUMINA.">
+    <h1 class="v1">Сайт за вашия<br>бизнес, изцяло<br>от нас.</h1>
+    <div class="note v1">Безплатно демо до 24 часа</div>
+
+    <h1 class="v2">Сайт за вашия бизнес, изцяло от нас.</h1>
+    <div class="browser v2"><div class="bar"><i></i><i></i><i></i></div><div class="view"><span>Запазете си няколко дни край морето.</span></div></div>
+    <div class="note v2">Безплатно демо до 24 часа</div>
+
+    <p class="cap v3">WEB DESIGN STUDIO</p>
+    <h1 class="v3">Сайт за вашия бизнес,<br>изцяло от нас.</h1>
+  </div>
+</div>
+<script>document.querySelector('.card').dataset.v = new URLSearchParams(location.search).get('v') || '1'</script>
+</body>
+</html>

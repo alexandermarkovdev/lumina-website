@@ -4,4 +4,4 @@ Disallow: /archive/
 Disallow: /previews/
 Disallow: /sites/
 
-Sitemap: https://alexandermarkovdev.github.io/lumina-website/sitemap.xml
+Sitemap: https://luminastudio.bg/sitemap.xml

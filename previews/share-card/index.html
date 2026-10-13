@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lumina — link picture</title>
+<style>
+  body{margin:0;background:#e9e6df;color:#0b0c0e;font-family:Arial,Helvetica,sans-serif}
+  .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 70px}
+  h1{font-size:24px;margin:0 0 6px}
+  .lead{margin:0 0 26px;font-size:14px;color:#35343c;line-height:1.5;max-width:75ch}
+  .opt{margin:0 0 34px}
+  .opt h2{font-size:15px;margin:0 0 8px;display:flex;gap:10px;align-items:baseline}
+  .opt h2 b{background:#0b0c0e;color:#fffefa;padding:3px 9px;border-radius:99px;font-size:13px}
+  .opt h2 span{font-weight:400;color:#35343c;font-size:13px}
+  .row{display:grid;grid-template-columns:minmax(0,1.905fr) minmax(0,1fr);gap:12px;align-items:start}
+  .row img{display:block;width:100%;height:auto}
+  .cap{font-size:11px;color:#6a6860;margin:5px 0 0;letter-spacing:.04em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Link picture: three versions</h1>
+  <p class="lead">The picture people see when the site's link is pasted in a chat. Left is the wide version (Viber, WhatsApp, Facebook), right is the square Instagram cuts out of the middle. Nothing on the real site has changed. Tell me a number.</p>
+  <script>
+    const rows = [
+      ['Now', '../../assets/share-card.jpg', 'now-square.png', 'the current picture: Instagram cuts the heading in half'],
+      ['1', 'shots/card1.png', 'shots/card1-square.png', 'the heading with the yellow demo note'],
+      ['2', 'shots/card2.png', 'shots/card2-square.png', 'the example site on blue paper'],
+      ['3', 'shots/card3.png', 'shots/card3-square.png', 'the logo, calm']
+    ];
+    document.write(rows.map(([n, wide, square, text]) => `
+  <section class="opt">
+    <h2><b>${n}</b><span>${text}</span></h2>
+    <div class="row">
+      <div><img src="${wide}" alt=""><p class="cap">Viber, WhatsApp, Facebook</p></div>
+      <div><img src="${square.startsWith('now') ? 'shots/' + square : square}" alt=""><p class="cap">Instagram</p></div>
+    </div>
+  </section>`).join(''));
+  </script>
+</div>
+</body>
+</html>
