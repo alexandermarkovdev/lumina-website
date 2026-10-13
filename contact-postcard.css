@@ -153,3 +153,8 @@
 #contact .cp-privacy svg{width:14px;height:14px}
 @media(max-width:1150px){#contact .cp-steps li{font-size:22px}}
 @media(max-width:760px){#contact .cp-steps{margin-top:18px}#contact .cp-steps li{font-size:23px}}
+
+/* A problem (a field to fix, or the request not sent) shows on pink; the phone and email in it can be tapped. */
+#contact .cp-status.is-error{background:var(--pink)}
+#contact .cp-status a{color:inherit;font-weight:800;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+#contact .cp-field [aria-invalid="true"]{border-bottom:2px solid #a3261c}

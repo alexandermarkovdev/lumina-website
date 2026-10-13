@@ -35,6 +35,12 @@
   // Projects whose first result has already been shown; from then on only the result line blinks between searches.
   const seen=new Set();
   let proof=null,proofId='',proofVisible=false,proofTimer,proofIndex=0,proofLooping=false,proofFresh=false;
+  // The pause button under the preview (built by site-preview.js) holds the typing too, not only the scrolling site.
+  const heldByVisitor=()=>section.querySelector('.lp-rotation-toggle')?.getAttribute('aria-pressed')==='true';
+  section.addEventListener('click',event=>{
+    if(!event.target.closest('.lp-rotation-toggle'))return;
+    setTimeout(()=>{if(heldByVisitor())finishProof();else playProof()},0);
+  });
   function setQuery(query,typed){
     typedQuery.textContent=typed;
     googleBar.setAttribute('aria-label',`Търсене в Google: ${query}`);
@@ -52,12 +58,12 @@
   }
   // Types each search in turn, shows the result after every one, and starts over after the last.
   function playProof(){
-    if(!proof||googleProof.hidden||!proofVisible||proofLooping||document.hidden)return;
+    if(!proof||googleProof.hidden||!proofVisible||proofLooping||document.hidden||heldByVisitor())return;
     if(reducedMotion.matches){finishProof();return}
     proofLooping=true;
     const queries=proof.queries;
     let position=0;
-    const interrupted=()=>googleProof.hidden||!proofVisible||document.hidden||reducedMotion.matches;
+    const interrupted=()=>googleProof.hidden||!proofVisible||document.hidden||reducedMotion.matches||heldByVisitor();
     function startQuery(){
       position=0;
       googleProof.dataset.proofState=seen.has(proofId)?'retyping':'typing';

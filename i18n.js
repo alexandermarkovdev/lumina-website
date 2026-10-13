@@ -478,7 +478,8 @@
     'До: вас': 'To: you',
     'Затвори': 'Close',
     'Благодарим! Получихме заявката ви и ще се свържем с вас до 24 часа.': "Thank you! We’ve received your request and will get back to you within 24 hours.",
-    'Заявката не беше изпратена. Моля, обадете ни се на 0877 776 563 или пишете на info@luminastudio.bg.': "Your request wasn’t sent. Please call us on 0877 776 563 or write to info@luminastudio.bg.",
+    'Заявката не беше изпратена. Моля, обадете ни се на': "Your request wasn’t sent. Please call us on",
+    'или пишете на': 'or write to',
 
     // Footer and cookie notice
     'ВСИЧКО Е ПОЕТО ОТ НАС.': 'WE TAKE CARE OF EVERYTHING.',
@@ -522,7 +523,7 @@
     [/^(\d+) минути$/, m => `${m[1]} minutes`],
     [/^Стилист Елена · (\d+) мин\.$/, m => `Stylist Elena · ${m[1]} min`],
     [new RegExp(`^${DATE}$`), date],
-    [new RegExp(`^Избран час: ${DATE}\\.$`), (m, tr) => `Selected time: ${date(m, tr)}.`],
+    [new RegExp(`^Примерна резервация: ${DATE}\\. Не е изпратена\\.$`), (m, tr) => `Demo booking: ${date(m, tr)}. Nothing has been sent.`],
     [/^(\d\d:\d\d) — свободен час$/, m => `${m[1]} — available`],
     [/^(\d\d:\d\d) — зает час$/, m => `${m[1]} — booked`],
     [/^Добави още (.+)$/, (m, tr) => `Add one more ${tr(m[1])}`],
@@ -530,7 +531,7 @@
     [/^Намали (.+)$/, (m, tr) => `One less ${tr(m[1])}`],
     [/^Виж поръчката \((\d+)\)$/, m => `View order (${m[1]})`],
     [/^(.+) е добавена в кошницата\.$/, (m, tr) => `${tr(m[1])} added to your basket.`],
-    [/^В кошницата: (\d+) артикула · (.+)\.$/, m => `In the basket: ${m[1]} item${m[1] === '1' ? '' : 's'} · ${m[2].replace(/(\d),(\d\d €)/, '$1.$2')}.`],
+    [/^Примерна поръчка: (\d+) артикула? · (.+)\. Не е изпратена\.$/, m => `Demo order: ${m[1]} item${m[1] === '1' ? '' : 's'} · ${m[2].replace(/(\d),(\d\d €)/, '$1.$2')}. Nothing has been sent.`],
     [/^Керамичен блок (\d+)$/, m => `Ceramic block ${m[1]}`],
     [/^(\d+) палета? · (\d+) броя$/, m => `${pallets(m[1])} · ${m[2]} pieces`],
     [/^Избрано количество: (\d+) палета? · (.+)\.$/, m => `Selected quantity: ${pallets(m[1])} · ${m[2]}.`],

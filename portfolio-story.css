@@ -110,3 +110,14 @@
 /* Where the Google note sits under the search result (phones and tablets), its arrow is mirrored so it curves
    up and to the left, at the result. Before it curved up and to the right, off the edge of the screen. */
 @media(max-width:950px){#portfolio .ps-google-note h4 svg{transform:rotate(-100deg) scaleX(-1)}}
+
+/* Phones: the four project buttons sit above the preview, so it is clear there are four projects (2026-10-13). */
+@media(max-width:760px){
+#portfolio .ps-picks{grid-row:1}
+#portfolio .live-stage{grid-row:2}
+#portfolio .ps-caption{grid-row:3}
+#portfolio .ps-story,#portfolio .ps-below{grid-row:4}
+#portfolio .live-controls{grid-row:5}
+#portfolio .ps-pick{min-height:64px;padding:9px 5px 9px 10px}
+#portfolio .ps-row-open{min-height:44px}
+}

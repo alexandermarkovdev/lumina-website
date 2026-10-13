@@ -65,11 +65,13 @@
   form.addEventListener('input', event => {
     if (!(event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement)) return;
     event.target.setCustomValidity('');
+    event.target.removeAttribute('aria-invalid');
     status.hidden = true;
   });
   const submit = form.querySelector('.cp-submit');
-  const say = text => {
+  const say = (text, problem = false) => {
     status.textContent = text;
+    status.classList.toggle('is-error', problem);
     status.hidden = false;
     status.focus({preventScroll: true});
   };
@@ -115,7 +117,15 @@
         const phone = /^[+()\d\s.-]+$/.test(value) && digits >= 7 && digits <= 15;
         if (!email && !phone) field.setCustomValidity(message('Въведете валиден имейл или телефон.', 'Enter a valid email or phone number.'));
       }
-      if (!field.reportValidity()) return;
+      field.removeAttribute('aria-invalid');
+      if (!field.reportValidity()) {
+        // The browser's own bubble fades after a few seconds, so the same words also stay under the button.
+        field.setAttribute('aria-invalid', 'true');
+        status.textContent = field.validationMessage;
+        status.classList.add('is-error');
+        status.hidden = false;
+        return;
+      }
     }
     // send.php emails the request. Say "received" only when the server confirms it; anything else is "not sent".
     submit.disabled = true;
@@ -133,7 +143,8 @@
       status.hidden = true;
       thank();
     } else {
-      say('Заявката не беше изпратена. Моля, обадете ни се на 0877 776 563 или пишете на info@luminastudio.bg.');
+      say('', true);
+      status.innerHTML = `Заявката не беше изпратена. Моля, обадете ни се на <a href="${CONTACT.phoneLink}">${CONTACT.phone}</a> или пишете на <a href="mailto:${CONTACT.email}">${CONTACT.email}</a>.`;
     }
   });
 })();

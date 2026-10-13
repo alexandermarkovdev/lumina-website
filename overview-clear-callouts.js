@@ -150,8 +150,8 @@ function compactNotice(root,text){let status=root.querySelector('.site-status');
 section.addEventListener('click',event=>{const b=event.target.closest('button');if(!b)return;
  if(b.dataset.mobileBusiness){showMobile(b.dataset.mobileBusiness);return}
  if(b.dataset.mobileNext){showMobile(b.dataset.mobileNext);mobileHint.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});return}
- if(b.hasAttribute('data-food-cart')){event.stopImmediatePropagation();const t=foodTotals();compactNotice(b.closest('[data-site]'),t.count?`В кошницата: ${t.count} артикула · ${euro(t.total)}.`:'Добавете нещо от менюто.');return}
- if(b.hasAttribute('data-book')){event.stopImmediatePropagation();salon.confirmed=false;updateSalon();compactNotice(b.closest('[data-site]'),`Избран час: ${salonDate()}.`);return}
+ if(b.hasAttribute('data-food-cart')){event.stopImmediatePropagation();const t=foodTotals();compactNotice(b.closest('[data-site]'),t.count?`Примерна поръчка: ${t.count} артикул${t.count===1?'':'а'} · ${euro(t.total)}. Не е изпратена.`:'Добавете нещо от менюто.');return}
+ if(b.hasAttribute('data-book')){event.stopImmediatePropagation();salon.confirmed=false;updateSalon();compactNotice(b.closest('[data-site]'),`Примерна резервация: ${salonDate()}. Не е изпратена.`);return}
  if(b.hasAttribute('data-product-cart')){event.stopImmediatePropagation();compactNotice(b.closest('[data-site]'),`Избрано количество: ${materials.quantity} палет${materials.quantity===1?'':'а'} · ${euro(materialUnitPrice()*materials.quantity)}.`);return}
  if(b.dataset.add||b.hasAttribute('data-food-qr')){setTimeout(()=>{const status=section.querySelector('#food-live');if(status.textContent)compactNotice(b.closest('[data-site]'),status.textContent)},0)}
 },true);
