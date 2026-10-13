@@ -466,6 +466,17 @@
     'Въведете валиден имейл или телефон.': 'Enter a valid email or phone number.',
     'Или направо:': "Or contact us here:",
     'Изпращаме заявката…': 'Sending your request…',
+    'Какво включва': 'What’s included',
+    'Пишете ни.': 'Write to us.',
+    'До 24 часа виждате демо на вашия сайт.': 'Within 24 hours you see a demo of your website.',
+    'Харесва ли ви, уговаряме цена. Ако не, не дължите нищо.': 'If you like it, we agree a price. If not, you owe nothing.',
+    'Използваме контакта ви само за да ви отговорим.': 'We use your contact details only to reply to you.',
+    'Благодарим!': 'Thank you!',
+    'Получихме заявката ви. До 24 часа ще ви покажем демо на вашия сайт.': "We’ve received your request. Within 24 hours we’ll show you a demo of your website.",
+    'Добре': 'OK',
+    'От: Lumina Studio': 'From: Lumina Studio',
+    'До: вас': 'To: you',
+    'Затвори': 'Close',
     'Благодарим! Получихме заявката ви и ще се свържем с вас до 24 часа.': "Thank you! We’ve received your request and will get back to you within 24 hours.",
     'Заявката не беше изпратена. Моля, обадете ни се на 0877 776 563 или пишете на info@luminastudio.bg.': "Your request wasn’t sent. Please call us on 0877 776 563 or write to info@luminastudio.bg.",
 
@@ -476,7 +487,8 @@
     'Бисквитки': 'Cookies',
     'Приемам': 'Accept',
     'Отказвам': 'Decline',
-    'Използваме бисквитки за правилната работа на сайта и за анонимна статистика на посещенията (Google Analytics). Може да промените избора си по всяко време от „Бисквитки“ в долния край на страницата.': "We use cookies to run this site and collect anonymous visitor statistics with Google Analytics. You can change your choice at any time using “Cookies” at the bottom of the page.",
+    'Използваме бисквитки за правилната работа на сайта и за анонимна статистика на посещенията (Google Analytics).': "We use cookies to run this site and collect anonymous visitor statistics with Google Analytics.",
+    'Може да промените избора си по всяко време от „Бисквитки“ в долния край на страницата.': "You can change your choice at any time using “Cookies” at the bottom of the page.",
 
     // Extra panels (studio, journal, SOLA concept)
     'Обратно към началото': 'Back to top',

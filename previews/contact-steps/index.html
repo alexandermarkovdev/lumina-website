@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lumina — steps by the contact form</title>
+<style>
+  body{margin:0;background:#e9e6df;color:#0b0c0e;font-family:Arial,Helvetica,sans-serif}
+  .wrap{max-width:1400px;margin:0 auto;padding:28px 16px 70px}
+  h1{font-size:24px;margin:0 0 6px}
+  .lead{margin:0 0 26px;font-size:14px;color:#35343c;line-height:1.5;max-width:75ch}
+  .opt{margin:0 0 34px}
+  .opt h2{font-size:15px;margin:0 0 8px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+  .opt h2 b{background:#0b0c0e;color:#fffefa;padding:3px 9px;border-radius:99px;font-size:13px}
+  .opt h2 span{font-weight:400;color:#35343c;font-size:13px}
+  .opt h2 a{font-size:13px;color:#086697;margin-left:auto}
+  .row{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:12px;align-items:start}
+  .row img{display:block;width:100%;height:auto}
+  .cap{font-size:11px;color:#6a6860;margin:5px 0 0;letter-spacing:.04em;text-transform:uppercase}
+  @media(max-width:800px){.row{grid-template-columns:1fr}.row>div:last-child{max-width:300px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>"What happens next" by the contact form: three looks</h1>
+  <p class="lead">Three steps (1. Пишете ни. 2. До 24 часа виждате демо на вашия сайт. 3. Харесва ли ви, уговаряме цена. Ако не, не дължите нищо.) and one small line under the button („Използваме контакта ви само за да ви отговорим.“). The wording is the same in all three; only the place and the look differ. Nothing on the real site has changed. Tell me a number.</p>
+  <script>
+    const rows = [
+      ['Now', 'now', 'the contact section as it is today', '../../index.html#contact'],
+      ['1', 'idea1', 'three paper slips in a row above the blue panel, joined by hand-drawn arrows', 'idea1.html'],
+      ['2', 'idea2', 'handwritten numbered list on the left, in place of the short grey paragraph', 'idea2.html'],
+      ['3', 'idea3', 'a dashed ink line with three numbered dots along the bottom of the blue panel', 'idea3.html']
+    ];
+    document.write(rows.map(([n, file, text, link]) => `
+  <section class="opt">
+    <h2><b>${n}</b><span>${text}</span><a href="${link}">Open the page</a></h2>
+    <div class="row">
+      <div><img src="shots/${file}-desktop.png" alt=""><p class="cap">Computer</p></div>
+      <div><img src="shots/${file}-phone.png" alt=""><p class="cap">Phone</p></div>
+    </div>
+  </section>`).join(''));
+  </script>
+</div>
+</body>
+</html>

@@ -17,7 +17,7 @@ html{scrollbar-gutter:stable}
 .lp-miniature{position:absolute;inset:0;pointer-events:none}
 .lp-miniature .lp-poster{opacity:1}
 .lp-device>button{position:absolute;inset:0;z-index:2;width:100%;height:100%;border:0;padding:0;background:transparent;cursor:zoom-in}
-.lp-device>button:focus-visible{outline:2px solid #f5b301;outline-offset:-3px}
+.lp-device>button:focus-visible{outline:3px solid #0b0c0e;outline-offset:-3px;box-shadow:inset 0 0 0 6px #fffefa}
 .lp-device>button::after{content:'';position:absolute;inset:0;background:#fff;opacity:0;transition:opacity .25s}
 .lp-device>button:hover::after{opacity:.035}
 .lp-hero-link{display:inline-flex;align-items:center;gap:9px;background:none;border:0;border-bottom:1px solid #8c897f;padding:9px 0;margin-top:12px;min-height:44px;font-size:12px;line-height:1.5;color:var(--ink);cursor:pointer}

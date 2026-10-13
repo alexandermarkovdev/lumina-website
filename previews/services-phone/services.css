@@ -1,0 +1,12 @@
+/* Services on phones: each service shows its heading and one line; the list opens on tap. Preview only. */
+.sr-more{display:none}
+@media(max-width:700px){
+  .sr-benefit-journey .sr-benefit-grid{row-gap:26px}
+  .sr-benefit-grid>li{padding-bottom:16px}
+  .sr-benefit-copy .si-includes{display:none}
+  .sr-benefit-grid>li.is-open .si-includes{display:block}
+  .sr-more{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:10px 0 0;padding:8px 0;border:0;background:none;color:var(--ink);font:800 13px/1.4 Manrope,Arial,sans-serif;text-align:left;cursor:pointer}
+  .sr-more svg{width:20px;height:20px;flex-shrink:0;transition:transform .25s var(--ease)}
+  .sr-benefit-grid>li.is-open .sr-more svg{transform:rotate(45deg)}
+  .sr-more:focus-visible{outline:3px solid #086697;outline-offset:2px}
+}

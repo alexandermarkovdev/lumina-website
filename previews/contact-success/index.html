@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lumina — thank-you popup</title>
+<style>
+  body{margin:0;background:#e9e6df;color:#0b0c0e;font-family:Arial,Helvetica,sans-serif}
+  .wrap{max-width:1400px;margin:0 auto;padding:28px 16px 70px}
+  h1{font-size:24px;margin:0 0 6px}
+  .lead{margin:0 0 26px;font-size:14px;color:#35343c;line-height:1.5;max-width:75ch}
+  .opt{margin:0 0 34px}
+  .opt h2{font-size:15px;margin:0 0 8px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+  .opt h2 b{background:#0b0c0e;color:#fffefa;padding:3px 9px;border-radius:99px;font-size:13px}
+  .opt h2 span{font-weight:400;color:#35343c;font-size:13px}
+  .opt h2 a{font-size:13px;color:#086697;margin-left:auto}
+  .row{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:12px;align-items:start}
+  .row img{display:block;width:100%;height:auto}
+  .cap{font-size:11px;color:#6a6860;margin:5px 0 0;letter-spacing:.04em;text-transform:uppercase}
+  @media(max-width:800px){.row{grid-template-columns:1fr}.row>div:last-child{max-width:300px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Thank-you popup: five looks</h1>
+  <p class="lead">What appears after someone sends the contact form. Each row shows a computer and a phone. „Try it“ opens that look on the whole page, where you can close the popup and press the form's button to see it drop in again. Nothing on the real site has changed. Tell me a number.</p>
+  <script>
+    const rows = [
+      ['1', 'blue postcard, tilted, with the yellow 0 € stamp'],
+      ['2', 'cut blue paper, handwritten „Благодарим!“, yellow note on the corner'],
+      ['3', 'a handwritten paper postcard lying on a blue card turned the other way'],
+      ['4', 'bold blue card, strongly tilted, hand-drawn tick'],
+      ['5', 'small blue card in the corner; the page is not covered and it leaves by itself']
+    ];
+    document.write(rows.map(([n, text]) => `
+  <section class="opt">
+    <h2><b>${n}</b><span>${text}</span><a href="idea${n}.html">Try it</a></h2>
+    <div class="row">
+      <div><img src="shots/idea${n}-desktop.png" alt=""><p class="cap">Computer</p></div>
+      <div><img src="shots/idea${n}-phone.png" alt=""><p class="cap">Phone</p></div>
+    </div>
+  </section>`).join(''));
+  </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+/* "What happens next" steps by the contact form, plus the privacy line under the button. Three looks, chosen
+   with data-cs on <html>. Preview only. */
+.cs-steps{list-style:none;margin:0;padding:0;color:var(--ink)}
+.cs-steps li{margin:0}
+.cs-steps b{font-weight:800}
+#contact .cs-privacy{display:flex;align-items:center;gap:8px;margin:12px 0 0;font-size:12px;line-height:1.5;color:#57544b}
+#contact .cs-privacy svg{width:14px;height:14px;flex-shrink:0}
+
+/* 1: three paper slips in a row above the blue panel, joined by hand-drawn arrows */
+[data-cs="1"] .cs-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:54px;margin:0 0 30px;padding:0 10px}
+[data-cs="1"] .cs-steps li{position:relative;display:flex;align-items:center;gap:16px;padding:18px 24px 20px;font-size:15px;font-weight:700;line-height:1.4;isolation:isolate}
+[data-cs="1"] .cs-steps li:before{content:"";position:absolute;inset:0;z-index:-1;background:var(--yellow);clip-path:polygon(1% 6%,98% 0,100% 92%,0 100%)}
+[data-cs="1"] .cs-steps li:nth-child(1){transform:rotate(-1.5deg)}
+[data-cs="1"] .cs-steps li:nth-child(2){transform:rotate(1deg)}[data-cs="1"] .cs-steps li:nth-child(2):before{background:var(--pink)}
+[data-cs="1"] .cs-steps li:nth-child(3){transform:rotate(-1deg)}[data-cs="1"] .cs-steps li:nth-child(3):before{background:var(--pale-blue)}
+[data-cs="1"] .cs-steps i{font:800 46px/1 Manrope,sans-serif;font-style:normal;letter-spacing:-.05em}
+[data-cs="1"] .cs-steps li:not(:last-child):after{content:"";position:absolute;right:-48px;top:50%;width:40px;height:26px;margin-top:-13px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 26' fill='none' stroke='%230b0c0e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 15c9-7 20-8 33-3M27 5l9 7-10 6'/%3E%3C/svg%3E") center/contain no-repeat}
+@media(max-width:900px){
+  [data-cs="1"] .cs-steps{grid-template-columns:1fr;gap:10px;margin-bottom:22px;padding:0}
+  [data-cs="1"] .cs-steps li{padding:12px 18px 14px;font-size:14px}
+  [data-cs="1"] .cs-steps i{font-size:34px;min-width:26px}
+  [data-cs="1"] .cs-steps li:after{display:none}
+}
+
+/* 2: a handwritten numbered list in the left column, in place of the short description */
+[data-cs="2"] #contact .cp-description{display:none}
+[data-cs="2"] .cs-steps{margin:24px 0 0;display:grid;gap:11px;max-width:400px}
+[data-cs="2"] .cs-steps li{display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:start;font:600 25px/1.1 Caveat,cursive}
+[data-cs="2"] .cs-steps i{display:grid;place-items:center;width:36px;height:36px;font:800 17px/1 Manrope,sans-serif;font-style:normal;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36' fill='none' stroke='%230b0c0e' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M19 3C9 2 3 9 3 18s7 15 16 15 14-7 14-16S27 3 16 4'/%3E%3C/svg%3E") center/contain no-repeat}
+[data-cs="2"] .cs-steps span{padding-top:5px}
+[data-cs="2"] #contact .cp-offer{margin-top:24px}
+[data-cs="2"] #contact .cp-signature{margin-top:24px}
+@media(max-width:1150px){[data-cs="2"] .cs-steps li{font-size:22px}}
+@media(max-width:760px){[data-cs="2"] .cs-steps{margin-top:18px}[data-cs="2"] .cs-steps li{font-size:23px}}
+
+/* 3: an ink line with three numbered dots along the bottom of the blue panel, like the services line */
+[data-cs="3"] #contact .cp-panel{row-gap:30px;align-content:center}
+[data-cs="3"] .cs-steps{grid-column:1/-1;position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding-top:22px}
+[data-cs="3"] .cs-steps:before{content:"";position:absolute;left:0;right:0;top:15px;height:0;border-top:2px dashed #0b0c0e80}
+[data-cs="3"] .cs-steps li{position:relative;font-size:14px;font-weight:600;line-height:1.5;padding-top:22px;max-width:30ch}
+[data-cs="3"] .cs-steps i{position:absolute;left:0;top:-23px;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);font:800 14px/1 Manrope,sans-serif;font-style:normal;box-shadow:0 0 0 6px var(--blue)}
+@media(max-width:760px){
+  [data-cs="3"] .cs-steps{grid-template-columns:1fr;gap:14px;padding:0 7px 0 23px}
+  [data-cs="3"] .cs-steps:before{left:22px;right:auto;top:6px;bottom:6px;height:auto;border-top:0;border-left:2px dashed #0b0c0e80}
+  [data-cs="3"] .cs-steps li{padding:4px 0 4px 30px;max-width:none}
+  [data-cs="3"] .cs-steps i{left:-16px;top:1px}
+}

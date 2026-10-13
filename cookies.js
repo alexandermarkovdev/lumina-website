@@ -39,10 +39,11 @@
   bar.setAttribute('aria-label', 'Бисквитки');
   bar.hidden = true;
   bar.innerHTML = '<div class="cookie-bar-inner">' +
-    '<p>Използваме бисквитки за правилната работа на сайта и за анонимна статистика на посещенията (Google Analytics). Може да промените избора си по всяко време от „Бисквитки“ в долния край на страницата.</p>' +
+    '<p>Използваме бисквитки за правилната работа на сайта и за анонимна статистика на посещенията (Google Analytics).<span class="cookie-more"> Може да промените избора си по всяко време от „Бисквитки“ в долния край на страницата.</span></p>' +
     '<div class="cookie-bar-actions"><button type="button" class="cookie-decline">Отказвам</button><button type="button" class="cookie-accept">Приемам</button></div>' +
     '</div>';
-  document.body.append(bar);
+  // Right after the skip link, so keyboard and screen-reader users meet the notice first instead of last.
+  (document.querySelector('.skip-link') || document.body.firstElementChild).after(bar);
 
   function choose(value) {
     write(value);

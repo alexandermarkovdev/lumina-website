@@ -17,9 +17,11 @@
 .cookie-settings:hover { color: var(--ink); }
 @media (max-width: 1180px) { .cookie-bar-inner { width: calc(100% - 64px); } }
 @media (max-width: 700px) {
-  .cookie-bar { padding-top: 16px; }
+  /* Compact on phones (2026-10-13): one sentence and one row of buttons, so the notice no longer covers the hero text. */
+  .cookie-bar { padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 0px)); }
   .cookie-bar-inner { width: calc(100% - 36px); display: block; }
-  .cookie-bar p { font-size: 13px; margin-bottom: 14px; }
-  .cookie-bar-actions button { flex: 1; padding: 14px 10px 15px; }
+  .cookie-bar p { font-size: 12.5px; line-height: 1.45; margin-bottom: 10px; }
+  .cookie-more { display: none; }
+  .cookie-bar-actions button { flex: 1; min-height: 44px; padding: 10px 10px 11px; }
 }
 @media (max-width: 1180px) { .cookie-settings { justify-self: start; } }

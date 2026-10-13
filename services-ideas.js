@@ -13,7 +13,9 @@
   const icon = name => `<svg class="icon" aria-hidden="true"><use href="#${name}"/></svg>`;
   const arrow = icon('arrow-e');
   const handArrow = '<svg viewBox="0 0 100 70" aria-hidden="true"><path d="M8 9c48-12 63 13 77 48M72 49l13 8 4-16"/></svg>';
-  const list = service => `<ul class="si-includes">${service.items.map(item=>`<li>${item}</li>`).join('')}</ul>`;
+  // On phones each list starts closed behind this button (owner's choice 2026-10-13); on wider screens the button is hidden and the list always shows.
+  const more = service => `<button class="sr-more" type="button" aria-expanded="false" aria-controls="sr-includes-${service.id}">Какво включва<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M10 3v14M3 10h14"/></svg></button>`;
+  const list = service => `${more(service)}<ul class="si-includes" id="sr-includes-${service.id}">${service.items.map(item=>`<li>${item}</li>`).join('')}</ul>`;
   const art = service => `<span class="si-art si-${service.color}">${icon(service.icon)}</span>`;
   const number = index => String(index+1).padStart(2,'0');
   const heading = (title,text) => `<header class="si-heading draw-swipe"><h2 id="services-title">${title}</h2><p>${text}</p></header>`;
@@ -31,6 +33,11 @@
     + '<p class="sr-english-more">Преводачите ни говорят свободно английски и български. Без машинен превод и без изкуствен интелект. Не вярвате? Обадете ни се и ще поговорим на езика, който изберете.</p></div>'
     + '<span class="sr-english-chip" aria-hidden="true"><b>BG</b><i>|</i><b class="on">EN</b></span></div>'
     + care();
+
+  stage.addEventListener('click', event => {
+    const button = event.target.closest('.sr-more');
+    if (button) button.setAttribute('aria-expanded', String(button.closest('li').classList.toggle('is-open')));
+  });
 
   // The central line fills as the section scrolls past; each step lights up when the ink reaches it.
   const journey = stage.querySelector('.sr-benefit-journey');

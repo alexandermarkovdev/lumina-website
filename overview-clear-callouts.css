@@ -831,3 +831,52 @@
 #why-sites.compact .mobile-next:active{transform:translateY(1px)}
 }
 @media (min-width:851px) and (max-width:1100px){#why-sites.compact .mobile-hint{scroll-margin-top:92px}}
+
+/* Phones and tablets, where one example shows at a time (2026-10-13, after the design review): text inside the example
+   windows is at least about 11-13px and the controls are easier to hit. The window is taller to make room; buttons that
+   cannot grow get an invisible larger tap area (:after). Wide screens are untouched. */
+@media(max-width:1100px){
+ #why-sites.compact .site-window{height:clamp(540px,calc(100svh - 250px),612px)}
+ #why-sites.compact .browser-bar span{font-size:11px}
+ #why-sites.compact .site-window .site-nav .site-nav-caption{font-size:11.5px}
+ #why-sites.compact .site-footer,#why-sites.compact .site-footer span{font-size:11.5px}
+ #why-sites.compact .nav-cart,#why-sites.compact .add-dish,#why-sites.compact .menu-tabs button,#why-sites.compact .times button,#why-sites.compact .quantity button{position:relative}
+ #why-sites.compact .nav-cart:after{content:"";position:absolute;inset:-10px -6px}
+ #why-sites.compact .cart-badge{font-size:12px}
+ #why-sites.compact .qr-slip span{font-size:10px;letter-spacing:-.01em}
+ #why-sites.compact .menu-tabs button{min-height:36px;padding-inline:13px;font-size:12.5px}
+ #why-sites.compact .menu-tabs button:after{content:"";position:absolute;inset:-4px 0}
+ #why-sites.compact .menu-item h5{font-size:13px}
+ #why-sites.compact .menu-item p{font-size:12px;line-height:1.35}
+ #why-sites.compact .site-window .price{font-size:13px}
+ #why-sites.compact .add-dish{width:36px;height:36px}
+ #why-sites.compact .add-dish:after{content:"";position:absolute;inset:-4px}
+ #why-sites.compact .basket-bar{min-height:44px}
+ #why-sites.compact .basket-bar span{font-size:12.5px}
+ #why-sites.compact .service-choice{min-height:40px}
+ #why-sites.compact .service-choice .service-name,#why-sites.compact .service-choice .price{font-size:13px}
+ #why-sites.compact .calendar-heading b{font-size:12.5px}
+ #why-sites.compact .calendar-heading small{font-size:11.5px}
+ #why-sites.compact .days button{min-height:44px;font-size:11.5px}
+ #why-sites.compact .days button b{font-size:13.5px}
+ #why-sites.compact .times button{min-height:40px}
+ #why-sites.compact .times button:after{content:"";position:absolute;inset:-2px 0}
+ #why-sites.compact .times button span{font-size:13px}
+ #why-sites.compact .times button small{font-size:10.5px}
+ #why-sites.compact .booking-total,#why-sites.compact .booking-total span,#why-sites.compact .booking-total b{font-size:12.5px}
+ #why-sites.compact .site-window .site-button{min-height:44px}
+ #why-sites.compact .site-window .site-button{font-size:13px}
+}
+/* The narrowest phones have a 211px window, so the same idea with slightly smaller sizes. */
+@media(max-width:370px){
+ #why-sites.compact .site-window .site-nav .site-nav-caption{font-size:10px}
+ #why-sites.compact .site-footer,#why-sites.compact .site-footer span{font-size:10px}
+ #why-sites.compact .menu-tabs button{padding-inline:9px;font-size:11.5px}
+ #why-sites.compact .menu-item p{font-size:11.5px}
+ #why-sites.compact .add-dish{width:32px;height:32px}
+ #why-sites.compact .add-dish:after{inset:-6px}
+ #why-sites.compact .basket-bar span{font-size:11px}
+ #why-sites.compact .basket-total{white-space:nowrap}
+ #why-sites.compact .service-choice .service-name,#why-sites.compact .service-choice .price{font-size:12px}
+ #why-sites.compact .times button span{font-size:12px}
+}

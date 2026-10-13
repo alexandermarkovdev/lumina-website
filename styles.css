@@ -256,3 +256,10 @@ html #why-sites.compact,html #services,html #portfolio,html #contact{border-top:
    fill the bottom left), so there the promise keeps its old place at the foot of the blue shape, by the phone. */
 @media(max-width:1180px){.process-note{left:auto;right:182px;top:auto;bottom:-8px;transform:rotate(-7deg)}.process-note-arrow{display:none}}
 @media(max-width:850px){.process-note{right:150px}}
+
+/* The BG | EN switch keeps its look but gets a 44px tap area on phones and tablets (2026-10-13). */
+@media(max-width:850px){
+ .lang-switch button:before{content:"";position:absolute;top:-4px;bottom:-4px}
+ .lang-switch button:first-of-type:before{left:-18px;right:-8px}
+ .lang-switch button:last-of-type:before{left:-8px;right:-18px}
+}

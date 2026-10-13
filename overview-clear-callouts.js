@@ -4,7 +4,7 @@ const section=document.querySelector('#why-sites');
 if(!section)return;
 const byId=id=>section.querySelector('#'+CSS.escape(id));
 'use strict';
-const images={restaurant:'assets/clear-callouts/restaurant-ai.webp',salon:'assets/clear-callouts/salon-ai.webp',materials:'assets/clear-callouts/materials-ai.webp',qr:'assets/preview-menu-qr.svg'};
+const images={restaurant:'assets/clear-callouts/restaurant-ai.webp',salon:'assets/clear-callouts/salon-ai.webp',materials:'assets/clear-callouts/roof-ridge.webp',qr:'assets/preview-menu-qr.svg'};
 const paths={arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',chevron:'<path d="m9 5 7 7-7 7"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',check:'<path d="m5 12 4 4L19 6"/>',bag:'<path d="M5 7h14l1 14H4ZM9 8V6a3 3 0 0 1 6 0v2"/>',plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',expand:'<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/>',truck:'<path d="M2 5h12v12H2Zm12 5h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>',pin:'<path d="M19 10c0 6-7 11-7 11S5 16 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/>',leaf:'<path d="M20 3c0 9-3 15-9 15a6 6 0 0 1-6-6C5 6 11 3 20 3ZM4 21 15 10"/>',box:'<path d="m12 2 9 5v10l-9 5-9-5V7Zm-9 5 9 5 9-5M12 12v10M7 4l10 5"/>'};
 const icon=name=>`<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${paths[name]||paths.arrow}</svg>`;
 const euro=value=>value.toLocaleString('bg-BG',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
