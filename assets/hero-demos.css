@@ -19,12 +19,11 @@
 .hero-showcase .hero-demo-stage--phone{height:auto;aspect-ratio:390/844;padding:0}
 @media(min-width:1500px){.hero-showcase .browser-mockup{top:113px}}
 @media(max-width:1180px){.hero-showcase .browser-mockup{top:89px}}
+/* Phones: only the computer picture, without the small phone or the yellow note (owner's request, 2026-10-14). */
 @media(max-width:600px){
-  .hero-showcase .browser-mockup{top:18%;width:88%;left:3%}
-  .hero-showcase .phone-mockup{bottom:-4px;right:0;width:28%;border-radius:18px;padding:4px}
+  .hero-showcase .browser-mockup{top:50%;width:94%;left:3%;translate:0 -50%}
   .hero-showcase .browser-chrome{height:20px}
-  .hero-showcase .phone-screen{border-radius:14px}
-  .hero-showcase .phone-camera{width:30%;height:7px;top:6px}
+  .hero-showcase .phone-mockup,.hero-showcase .pink-note,.hero-showcase .note-marks{display:none}
 }
 
 /* The new site slides down over the old one, inside the screens only. */
