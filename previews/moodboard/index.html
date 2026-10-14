@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Lumina — mood board</title>
+<!-- Five boards, each 1800px wide; boards.py saves each one as a PNG for image tools. Serve the repo root (paths start with /). -->
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=2">
+<style>
+:root{--paper:#fffefa;--ink:#0b0c0e;--muted:#35343c;--yellow:#ffe74c;--pink:#fbc4d7;--blue:#45b4f7;--pale-blue:#c7e8fa;--warm:#f4f2ed;--line:#dedbd2}
+*{box-sizing:border-box}
+body{margin:0;background:#d9d6ce;font-family:Manrope,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.board{width:1800px;margin:40px auto;background:var(--paper);padding:70px 80px 80px;position:relative;overflow:hidden}
+.bh{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:46px}
+.bh h1{font-size:76px;font-weight:800;letter-spacing:-.06em;line-height:.9;margin:0}
+.bh h1 span{position:relative;isolation:isolate;white-space:nowrap}
+.bh h1 span:after{content:"";position:absolute;left:-4px;right:-8px;bottom:6px;height:22px;background:var(--yellow);z-index:-1;transform:rotate(-1deg)}
+.bh .meta{text-align:right;font-size:14px;line-height:1.6;color:var(--muted)}
+.bh .meta img{width:190px;display:block;margin:0 0 10px auto}
+.lab{font-size:12px;font-weight:800;letter-spacing:.19em;text-transform:uppercase;margin:0 0 14px}
+.note{font-size:14px;line-height:1.6;color:var(--muted);margin:0}
+.hand{font-family:Caveat,cursive;font-weight:600}
+.grid{display:grid;gap:34px}
+
+/* ---------- 1 colour ---------- */
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.chip{position:relative}
+.chip .c{height:210px;position:relative;display:flex;align-items:flex-end;padding:18px 20px}
+.chip .c b{font-size:34px;font-weight:800;letter-spacing:-.05em}
+.chip h3{font-size:20px;font-weight:800;letter-spacing:-.03em;margin:14px 0 4px}
+.chip code{font:600 14px/1.5 Consolas,monospace;display:block}
+.chip p{font-size:13px;line-height:1.5;color:var(--muted);margin:6px 0 0}
+.ratio{display:flex;height:64px;margin:12px 0 8px;border:1.5px solid var(--ink)}
+.ratio i{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;font-weight:800}
+.pairs{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.pair{height:120px;display:flex;flex-direction:column;justify-content:center;padding:0 18px;font-size:22px;font-weight:800;letter-spacing:-.04em;clip-path:polygon(2% 6%,98% 0,100% 93%,0 100%)}
+.pair small{font:600 11px/1.4 Consolas,monospace;letter-spacing:0;margin-top:6px;opacity:.75}
+.photos{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.photos img{width:100%;height:190px;object-fit:cover;display:block}
+
+/* ---------- 2 type ---------- */
+.t1{font-size:150px;font-weight:800;letter-spacing:-.075em;line-height:.9;margin:0 0 30px}
+.t2{font-size:64px;font-weight:700;letter-spacing:-.055em;line-height:1;margin:0}
+.t2 span,.t1 span{position:relative;isolation:isolate;white-space:nowrap}
+.t2 span:after,.t1 span:after{content:"";position:absolute;left:-3px;right:-6px;bottom:4%;height:24%;z-index:-1;transform:rotate(-1deg)}
+.hl-y:after{background:var(--yellow)}.hl-p:after{background:var(--pink)}.hl-b:after{background:var(--blue)}.hl-pb:after{background:var(--pale-blue)}
+.t3{font-family:Caveat,cursive;font-weight:600;font-size:64px;line-height:1;margin:0}
+.caps{font-size:15px;font-weight:800;letter-spacing:.19em;text-transform:uppercase;line-height:1.5}
+.body{font-size:22px;line-height:1.6;max-width:44ch;margin:0}
+.spec{font:600 13px/1.6 Consolas,monospace;color:var(--muted);margin-top:10px}
+.voice{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.voice div{padding:22px 24px;background:var(--warm)}
+.voice div.bad{background:#fff;border:1.5px dashed #b9b5aa}
+.voice b{display:block;font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
+.voice p{margin:0 0 6px;font-size:18px;line-height:1.45}
+
+/* ---------- 3 shapes ---------- */
+.shapes{display:grid;grid-template-columns:repeat(4,1fr);gap:30px 40px;align-items:center}
+.shape{height:220px;display:grid;place-items:center;position:relative}
+.shape > i{display:block}
+.cap2{font-size:13px;line-height:1.45;color:var(--muted);margin:10px 0 0;text-align:center}
+.cap2 code{font:600 11px Consolas,monospace;color:var(--ink);display:block;margin-top:4px;word-break:break-all}
+.s-blue{width:300px;height:210px;background:var(--blue);clip-path:polygon(9% 10%,51% 0,91% 11%,100% 47%,88% 79%,61% 100%,10% 85%,0 41%)}
+.s-yel{width:220px;height:215px;background:var(--yellow);clip-path:polygon(28% 0,72% 13%,78% 32%,88% 38%,100% 71%,89% 92%,21% 100%,0 40%);transform:rotate(-4deg)}
+.s-pink{width:180px;height:176px;background:var(--pink);clip-path:polygon(9% 4%,80% 0,100% 24%,94% 84%,27% 100%,0 48%);transform:rotate(-7deg)}
+.s-pale{width:200px;height:110px;background:var(--pale-blue);clip-path:polygon(21% 7%,63% 0,100% 21%,86% 95%,24% 100%,0 43%);transform:rotate(6deg)}
+.slips{display:flex;flex-direction:column;gap:9px;width:300px}
+.slips i{display:block;height:44px;clip-path:polygon(1% 7%,99% 0,100% 92%,0 100%)}
+.slips i:nth-child(1){background:var(--yellow);transform:rotate(-1deg)}.slips i:nth-child(2){background:var(--pink);transform:rotate(.8deg)}.slips i:nth-child(3){background:var(--pale-blue);transform:rotate(-.6deg)}.slips i:nth-child(4){background:var(--blue);transform:rotate(1deg)}
+.tag{display:inline-block;padding:9px 16px;font-weight:800;font-size:18px;letter-spacing:-.02em;clip-path:polygon(2% 6%,98% 0,100% 92%,0 100%)}
+.stamp{width:120px;height:130px;background:var(--yellow);display:grid;place-items:center;text-align:center;transform:rotate(4deg);outline:7px dotted var(--yellow);outline-offset:2px;box-shadow:0 0 0 2px var(--paper)}
+.stamp b{font-size:40px;font-weight:800;letter-spacing:-.04em;line-height:.9}.stamp span{font-family:Caveat,cursive;font-size:24px;font-weight:600;display:block}
+.marks{position:relative;width:120px;height:120px}
+.marks i{position:absolute;width:52px;height:9px;border-radius:9px;background:var(--ink)}
+.marks i:nth-child(1){left:6px;top:80px;transform:rotate(-12deg)}.marks i:nth-child(2){left:22px;top:40px;transform:rotate(-48deg)}.marks i:nth-child(3){left:58px;top:16px;transform:rotate(-84deg)}
+svg.arrow{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.circ{display:flex;gap:16px;align-items:center}
+.circ span{width:58px;height:58px;border:2.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:24px;font-weight:700}
+.browser{width:320px;background:var(--warm);border-radius:10px 10px 1px 1px;box-shadow:1px 13px 19px #11111129;overflow:hidden;transform:rotate(-.2deg)}
+.browser .bar{height:24px;background:#e6e3dc;display:flex;gap:6px;align-items:center;padding:0 10px}
+.browser .bar i{width:8px;height:8px;border-radius:50%;background:var(--pink)}.browser .bar i:nth-child(2){background:var(--yellow)}.browser .bar i:nth-child(3){background:var(--blue)}
+.browser .scr{height:150px;background:linear-gradient(#0000,#0000),url(/assets/selected-demos/liora.jpg) center/cover}
+.phone{width:96px;height:196px;background:#0a0b0b;border-radius:18px;padding:5px;box-shadow:2px 9px 13px #11111133;transform:rotate(.5deg)}
+.phone div{height:100%;border-radius:13px;background:url(/assets/selected-demos/forno-mobile.jpg) center/cover}
+.postcard{width:300px;height:190px;position:relative}
+.postcard:before{content:"";position:absolute;inset:0;background:var(--blue);transform:rotate(4deg)}
+.postcard div{position:absolute;inset:0;background:#fffdf8;transform:rotate(-2.5deg);box-shadow:0 12px 22px #0b3a4d26;padding:22px}
+.postcard div p{font-family:Caveat,cursive;font-size:34px;font-weight:600;margin:0}
+.postcard div hr{border:0;border-top:1px solid #c9c5bb;margin:10px 0 0 50%}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.rules div{border-top:2px solid var(--ink);padding-top:12px}
+.rules h4{margin:0 0 6px;font-size:18px;letter-spacing:-.02em}
+.rules p{margin:0;font-size:14px;line-height:1.55;color:var(--muted)}
+
+/* ---------- 4 snippets ---------- */
+.collage{display:grid;grid-template-columns:repeat(12,1fr);gap:22px;align-items:start}
+.collage figure{margin:0}
+.collage img{width:100%;display:block;box-shadow:0 10px 26px #0b0c0e1c}
+.collage figcaption{font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:.04em}
+
+/* ---------- 5 posters ---------- */
+.posters{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.poster{aspect-ratio:4/5;position:relative;overflow:hidden;background:var(--paper);box-shadow:0 14px 34px #0b0c0e26;border:1px solid #e5e2da}
+.poster .logo{position:absolute;left:7%;bottom:5.5%;width:30%}
+.poster .url{position:absolute;right:7%;bottom:6%;font-weight:800;font-size:17px;letter-spacing:-.02em}
+.p1 .blue{position:absolute;right:-6%;top:34%;width:78%;height:52%;background:var(--blue);clip-path:polygon(9% 10%,51% 0,91% 11%,100% 47%,88% 79%,61% 100%,10% 85%,0 41%)}
+.p1 h2{position:absolute;z-index:2;left:7%;top:6%;right:7%;font-size:52px;font-weight:800;letter-spacing:-.07em;line-height:.92;margin:0}
+.p1 .browser{position:absolute;left:18%;top:40%;width:60%}
+.p1 .browser .scr{height:170px}
+.p1 .phone{position:absolute;right:8%;top:50%;width:22%;height:auto;aspect-ratio:.49}
+.p1 .yel{position:absolute;left:3%;top:48%;width:40%;aspect-ratio:1;background:var(--yellow);clip-path:polygon(28% 0,72% 13%,78% 32%,88% 38%,100% 71%,89% 92%,21% 100%,0 40%);transform:rotate(-5deg);display:grid;place-items:center;text-align:center;font-family:Caveat,cursive;font-weight:600;font-size:27px;line-height:.95;padding:18% 14% 14%}
+.p2{background:var(--yellow)}
+.p2 h2{position:absolute;left:8%;top:9%;right:8%;font-size:70px;font-weight:800;letter-spacing:-.07em;line-height:.9;margin:0}
+.p2 h2 span:after{content:"";position:absolute;left:-3px;right:-6px;bottom:6%;height:22%;background:var(--paper);z-index:-1;transform:rotate(-1deg)}
+.p2 h2 span{position:relative;isolation:isolate}
+.p2 .g{position:absolute;left:8%;right:8%;top:50%;background:var(--paper);padding:18px 20px;transform:rotate(-1.5deg);box-shadow:0 10px 20px #0002}
+.p2 .g .q{border:1.5px solid #c9c5bb;border-radius:30px;padding:9px 16px;font-size:16px}
+.p2 .g .r{display:flex;gap:12px;align-items:center;margin-top:14px;font-size:18px;color:#1a0dab;font-weight:600}
+.p2 .g .r b{background:var(--yellow);color:var(--ink);padding:3px 8px;font-size:15px;transform:rotate(-4deg)}
+.p2 .hand{position:absolute;left:10%;top:73%;font-size:34px;transform:rotate(-3deg)}
+.p3 .slipz{position:absolute;left:8%;right:8%;top:30%;display:flex;flex-direction:column;gap:12px}
+.p3 .slipz i{display:block;font-style:normal;padding:16px 20px;font-size:30px;font-weight:800;letter-spacing:-.04em;clip-path:polygon(1% 7%,99% 0,100% 92%,0 100%)}
+.p3 .slipz i:nth-child(1){background:var(--yellow);transform:rotate(-1.5deg)}.p3 .slipz i:nth-child(2){background:var(--pink);transform:rotate(1deg)}.p3 .slipz i:nth-child(3){background:var(--pale-blue);transform:rotate(-.8deg)}.p3 .slipz i:nth-child(4){background:var(--blue);transform:rotate(1.2deg)}
+.p3 h2{position:absolute;left:8%;top:7%;right:8%;font-size:50px;font-weight:800;letter-spacing:-.065em;line-height:.95;margin:0}
+.p3 .hand{position:absolute;right:9%;top:78%;font-size:30px;margin:0;transform:rotate(-4deg);text-align:right}
+.dont{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:46px}
+.dont div{padding:24px 28px}
+.dont .y{background:var(--pale-blue)}.dont .n{background:var(--pink)}
+.dont h4{margin:0 0 10px;font-size:22px;letter-spacing:-.03em}
+.dont ul{margin:0;padding-left:20px;font-size:16px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<!-- ===================== BOARD 1: COLOUR ===================== -->
+<section class="board" id="b1">
+  <header class="bh"><h1>Lumina — <span>colour &amp; paper</span></h1><div class="meta"><img src="/assets/images/lumina-logo.png?v=2" alt="">Board 1 of 5 · web design studio, Bulgaria · luminastudio.bg</div></header>
+  <p class="lab">The palette: warm off-white paper, near-black ink, three flat paper colours</p>
+  <div class="sw">
+    <div class="chip"><div class="c" style="background:var(--paper);border:1.5px solid var(--ink)"><b>Paper</b></div><h3>Paper (background)</h3><code>#FFFEFA · rgb 255 254 250</code><p>Every page sits on it. Warm, not pure white. About 60–70% of any layout.</p></div>
+    <div class="chip"><div class="c" style="background:var(--ink);color:var(--paper)"><b>Ink</b></div><h3>Ink (text, lines, marks)</h3><code>#0B0C0E · rgb 11 12 14</code><p>Headlines, body text, hand-drawn arrows, thin rules. Never pure black.</p></div>
+    <div class="chip"><div class="c" style="background:var(--yellow)"><b>Yellow</b></div><h3>Lemon yellow (main accent)</h3><code>#FFE74C · rgb 255 231 76</code><p>The call to action: demo note, buttons, marker under key words, stamps.</p></div>
+    <div class="chip"><div class="c" style="background:var(--pink)"><b>Pink</b></div><h3>Candy pink</h3><code>#FBC4D7 · rgb 251 196 215</code><p>Second paper colour: notes, tags, the "Design" strip, the thank-you button.</p></div>
+    <div class="chip"><div class="c" style="background:var(--blue)"><b>Blue</b></div><h3>Sky blue</h3><code>#45B4F7 · rgb 69 180 247</code><p>Big background shapes (the cut-paper blob behind the hero), the contact section, postcards.</p></div>
+    <div class="chip"><div class="c" style="background:var(--pale-blue)"><b>Pale blue</b></div><h3>Pale blue</h3><code>#C7E8FA · rgb 199 232 250</code><p>Quiet paper: support block, tags, menu slips, softer highlights.</p></div>
+    <div class="chip"><div class="c" style="background:var(--warm)"><b>Warm grey</b></div><h3>Warm grey</h3><code>#F4F2ED · line #DEDBD2</code><p>Browser windows, quiet panels, lines between rows.</p></div>
+    <div class="chip"><div class="c" style="background:var(--muted);color:var(--paper)"><b>Muted ink</b></div><h3>Muted ink (small text)</h3><code>#35343C · links #086697</code><p>Secondary text and captions. Links in content use deep blue.</p></div>
+  </div>
+  <div style="margin-top:46px" class="lab">Roughly how much of each colour a page uses</div>
+  <div class="ratio"><i style="flex:62;background:var(--paper)">Paper 62%</i><i style="flex:13;background:var(--ink);color:var(--paper)">Ink 13%</i><i style="flex:9;background:var(--yellow)">Yellow 9%</i><i style="flex:7;background:var(--blue)">Blue 7%</i><i style="flex:5;background:var(--pink)">Pink 5%</i><i style="flex:4;background:var(--pale-blue)">4%</i></div>
+  <p class="note">Flat colour only: no gradients, no glows, no neon. Each paper shape is a single solid colour, with ink text sitting directly on it.</p>
+  <div style="margin-top:44px" class="lab">Pairs that are used (text on paper)</div>
+  <div class="pairs">
+    <div class="pair" style="background:var(--yellow)">Ink on yellow<small>#0B0C0E / #FFE74C</small></div>
+    <div class="pair" style="background:var(--pink)">Ink on pink<small>#0B0C0E / #FBC4D7</small></div>
+    <div class="pair" style="background:var(--blue)">Ink on blue<small>#0B0C0E / #45B4F7</small></div>
+    <div class="pair" style="background:var(--pale-blue)">Ink on pale blue<small>#0B0C0E / #C7E8FA</small></div>
+    <div class="pair" style="background:var(--ink);color:var(--paper)">Paper on ink<small>#FFFEFA / #0B0C0E</small></div>
+    <div class="pair" style="background:var(--paper);box-shadow:inset 0 0 0 2px var(--ink);clip-path:none">Ink on paper<small>#0B0C0E / #FFFEFA</small></div>
+  </div>
+  <div style="margin-top:44px" class="lab">Photography inside the frames: warm, natural light, real places, close and appetising</div>
+  <div class="photos">
+    <img src="/assets/images/creative-desk.jpg" alt=""><img src="/assets/clear-callouts/restaurant-ai.webp" alt=""><img src="/assets/clear-callouts/salon-ai.webp" alt=""><img src="/assets/clear-callouts/roof-ridge.webp" alt=""><img src="/assets/images/seaside-hero-1000.webp" alt="">
+  </div>
+  <p class="note" style="margin-top:12px">Photos appear inside browser and phone frames or as tiles, never as full-bleed backgrounds behind the brand's own text.</p>
+</section>
+
+<!-- ===================== BOARD 2: TYPE & VOICE ===================== -->
+<section class="board" id="b2">
+  <header class="bh"><h1>Lumina — <span>type &amp; voice</span></h1><div class="meta"><img src="/assets/images/lumina-logo.png?v=2" alt="">Board 2 of 5 · Manrope + Caveat</div></header>
+  <div class="grid" style="grid-template-columns:1.25fr 1fr;gap:60px">
+    <div>
+      <p class="lab">Headlines · Manrope ExtraBold 800 · very tight letter-spacing (−0.075em) · line-height 0.9</p>
+      <p class="t1">Сайт за вашия бизнес, изцяло <span class="hl-y">от нас.</span></p>
+      <p class="spec">Sentence case, ends with a full stop. Huge, heavy, tightly packed, black on paper.</p>
+      <div style="height:40px"></div>
+      <p class="lab">Section headings · Manrope Bold 700 · −0.055em · one phrase underlined with a tilted paper-colour marker</p>
+      <p class="t2">Защо ви е сайт? <span class="hl-b">Вижте сами.</span></p>
+      <p class="t2" style="margin-top:14px">Какво правим? <span class="hl-y">Всичко!</span></p>
+      <p class="t2" style="margin-top:14px">Нашите <span class="hl-p">клиенти.</span></p>
+      <p class="spec">Marker = a flat bar of yellow / blue / pink, about a quarter of the letter height, behind the lower half of the words, rotated −1°.</p>
+    </div>
+    <div>
+      <p class="lab">Handwriting · Caveat SemiBold 600 · notes, arrows' labels, thank-yous</p>
+      <p class="t3">Заяви безплатно демо</p>
+      <p class="t3" style="font-size:46px;margin-top:10px;transform:rotate(-2deg)">Малка инвестиция, която ви води клиенти.</p>
+      <p class="t3" style="font-size:40px;margin-top:10px">QR код за менюто ↙</p>
+      <p class="spec">Always slightly rotated (−2° to −7°), short, like a note scribbled on the page. Never for long text.</p>
+      <div style="height:34px"></div>
+      <p class="lab">Small labels · Manrope 800 · all caps · wide spacing (+0.19em)</p>
+      <p class="caps">Всичко за<br>сайта ви<br>│ на едно място</p>
+      <div style="height:30px"></div>
+      <p class="lab">Body · Manrope 400–500 · 15–22px · line-height 1.6</p>
+      <p class="body">Правим сайта ви от първата идея до пускането — и оставаме след това. Домейн, хостинг и SEO са наша грижа.</p>
+    </div>
+  </div>
+  <div style="height:50px"></div>
+  <p class="lab">Voice: plain Bulgarian, short sentences, talks to a small-business owner like a friend would</p>
+  <div class="voice">
+    <div><b>Sounds like Lumina</b><p>„Правим сайта ви от първата идея до пускането.“</p><p>„Хората ви търсят в Google. Ние правим така, че да ви намерят.“</p><p>„До 24 часа виждате демо на вашия сайт.“</p><p>„Харесва ли ви, уговаряме цена. Ако не, не дължите нищо.“</p></div>
+    <div class="bad"><b>Not Lumina</b><p>Corporate claims: „Иновативни дигитални решения от следващо поколение.“</p><p>Two-word punchlines and slogans in pairs: „Бързо. Модерно.“</p><p>Tech words the owner wouldn't use: „SaaS“, „conversion funnel“, „синергия“.</p><p>Exclamation marks everywhere, ALL CAPS sentences, emoji rows.</p></div>
+  </div>
+  <p class="note" style="margin-top:16px">Recurring promises: free demo within 24 hours · people find you on Google (SEO) · online bookings and orders · we handle domain, hosting and support · made to measure for your business.</p>
+</section>
+
+<!-- ===================== BOARD 3: SHAPES & MARKS ===================== -->
+<section class="board" id="b3">
+  <header class="bh"><h1>Lumina — <span>shapes &amp; marks</span></h1><div class="meta"><img src="/assets/images/lumina-logo.png?v=2" alt="">Board 3 of 5 · cut paper, slightly tilted</div></header>
+  <p class="lab">Cut-paper shapes: hand-cut polygons with straight edges, flat colour, each turned a few degrees</p>
+  <div class="shapes">
+    <div><div class="shape"><i class="s-blue"></i></div><p class="cap2">Big blue blob (behind the hero mock-ups), 8 corners<code>polygon(9% 10%,51% 0,91% 11%,100% 47%,88% 79%,61% 100%,10% 85%,0 41%)</code></p></div>
+    <div><div class="shape"><i class="s-yel"></i></div><p class="cap2">Yellow demo note, rotated −4°<code>polygon(28% 0,72% 13%,78% 32%,88% 38%,100% 71%,89% 92%,21% 100%,0 40%)</code></p></div>
+    <div><div class="shape"><i class="s-pink"></i></div><p class="cap2">Pink sticky note, rotated −7°<code>polygon(9% 4%,80% 0,100% 24%,94% 84%,27% 100%,0 48%)</code></p></div>
+    <div><div class="shape"><i class="s-pale"></i></div><p class="cap2">Small pale-blue note, rotated +6°<code>polygon(21% 7%,63% 0,100% 21%,86% 95%,24% 100%,0 43%)</code></p></div>
+    <div><div class="shape"><div class="slips"><i></i><i></i><i></i><i></i></div></div><p class="cap2">Paper slips (menu, buttons, strips): rectangles with slightly uneven corners, alternating ±1°<code>polygon(1% 7%,99% 0,100% 92%,0 100%)</code></p></div>
+    <div><div class="shape" style="gap:12px;align-content:center"><span class="tag" style="background:var(--pink)">Повече хора ви намират</span><span class="tag" style="background:var(--yellow)">Работи вместо вас</span><span class="tag" style="background:var(--pale-blue)">Вдъхва доверие</span></div><p class="cap2">Tags: short phrases on paper strips</p></div>
+    <div><div class="shape"><div class="stamp"><div><b>0 €</b><span>демо</span></div></div></div><p class="cap2">Postage stamp with perforated edge (yellow), on the postcard form</p></div>
+    <div><div class="shape"><div class="postcard"><div><p>Здравейте, Lumina.</p><hr><hr><hr></div></div></div><p class="cap2">Postcard: cream card turned −2.5° over a blue card turned +4°</p></div>
+  </div>
+  <div style="height:44px"></div>
+  <p class="lab">Hand-drawn marks: thin ink strokes, round ends, a little wobbly</p>
+  <div class="shapes">
+    <div><div class="shape"><svg class="arrow" viewBox="0 0 180 50" width="260"><path d="M9 39 167 12m-21-8 23 8-13 19"/></svg></div><p class="cap2">Straight arrow under „Заяви безплатно демо“</p></div>
+    <div><div class="shape"><svg class="arrow" viewBox="0 0 120 44" width="240"><path d="M4 34C40 44 82 36 112 8M96 6l16 2-7 15"/></svg></div><p class="cap2">Swoosh arrow from a note to the thing it explains</p></div>
+    <div><div class="shape"><svg class="arrow" viewBox="0 0 90 76" width="170"><path d="M80 6C90 40 60 63 9 56m11-10L8 56l14 9"/></svg></div><p class="cap2">Hook arrow pointing back at a picture</p></div>
+    <div><div class="shape"><div class="marks"><i></i><i></i><i></i></div></div><p class="cap2">Three ink dashes: "look here / it moves" next to notes and buttons</p></div>
+    <div><div class="shape"><div class="circ"><span class="hand" style="font-family:Manrope">1</span><span>2</span><span>3</span></div></div><p class="cap2">Numbers in hand-drawn circles for steps</p></div>
+    <div><div class="shape"><p class="t2" style="font-size:54px"><span class="hl-y">маркер</span></p></div><p class="cap2">Marker bar behind key words (yellow, pink, blue or pale blue)</p></div>
+    <div><div class="shape"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="scr"></div></div></div><p class="cap2">Browser frame: warm grey, three dots in pink/yellow/blue, soft shadow</p></div>
+    <div><div class="shape"><div class="phone"><div></div></div></div><p class="cap2">Phone frame: black, rounded, overlapping the browser</p></div>
+  </div>
+  <div style="height:40px"></div>
+  <div class="rules">
+    <div><h4>Tilt everything a little</h4><p>Paper pieces sit at −7° to +6°, most between −2° and +1°. Nothing is perfectly straight except the text blocks and the four service cards.</p></div>
+    <div><h4>Layer like a collage</h4><p>Shapes overlap: a browser on a blue blob, a phone on the browser, a note on the corner. Small soft shadows only on the "objects" (screens, cards).</p></div>
+    <div><h4>Straight cut edges, no curves</h4><p>Shapes are polygons that look cut with scissors. No rounded blobs, no circles (except stamps and step numbers), no gradients.</p></div>
+  </div>
+</section>
+
+<!-- ===================== BOARD 4: SNIPPETS ===================== -->
+<section class="board" id="b4">
+  <header class="bh"><h1>Lumina — <span>from the site</span></h1><div class="meta"><img src="/assets/images/lumina-logo.png?v=2" alt="">Board 4 of 5 · real screenshots, luminastudio.bg</div></header>
+  <div class="collage">
+    <figure style="grid-column:span 12"><img src="snips/hero-desktop.png" alt=""><figcaption>Hero: giant tight headline, cut-paper blue blob, browser + phone mock-ups, yellow demo note with ink marks, pink and pale-blue notes</figcaption></figure>
+    <figure style="grid-column:span 4"><img src="snips/demo-note.png" alt=""><figcaption>Demo note: handwriting on a yellow cut-paper shape, arrow, three ink dashes</figcaption></figure>
+    <figure style="grid-column:span 5"><img src="snips/thank-you-card.png" alt=""><figcaption>Thank-you postcard: handwritten, 0 € stamp, pink paper button, blue card behind</figcaption></figure>
+    <figure style="grid-column:span 3"><img src="snips/phone-menu.png" alt=""><figcaption>Phone menu: each link on its own paper slip</figcaption></figure>
+    <figure style="grid-column:span 12"><img src="snips/service-strip.png" alt=""><figcaption>Service cards: flat colour blocks, line icons, heavy headings</figcaption></figure>
+    <figure style="grid-column:span 7"><img src="snips/why-top.png" alt=""><figcaption>Section heading with marker, handwritten line, paper tags, example windows on coloured paper</figcaption></figure>
+    <figure style="grid-column:span 5"><img src="snips/example-restaurant.png" alt=""><figcaption>Example site in a browser frame with handwritten callouts and arrows</figcaption></figure>
+    <figure style="grid-column:span 6"><img src="snips/services-top.png" alt=""><figcaption>Services: paper strips in four colours along a centre line, numbered tabs</figcaption></figure>
+    <figure style="grid-column:span 6"><img src="snips/contact.png" alt=""><figcaption>Contact: blue section, handwritten steps in circles, postcard form with stamp</figcaption></figure>
+    <figure style="grid-column:span 6"><img src="snips/portfolio.png" alt=""><figcaption>Portfolio: real client site in a frame on yellow paper, project list as paper cards</figcaption></figure>
+    <figure style="grid-column:span 6"><img src="snips/page-404.png" alt=""><figcaption>404: the three digits on yellow, pink and blue slips</figcaption></figure>
+    <figure style="grid-column:span 4"><img src="snips/phone-hero.png" alt=""><figcaption>Phone layout of the hero</figcaption></figure>
+    <figure style="grid-column:span 8"><img src="/assets/share-card.jpg" alt=""><figcaption>Share card (link preview in chats), 1200×630</figcaption></figure>
+  </div>
+</section>
+
+<!-- ===================== BOARD 5: POSTER DIRECTION ===================== -->
+<section class="board" id="b5">
+  <header class="bh"><h1>Lumina — <span>poster direction</span></h1><div class="meta"><img src="/assets/images/lumina-logo.png?v=2" alt="">Board 5 of 5 · three layouts that follow the rules</div></header>
+  <div class="posters">
+    <div class="poster p1"><h2>Сайт за вашия бизнес, изцяло от нас.</h2><div class="blue"></div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="scr"></div></div><div class="phone"><div></div></div><div class="yel">Безплатно демо до 24 часа</div><img class="logo" src="/assets/images/lumina-logo.png?v=2" alt=""><span class="url">luminastudio.bg</span></div>
+    <div class="poster p2"><h2>Хората ви търсят в <span>Google.</span></h2><div class="g"><div class="q">🔍 фризьор Пловдив</div><div class="r"><b>#1</b>Вашият салон — запазете час</div></div><p class="hand">Ние правим така, че да ви намерят.</p><img class="logo" src="/assets/images/lumina-logo.png?v=2" alt=""><span class="url">luminastudio.bg</span></div>
+    <div class="poster p3"><h2>Всичко за сайта ви, на едно място.</h2><div class="slipz"><i>Дизайн и изработка</i><i>Резервации и поръчки</i><i>Google и SEO</i><i>Домейн и хостинг</i></div><p class="hand">Демо до 24 часа, безплатно.</p><img class="logo" src="/assets/images/lumina-logo.png?v=2" alt=""><span class="url">luminastudio.bg</span></div>
+  </div>
+  <div class="dont">
+    <div class="y"><h4>Do</h4><ul><li>Off-white paper background (#FFFEFA) with lots of empty space</li><li>One huge, heavy, tightly spaced headline in near-black, sentence case, ending in a full stop</li><li>Flat cut-paper shapes in yellow, pink, sky blue, pale blue, each slightly rotated</li><li>One short handwritten note (Caveat style) with a thin hand-drawn arrow</li><li>Real-looking website screens in a browser or phone frame, overlapping a paper shape</li><li>Logo „LUMINA.“ (thin wide capitals, yellow full stop) small in a corner, plus luminastudio.bg</li></ul></div>
+    <div class="n"><h4>Don't</h4><ul><li>Gradients, glows, neon, glossy 3D, glassmorphism, dark mode</li><li>Stock-photo people pointing at laptops, handshakes, robots, "AI" imagery</li><li>Rounded bubbly blobs, perfectly straight grids of icons, drop-shadowed text</li><li>More than one handwriting line, or long text in handwriting</li><li>Colours outside the palette (purple, orange, green as accents)</li><li>English slogans on Bulgarian posters, or two-word punchlines</li></ul></div>
+  </div>
+</section>
+
+</body>
+</html>
