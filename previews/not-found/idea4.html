@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Страницата не е намерена — Lumina</title>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=2">
+<link rel="stylesheet" href="/previews/not-found/base.css">
+<style>
+.i4{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;width:100%}
+.i4 h1{font-size:clamp(46px,6vw,84px)}
+.i4-wrap{position:relative;padding:22px}
+.i4-wrap:before{content:"";position:absolute;inset:0;background:var(--blue);transform:rotate(4deg)}
+.i4-card{position:relative;background:#fffdf8;padding:28px 30px 34px;box-shadow:0 18px 30px #0b3a4d26;transform:rotate(-2.5deg)}
+.i4-card .to{font-size:12px;color:var(--muted);border-bottom:1px solid #d9d5cc;padding-bottom:8px;width:70%}
+.i4-card .addr{font-size:clamp(28px,3vw,40px);margin:18px 0 6px;line-height:1.05;word-break:break-all}
+.i4-card .note{font-size:clamp(22px,2.2vw,28px);color:var(--muted)}
+.i4-stamp{position:absolute;right:22px;top:20px;width:108px;height:108px;border:3px solid #c0392b;border-radius:50%;display:grid;place-items:center;text-align:center;color:#c0392b;font-weight:800;font-size:11px;letter-spacing:.06em;line-height:1.25;transform:rotate(14deg);opacity:.85}
+.i4-stamp span{display:block;font-size:26px;letter-spacing:-.04em}
+@media(max-width:800px){.i4{grid-template-columns:1fr;gap:26px}.i4-wrap{order:-1;max-width:420px;padding:16px}.i4-card{padding:96px 22px 26px}.i4-card .addr{font-size:26px}.i4-stamp{top:14px;right:16px;width:76px;height:76px;font-size:8px}.i4-stamp span{font-size:18px}}
+</style>
+</head>
+<body>
+<header class="nf-top"><a href="/" aria-label="Lumina — начало"><img src="/assets/images/lumina-logo.png?v=2" width="264" height="68" alt="LUMINA."></a><a class="nf-call" href="tel:+359877776563">0877 776 563</a></header>
+<main class="nf-main"><div class="i4"><div><h1>Тази страница я&nbsp;няма.</h1><p class="nf-text">Адресът може да е сгрешен или страницата вече да не съществува. Всичко за Lumina е на началната страница.</p><div><a class="nf-btn" href="/">Към началната страница <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><a class="nf-link" href="/#contact">Заявете безплатно демо</a></div><p class="nf-en" lang="en">This page doesn’t exist. <a href="/">Go to the home page</a>.</p></div>
+<div class="i4-wrap" aria-hidden="true"><div class="i4-card"><p class="to">До:</p><p class="addr nf-hand">luminastudio.bg<span class="i4-path">/…</span></p><p class="note nf-hand">Върнато: такъв адрес няма.</p><div class="i4-stamp"><div><span>404</span>АДРЕСЪТ НЕ<br>Е НАМЕРЕН</div></div></div></div></div></main>
+<script>
+document.querySelectorAll('.i2-url,.i4-path').forEach(el => {
+  const path = decodeURIComponent(location.pathname).replace(/^\/previews\/not-found\/idea\d\.html$/, '/ceni-2025');
+  el.textContent = el.classList.contains('i2-url') ? 'luminastudio.bg' + path : path;
+});
+</script>
+</body>
+</html>

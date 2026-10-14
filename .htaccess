@@ -2,3 +2,6 @@
 RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.luminastudio\.bg$ [NC]
 RewriteRule ^ https://luminastudio.bg%{REQUEST_URI} [R=301,L]
+
+# An address that does not exist gets Lumina's own page (owner's pick 3 from previews/not-found/).
+ErrorDocument 404 /404.html
