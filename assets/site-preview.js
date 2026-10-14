@@ -685,7 +685,11 @@
     state.saved={overflow:document.documentElement.style.overflow,x:scrollX,y:scrollY,hash:location.hash};
     document.documentElement.style.overflow='hidden';
     dialog.querySelector('#lp-title').textContent=state.project.name+' — преглед на сайта';
-    dialog.inert=false;dialog.removeAttribute('aria-hidden');dialog.showModal();syncScreens();layoutViewer();V.close.focus({preventScroll:true});screens.forEach(restoreScroll);
+    dialog.inert=false;dialog.removeAttribute('aria-hidden');dialog.showModal();
+    // Phones close full-screen things with Back: the viewer gets its own history step, so Back closes it
+    // instead of leaving the site (found in pre-launch testing, 2026-10-14). See the popstate listener.
+    history.pushState({luminaViewer:true},'');state.historyLength=history.length;
+    syncScreens();layoutViewer();V.close.focus({preventScroll:true});screens.forEach(restoreScroll);
     state.screen.presentation?.run({cursor:false});
     if(touring)startViewerTour(state.screen,wait);else updatePlayback();
     if(viewerTour.screen)showTip();
@@ -721,6 +725,10 @@
       if(stage?.ready&&stage.pendingPlace)applyPlace(stage);
     };
     history.replaceState(history.state,'',location.pathname+location.search+saved.hash);
+    // Closed with the button, Esc or the backdrop: take back the viewer's history step, unless the visitor
+    // browsed inside the site meanwhile (those steps sit on top of it; the next Back passes over it unnoticed).
+    const ownStep=state.historyLength;state.historyLength=0;
+    if(ownStep&&history.length===ownStep&&history.state?.luminaViewer)history.back();
     if(compact){
       // Retire the expanded iframe before re-creating the three small views.
       // Avoid overlapping live iframe scale animations and decoded page layers.
@@ -791,6 +799,7 @@
   V.segment.addEventListener('click',e=>{const b=e.target.closest('button[data-mode]');if(b)switchMode(b.dataset.mode);});
   V.playback.querySelector('.lp-play').addEventListener('click',toggleViewerTour);V.playback.querySelector('.lp-restart').addEventListener('click',restartViewerTour);
   V.close.addEventListener('click',close);V.backdrop.addEventListener('click',close);
+  addEventListener('popstate',()=>{if(dialog.open&&state.historyLength&&!history.state?.luminaViewer){state.historyLength=0;close();}});
   ['pointerdown','wheel'].forEach(type=>dialog.addEventListener(type,e=>{if(viewerTour.screen&&e.target.closest?.('.lp-surface'))nudgeTip();},{passive:true}));
   V.failure.querySelector('button').addEventListener('click',()=>{if(!state.closing){loadScreen(state.screen);layoutViewer();}});
   dialog.addEventListener('cancel',e=>{e.preventDefault();close();});dialog.addEventListener('close',cleanup);dialog.addEventListener('close',hideTip);

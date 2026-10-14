@@ -112,7 +112,8 @@
       const value = field.value.trim();
       if (field.required && !value) field.setCustomValidity(message('Моля, попълнете това поле.', 'Please fill in this field.'));
       if (field.name === 'contact' && value) {
-        const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        // As strict as the server (send.php): no double dots, no dot at either end, a real ending such as .bg.
+        const email = /^[\w.!#$%&'*+/=?^`{|}~-]+@[a-z\d](?:[a-z\d-]*[a-z\d])?(?:\.[a-z\d](?:[a-z\d-]*[a-z\d])?)*\.[a-z]{2,}$/i.test(value) && !/^\.|\.\.|\.@/.test(value);
         const digits = value.replace(/\D/g, '').length;
         const phone = /^[+()\d\s.-]+$/.test(value) && digits >= 7 && digits <= 15;
         if (!email && !phone) field.setCustomValidity(message('Въведете валиден имейл или телефон.', 'Enter a valid email or phone number.'));
@@ -130,14 +131,23 @@
     // send.php emails the request. Say "received" only when the server confirms it; anything else is "not sent".
     submit.disabled = true;
     say('Изпращаме заявката…');
-    let delivered = false;
+    let delivered = false, refused = false;
     try {
       const response = await fetch('send.php', {method: 'POST', body: new FormData(form), headers: {Accept: 'application/json'}});
+      refused = response.status === 422;
       delivered = response.ok && (await response.json()).ok === true;
     } catch {
       delivered = false;
     }
     submit.disabled = false;
+    if (refused) {
+      // The server refuses only a request whose email or phone it cannot use: point at that field, not at "call us".
+      const contact = form.elements.contact;
+      contact.setAttribute('aria-invalid', 'true');
+      say(message('Въведете валиден имейл или телефон.', 'Enter a valid email or phone number.'), true);
+      contact.focus();
+      return;
+    }
     if (delivered) {
       form.reset();
       status.hidden = true;

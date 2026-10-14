@@ -45,20 +45,25 @@
   // Right after the skip link, so keyboard and screen-reader users meet the notice first instead of last.
   (document.querySelector('.skip-link') || document.body.firstElementChild).after(bar);
 
+  // While the notice is up, the page gets the same room at its foot, so the footer can scroll clear of it.
+  const room = () => document.body.style.setProperty('padding-bottom', bar.hidden ? '' : bar.offsetHeight + 'px');
+  new ResizeObserver(room).observe(bar);
+  function show(on) { bar.hidden = !on; room(); }
+
   function choose(value) {
     write(value);
-    bar.hidden = true;
+    show(false);
     if (value === 'yes') startAnalytics(); else stopAnalytics();
   }
   bar.querySelector('.cookie-accept').addEventListener('click', () => choose('yes'));
   bar.querySelector('.cookie-decline').addEventListener('click', () => choose('no'));
   // The footer link brings the notice back so the choice can be changed.
   document.querySelectorAll('.cookie-settings').forEach(link => link.addEventListener('click', () => {
-    bar.hidden = false;
+    show(true);
     bar.querySelector(read() === 'yes' ? '.cookie-decline' : '.cookie-accept').focus();
   }));
 
   const choice = read();
   if (choice === 'yes') startAnalytics();
-  else if (choice !== 'no') bar.hidden = false;
+  else if (choice !== 'no') show(true);
 })();
