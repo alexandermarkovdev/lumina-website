@@ -5,7 +5,12 @@
 (() => {
   'use strict';
   const T = {
-    // Static seaside hero
+    // Rotating hero (assets/hero-demos.js); the screenshots themselves stay Bulgarian
+    "Три примерни сайта на компютър и телефон: салон, пицария и хотел.": "Three example websites on a computer and phone: a salon, a pizzeria and a hotel.",
+    "Лиора — фризьорски салон с колаж от снимки": "Liora, a hair salon with a photo collage",
+    "Forno — пицария с меню и резервации": "Forno, a pizzeria with a menu and table booking",
+    "Хотел край морето с онлайн резервации": "Seaside hotel with online booking",
+    // Earlier static seaside hero
     "Запазете си няколко дни край морето.": "Book a few days by the sea.",
     "Стаи": "Rooms",
     "Резервации": "Booking",

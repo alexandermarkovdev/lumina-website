@@ -1,0 +1,40 @@
+/* Hero: three example sites (salon, pizza place, hotel) that change by themselves every 4 seconds in the
+   browser and phone frames. Taken from the owner's zip (Lumina-complete-selected-homepage-v2, 2026-10-14)
+   without its picker and pause buttons, and with nothing clickable (owner's request). */
+.hero-demo-stage{position:relative;isolation:isolate;overflow:hidden;background:#25251f;pointer-events:none}
+.hero-slide{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden}
+.hero-slide.is-active,.hero-slide.is-outgoing{opacity:1;visibility:visible}
+.hero-slide.is-active{z-index:2}
+.hero-slide.is-outgoing{z-index:1}
+.hero-slide--liora{background:#f5e2d9}
+.hero-demo-stage--phone .hero-slide{background:#0a0b0b}
+.hero-preview-image{position:absolute;left:-.5px;top:-.5px;display:block;width:calc(100% + 1px);height:calc(100% + 1px);max-width:none;object-fit:cover;border:0}
+
+/* Frames sized to the screenshots (1280×820 desktop, 390×844 phone), with flush edges. */
+.hero-showcase .browser-mockup,.hero-showcase .phone-mockup{transform:none;border:0}
+.hero-showcase .browser-mockup{height:auto;width:80%;left:12%;top:99px;padding:0;border-radius:10px 10px 0 0}
+.hero-showcase .browser-chrome{height:26px;border:0}
+.hero-showcase .hero-demo-stage{height:auto;aspect-ratio:1280/820}
+.hero-showcase .phone-mockup{height:auto;aspect-ratio:auto;top:auto;bottom:-7px;width:27%;right:2%;padding:5px;pointer-events:none}
+.hero-showcase .hero-demo-stage--phone{height:auto;aspect-ratio:390/844;padding:0}
+@media(min-width:1500px){.hero-showcase .browser-mockup{top:113px}}
+@media(max-width:1180px){.hero-showcase .browser-mockup{top:89px}}
+@media(max-width:600px){
+  .hero-showcase .browser-mockup{top:18%;width:88%;left:3%}
+  .hero-showcase .phone-mockup{bottom:-4px;right:0;width:28%;border-radius:18px;padding:4px}
+  .hero-showcase .browser-chrome{height:20px}
+  .hero-showcase .phone-screen{border-radius:14px}
+  .hero-showcase .phone-camera{width:30%;height:7px;top:6px}
+}
+
+/* The new site slides down over the old one, inside the screens only. */
+@media(prefers-reduced-motion:no-preference){
+  .hero-slide.is-entering{animation:hero-sheet-reveal .86s cubic-bezier(.16,1,.3,1) both}
+  .hero-slide.is-entering .hero-preview-image{animation:hero-photo-settle 1.1s cubic-bezier(.16,1,.3,1) both}
+  @keyframes hero-sheet-reveal{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0)}}
+  @keyframes hero-photo-settle{from{transform:scale(1.07) translateY(-2%)}to{transform:scale(1) translateY(0)}}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-slide.is-entering{animation:hero-quiet-change .18s linear both}
+  @keyframes hero-quiet-change{from{opacity:0}to{opacity:1}}
+}
