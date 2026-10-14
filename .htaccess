@@ -1,0 +1,4 @@
+# SiteGround (Apache). One address for the site: www.luminastudio.bg goes to luminastudio.bg.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.luminastudio\.bg$ [NC]
+RewriteRule ^ https://luminastudio.bg%{REQUEST_URI} [R=301,L]
