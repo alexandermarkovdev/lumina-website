@@ -1,0 +1,137 @@
+<!doctype html>
+<!-- Before/after of the SEO changes (2026-10-14). The changes themselves are in index.html, script.js and i18n.js. -->
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>SEO: преди и след</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css?v=2">
+<style>
+:root{--paper:#fffefa;--ink:#0b0c0e;--muted:#35343c;--yellow:#ffe74c;--pink:#fbc4d7;--blue:#45b4f7;--pale:#c7e8fa;--warm:#f4f2ed}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Manrope,Arial,sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{width:min(1180px,calc(100% - 40px));margin:0 auto;padding:48px 0 90px}
+h1{font-weight:800;font-size:clamp(36px,5vw,58px);letter-spacing:-.06em;line-height:.95;margin:0 0 14px}
+.lead{max-width:62ch;color:var(--muted);font-size:17px;margin:0 0 46px}
+section{margin:0 0 64px}
+h2{font-weight:800;font-size:28px;letter-spacing:-.045em;margin:0 0 6px;display:flex;gap:14px;align-items:baseline}
+h2 b{display:inline-grid;place-items:center;width:38px;height:38px;flex:none;background:var(--yellow);font-size:19px;clip-path:polygon(4% 6%,96% 0,100% 94%,0 100%);transform:rotate(-4deg)}
+.why{max-width:70ch;color:var(--muted);margin:0 0 22px 52px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}.pair>*{min-width:0}
+.tag{display:inline-block;font-weight:800;font-size:11px;letter-spacing:.19em;text-transform:uppercase;padding:5px 10px;margin:0 0 10px;transform:rotate(-1.5deg)}
+.before .tag{background:var(--warm)}.after .tag{background:var(--yellow)}
+.panel{background:#fff;border:1px solid #e3e0d8;padding:20px 22px;box-shadow:0 8px 22px rgba(11,12,14,.06)}
+.after .panel{border-color:#d8c94a}
+/* Google result */
+.g{font-family:Arial,sans-serif}
+.g-site{display:flex;gap:10px;align-items:center;font-size:14px;color:#202124}
+.g-site i{width:28px;height:28px;border-radius:50%;background:#f1f3f4 url(../../assets/favicon.svg) center/18px no-repeat;flex:none}
+.g-site small{display:block;color:#4d5156;font-size:12px}
+.g-title{display:block;color:#1a0dab;font-size:20px;line-height:1.3;margin:8px 0 4px}
+.g-desc{color:#4d5156;font-size:14px;line-height:1.58;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+mark{background:linear-gradient(transparent 55%,var(--yellow) 55%);color:inherit;padding:0 1px}
+/* Browser tab */
+.tabbar{background:#dfe1e5;padding:8px 10px 0;border-radius:8px 8px 0 0}
+.tab{display:flex;gap:8px;align-items:center;background:#fff;border-radius:8px 8px 0 0;padding:9px 12px;width:min(260px,100%);font:13px Arial,sans-serif;white-space:nowrap;overflow:hidden}
+.tab i{width:16px;height:16px;flex:none;background:url(../../assets/favicon.svg) center/16px no-repeat}
+.tab span{overflow:hidden;text-overflow:ellipsis}
+.tabnote{font-size:13px;color:var(--muted);margin:10px 0 0}
+/* Footer pictures */
+.shot{display:block;width:100%;height:auto;border:1px solid #e3e0d8;background:var(--paper)}
+.shots-phone{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+.shots-phone img{max-width:340px}
+/* Facts table */
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:14px}
+dt{font-weight:800}dd{margin:0}
+.new{background:var(--yellow);padding:0 4px}
+/* Removed text */
+.gone{list-style:none;margin:0;padding:0}
+.gone li{padding:7px 0;border-bottom:1px dashed #cfcac0;text-decoration:line-through;color:#6a6860}
+.gone li:last-child{border:0}
+/* Code */
+details{margin:22px 0 0 52px}
+summary{cursor:pointer;font-weight:700;font-size:14px}
+pre{white-space:pre-wrap;word-break:break-word;font:12.5px/1.6 Consolas,monospace;background:var(--warm);padding:14px 16px;margin:10px 0 0}
+pre del{background:var(--pink);text-decoration:none}pre ins{background:#e6f5c8;text-decoration:none}
+.todo{background:var(--pale);padding:22px 24px;clip-path:polygon(0 2%,100% 0,99.5% 100%,.5% 97%)}
+.todo h2 b{background:#fff}
+.hand{font-family:Caveat,cursive;font-weight:600;font-size:24px;transform:rotate(-2deg);display:inline-block}
+@media(max-width:760px){.pair,.shots-phone{grid-template-columns:1fr}.why,details{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>SEO: преди и след.</h1>
+<p class="lead">Всички промени по-долу са направени само на вашия компютър. Нищо не е качено на сайта и нищо не е записано в GitHub, докато не кажете „да“. На самата страница се вижда само един нов ред във футъра. Всичко останало е за Google.</p>
+
+<section>
+<h2><b>1</b>Как изглеждате в Google</h2>
+<p class="why">Заглавието вече започва с думите, които хората търсят („изработка на сайт“), и запазва вашия слоган. Описанието вече казва Пловдив. <em>Google показва това на свой ред: този вид е приблизителен.</em></p>
+<div class="pair">
+<div class="before"><span class="tag">Преди</span><div class="panel g"><div class="g-site"><i></i><div>Lumina<small>https://luminastudio.bg</small></div></div><span class="g-title">Lumina — Сайт за вашия бизнес, изцяло от нас</span><div class="g-desc">Lumina прави сайтове за малкия бизнес в България: дизайн, изработка, домейн, хостинг, SEO и поддръжка. Безплатно демо на вашия сайт до 24 часа.</div></div></div>
+<div class="after"><span class="tag">След</span><div class="panel g"><div class="g-site"><i></i><div>Lumina<small>https://luminastudio.bg</small></div></div><span class="g-title"><mark>Изработка на сайт</mark> за вашия бизнес, изцяло от нас | Lumina</span><div class="g-desc">Lumina прави сайтове за малкия бизнес в <mark>Пловдив</mark> и цяла България: дизайн, изработка, домейн, хостинг, SEO и поддръжка. Безплатно демо на вашия сайт до 24 часа.</div></div></div>
+</div>
+<details><summary>Покажи HTML кода</summary>
+<pre><del>&lt;title&gt;Lumina — Сайт за вашия бизнес, изцяло от нас&lt;/title&gt;</del>
+<ins>&lt;title&gt;Изработка на сайт за вашия бизнес, изцяло от нас | Lumina&lt;/title&gt;</ins>
+
+<del>&lt;meta name="description" content="Lumina прави сайтове за малкия бизнес в България: …"&gt;</del>
+<ins>&lt;meta name="description" content="Lumina прави сайтове за малкия бизнес в Пловдив и цяла България: …"&gt;</ins></pre>
+</details>
+</section>
+
+<section>
+<h2><b>2</b>Името в раздела на браузъра</h2>
+<p class="why">Същото заглавие се вижда и в раздела. На английски (EN) става „A website for your business, built by us | Lumina“.</p>
+<div class="pair">
+<div class="before"><span class="tag">Преди</span><div class="tabbar"><div class="tab"><i></i><span>Lumina — Сайт за вашия бизнес, изцяло от нас</span></div></div></div>
+<div class="after"><span class="tag">След</span><div class="tabbar"><div class="tab"><i></i><span>Изработка на сайт за вашия бизнес, изцяло от нас | Lumina</span></div></div></div>
+</div>
+<p class="why" style="margin-top:14px">Картичката, която излиза при споделяне в чат (Viber, Facebook, Instagram), <strong>не се променя</strong>: тя остава „Lumina — Сайт за вашия бизнес, изцяло от нас“.</p>
+</section>
+
+<section>
+<h2><b>3</b>Футърът (единственото видимо)</h2>
+<p class="why">Един нов ред най-долу на страницата, за да види Google, че сте в Пловдив. На английски: „We are based in Plovdiv and work with businesses all over Bulgaria.“</p>
+<span class="tag" style="background:var(--warm)">Преди</span>
+<img class="shot" src="footer-before-desktop.png" alt="Футър преди: два реда текст.">
+<span class="tag" style="background:var(--yellow);margin-top:22px">След</span>
+<img class="shot" src="footer-after-desktop.png" alt="Футър след: третият ред казва, че сте в Пловдив.">
+<div class="shots-phone">
+<div><span class="tag" style="background:var(--warm)">Преди, телефон</span><img class="shot" src="footer-before-phone.png" alt="Футър преди, на телефон."></div>
+<div><span class="tag" style="background:var(--yellow)">След, телефон</span><img class="shot" src="footer-after-phone.png" alt="Футър след, на телефон."></div>
+</div>
+<details><summary>Покажи HTML кода</summary>
+<pre>&lt;p class="footer-description"&gt;Вие се фокусирате върху бизнеса си.&lt;br&gt;Ние се грижим за сайта, SEO, хостинга, домейна, маркетинга и поддръжката.<ins>&lt;br&gt;Намираме се в Пловдив и работим с бизнеси от цяла България.</ins>&lt;/p&gt;</pre>
+</details>
+</section>
+
+<section>
+<h2><b>4</b>Данните за фирмата, които Google чете</h2>
+<p class="why">Скрита „визитка“ в кода на страницата. Посетителите не я виждат, но Google я използва за местни търсения като „изработка на сайт Пловдив“.</p>
+<div class="pair">
+<div class="before"><span class="tag">Преди</span><div class="panel"><dl><dt>Име</dt><dd>Lumina Studio</dd><dt>Телефон</dt><dd>+359 877 776 563</dd><dt>Имейл</dt><dd>info@luminastudio.bg</dd><dt>Къде сте</dt><dd>—</dd><dt>Къде работите</dt><dd>България</dd></dl></div></div>
+<div class="after"><span class="tag">След</span><div class="panel"><dl><dt>Име</dt><dd>Lumina Studio</dd><dt>Телефон</dt><dd>+359 877 776 563</dd><dt>Имейл</dt><dd>info@luminastudio.bg</dd><dt>Къде сте</dt><dd><span class="new">Пловдив, България</span></dd><dt>Къде работите</dt><dd><span class="new">Пловдив</span> и България</dd></dl></div></div>
+</div>
+<details><summary>Покажи HTML кода</summary>
+<pre><del>"areaServed":{"@type":"Country","name":"Bulgaria"}</del>
+<ins>"address":{"@type":"PostalAddress","addressLocality":"Пловдив","addressCountry":"BG"},
+"areaServed":[{"@type":"City","name":"Пловдив"},{"@type":"Country","name":"Bulgaria"}]</ins></pre>
+</details>
+</section>
+
+<section>
+<h2><b>5</b>Махнат стар скрит текст</h2>
+<p class="why">Три блока от старата версия на сайта стояха скрити в кода. Посетителите никога не са ги виждали, но Google може да ги прочете. Вече ги няма. Менюто и бутоните работят както преди (проверено във Firefox и Chrome, на компютър и телефон).</p>
+<div class="panel" style="max-width:640px"><ul class="gone"><li>„Добрата идея. В добър сайт.“</li><li>„Вие движите бизнеса. Ние — сайта.“</li><li>„Идеи за по-добро онлайн присъствие.“ (с въпроси и отговори)</li></ul></div>
+</section>
+
+<section class="todo">
+<h2><b>6</b>Чака вас: Facebook / Instagram</h2>
+<p class="why" style="color:var(--ink)">Ако Lumina има страница във Facebook или Instagram, изпратете ми адресите. Ще ги сложа като малки връзки във футъра и в данните за Google. Без тях не съм добавил нищо.</p>
+<p class="why" style="color:var(--ink);margin-bottom:0"><span class="hand">Пловдив е мое предположение, защото клиентите ви са оттам. Ако сте в друг град, кажете ми.</span></p>
+</section>
+</div>
+</body>
+</html>

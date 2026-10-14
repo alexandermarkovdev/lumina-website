@@ -67,15 +67,13 @@
   }), { threshold: .6 });
   document.querySelectorAll('.draw-swipe').forEach(heading => swipeObserver.observe(heading));
 
-  // Keep the main scrolling sections visible; only extra detail panels toggle.
-  if (!sections.length) return;
-
+  // Keep the main scrolling sections visible; only extra detail panels toggle (none left since 2026-10-14).
   function showSection(hash, scroll = true) {
     const id = hash.replace(/^#/, '');
     const sectionId = serviceIds.includes(id) ? 'services' : (id || 'home');
     const target = sections.find(section => section.id === sectionId);
     sections.forEach(section => { section.hidden = section !== target; });
-    toolbar.hidden = !target;
+    if (toolbar) toolbar.hidden = !target;
     document.querySelectorAll('.desktop-nav a, .expanded-menu a').forEach(link => {
       if (link.hash === `#${sectionId}`) link.setAttribute('aria-current', 'location');
       else if (link.getAttribute('aria-current') !== 'page') link.removeAttribute('aria-current');
@@ -106,7 +104,7 @@
     showSection(link.hash);
   });
 
-  closeButton.addEventListener('click', () => {
+  if (closeButton) closeButton.addEventListener('click', () => {
     history.pushState(null, '', '#home');
     showSection('#home');
     if (returnFocus && returnFocus.getClientRects().length) returnFocus.focus({ preventScroll: true });

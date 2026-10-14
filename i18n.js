@@ -23,6 +23,7 @@
     "Тераса на къща за гости с гледка към морето": "Guesthouse terrace overlooking the sea",
     // Page, header, menu
     'Lumina — Сайт за вашия бизнес, изцяло от нас': "Lumina — A website for your business, built by us",
+    'Изработка на сайт за вашия бизнес, изцяло от нас | Lumina': 'A website for your business, built by us | Lumina',
     'Lumina — уеб дизайн, разработка, SEO и поддръжка. Уебсайтове за по-силно присъствие.': "Lumina builds and looks after websites for businesses. Design, development, SEO and maintenance.",
     'Към съдържанието': 'Skip to content',
     'Lumina — начало': 'Lumina — home',
