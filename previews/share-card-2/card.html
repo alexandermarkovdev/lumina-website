@@ -8,13 +8,13 @@
 <style>
 /* Share card round 2 (2026-10-14): the Лиора salon on a desktop window and a phone, bigger than in round 1.
    1200x630; Instagram cuts it to the middle square (x 285-915), so in 1-3 everything that matters sits there.
-   4 uses the full width. Open with ?v=1 … 4; shots.py takes the JPEGs. */
+   4 uses the full width. Open with ?v=1 … 6 (5 and 6: card 1 with bigger devices, asked for the same day); shots.py takes the JPEGs. */
 :root{--paper:#fffefa;--ink:#0b0c0e;--yellow:#ffe74c;--pink:#fbc4d7;--blue:#45b4f7;--pale-blue:#c7e8fa}
 *{box-sizing:border-box}
 body{margin:0;background:#888}
 .card{position:relative;width:1200px;height:630px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:Manrope,Arial,sans-serif}
 .card>*{position:absolute}
-.card:not([data-v="1"]) .v1,.card:not([data-v="2"]) .v2,.card:not([data-v="3"]) .v3,.card:not([data-v="4"]) .v4{display:none}
+.card:not([data-v="1"]) .v1,.card:not([data-v="2"]) .v2,.card:not([data-v="3"]) .v3,.card:not([data-v="4"]) .v4,.card:not([data-v="5"]) .v5,.card:not([data-v="6"]) .v6{display:none}
 .cut1{clip-path:polygon(9% 10%,51% 0,91% 11%,100% 47%,88% 79%,61% 100%,10% 85%,0 41%)}
 .cut2{clip-path:polygon(9% 4%,80% 0,100% 24%,94% 84%,27% 100%,0 48%)}
 .cut3{clip-path:polygon(4% 20%,70% 0,100% 45%,80% 100%,12% 88%)}
@@ -79,6 +79,27 @@ h1 em{font-style:normal;background:linear-gradient(transparent 58%,var(--yellow)
 .v4.browser{left:520px;top:100px;width:540px}
 .v4.phone{left:960px;top:200px;width:180px}
 .v4.url{left:362px;top:482px}
+/* 5: card 1 with bigger devices, still inside the middle square */
+.v5.s1{left:240px;top:110px;width:740px;height:530px;transform:rotate(-2deg)}
+.v5.s2{left:-80px;top:360px;width:300px;height:300px;transform:rotate(9deg)}
+.v5.s3{right:-70px;top:-70px;width:330px;height:270px;transform:rotate(-8deg)}
+.v5.logo{left:298px;top:24px;width:120px}
+.v5.h{left:298px;top:54px;font-size:31px;white-space:nowrap;letter-spacing:-.06em}
+.v5.browser{left:288px;top:108px;width:566px}
+.v5.phone{left:722px;top:226px;width:192px}
+.v5.note{left:292px;top:500px;width:196px;height:118px;transform:rotate(-6deg);font-size:29px}
+.v5.marks{left:284px;top:482px}
+
+/* 6: card 1 filling the whole width (Instagram shows the middle of it) */
+.v6.s1{left:90px;top:120px;width:1020px;height:540px;transform:rotate(-1.5deg)}
+.v6.s2{left:-90px;top:-80px;width:300px;height:280px;transform:rotate(-7deg)}
+.v6.s3{right:-70px;top:-70px;width:330px;height:270px;transform:rotate(-8deg)}
+.v6.logo{left:520px;top:20px;width:160px}
+.v6.h{left:0;top:62px;width:1200px;text-align:center;font-size:40px;white-space:nowrap}
+.v6.browser{left:170px;top:128px;width:740px}
+.v6.phone{left:830px;top:150px;width:220px}
+.v6.note{left:96px;top:470px;width:220px;height:132px;transform:rotate(-6deg)}
+.v6.marks{left:86px;top:452px}
 </style>
 </head>
 <body>
@@ -114,6 +135,21 @@ h1 em{font-style:normal;background:linear-gradient(transparent 58%,var(--yellow)
   <svg class="v4 marks" viewBox="0 0 46 40"><path d="M6 20 2 10M15 15 13 3M24 14 27 3"/></svg>
   <div class="v4 browser"><div class="bar"><i></i><i></i><i></i></div><img src="../../assets/selected-demos/liora.jpg" alt=""></div>
   <div class="v4 phone"><img src="../../assets/selected-demos/liora-mobile.jpg" alt=""></div>
+  <i class="v5 s1 blue cut1"></i><i class="v5 s2 pink cut2"></i><i class="v5 s3 pale cut3"></i>
+  <img class="v5 logo" src="../../assets/images/lumina-logo.png" alt="">
+  <h1 class="v5 h">Сайт за вашия бизнес, изцяло от нас.</h1>
+  <div class="v5 browser"><div class="bar"><i></i><i></i><i></i></div><img src="../../assets/selected-demos/liora.jpg" alt=""></div>
+  <div class="v5 phone"><img src="../../assets/selected-demos/liora-mobile.jpg" alt=""></div>
+  <div class="v5 note">Безплатно демо до 24 часа</div>
+  <svg class="v5 marks" viewBox="0 0 46 40"><path d="M6 20 2 10M15 15 13 3M24 14 27 3"/></svg>
+
+  <i class="v6 s1 blue cut1"></i><i class="v6 s2 pink cut2"></i><i class="v6 s3 pale cut3"></i>
+  <img class="v6 logo" src="../../assets/images/lumina-logo.png" alt="">
+  <h1 class="v6 h">Сайт за вашия бизнес, изцяло от нас.</h1>
+  <div class="v6 browser"><div class="bar"><i></i><i></i><i></i></div><img src="../../assets/selected-demos/liora.jpg" alt=""></div>
+  <div class="v6 phone"><img src="../../assets/selected-demos/liora-mobile.jpg" alt=""></div>
+  <div class="v6 note">Безплатно демо до 24 часа</div>
+  <svg class="v6 marks" viewBox="0 0 46 40"><path d="M6 20 2 10M15 15 13 3M24 14 27 3"/></svg>
 </div>
 <script>document.querySelector('.card').dataset.v = new URLSearchParams(location.search).get('v') || '1'</script>
 </body>
