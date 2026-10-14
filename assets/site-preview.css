@@ -148,4 +148,4 @@ body[data-preview-switching] .lp-scene-plane{background:var(--lp-site-bg,#191c1e
 
 /* The site in the viewer takes no touches or scrolling while its tour is playing; pause hands it over. */
 .lp-viewer[data-touring] .lp-surface iframe{pointer-events:none}
-.lp-viewer[data-touring] .lp-surface{cursor:default}
+.lp-viewer[data-touring] .lp-surface{cursor:default;touch-action:none}

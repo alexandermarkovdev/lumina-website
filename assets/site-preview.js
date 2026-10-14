@@ -110,7 +110,8 @@
       const style=doc.createElement('style');style.id='lumina-tour-style';
       style.textContent=`html[data-lumina-thumbnail],html[data-lumina-thumbnail] *{scroll-behavior:auto!important}
         html[data-lumina-thumbnail] *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
-        html[data-lumina-thumbnail] .hero-pizza{filter:none!important}`;doc.head.append(style);
+        html[data-lumina-thumbnail] .hero-pizza{filter:none!important}
+        html[data-lumina-touring]{overflow:hidden!important;overscroll-behavior:none!important;touch-action:none!important}`;doc.head.append(style);
     }
     screen.pageSize?.disconnect();
     screen.tourGeometry={dirty:true,end:0,lastTop:null};
@@ -528,6 +529,9 @@
   function updatePlayback(){
     const playing=!!viewerTour.screen,button=V.playback.querySelector('.lp-play');
     dialog.toggleAttribute('data-touring',playing);
+    // Belt and braces for phones (Firefox scrolls touches itself): the playing page also locks its own
+    // scrolling; the tour's scrollTo still moves it. Pause or the end of the page unlocks it.
+    screens.forEach(s=>{try{s.frame?.contentDocument?.documentElement.toggleAttribute('data-lumina-touring',playing&&s===viewerTour.screen);}catch{}});
     if(!playing)hideTip();
     if(button.dataset.playing===String(playing))return;
     button.dataset.playing=String(playing);button.title=playing?'Спри превъртането':'Пусни превъртането';button.setAttribute('aria-label',button.title);
@@ -592,6 +596,7 @@
           t.doc=doc;
           // The page takes no pointer input while it plays (see nudgeTip); a key press still hands it over.
           doc.addEventListener('keydown',stopViewerTour,{capture:true,passive:true,signal:t.off.signal});
+          doc.documentElement.toggleAttribute('data-lumina-touring',true);
         }
         if(t.wait>0)t.wait-=dt;
         else{
@@ -668,7 +673,8 @@
     if(dialog.open||!registry.has(id))return;
     clearTimeout(returnTimer);rotation.holds.delete('viewer-return');
     if(id!==active)select(id);
-    const touring=canTour(),hold=registry.get(active).presentation==='jtn-doors'?4800:1800,wait=rotation.started?Math.max(0,hold-rotation.elapsed):hold;
+    // The opened site plays unless the visitor paused it (or asked for less motion); it is scrollable only once paused.
+    const touring=!rotation.paused,hold=registry.get(active).presentation==='jtn-doors'?4800:1800,wait=rotation.started?Math.max(0,hold-rotation.elapsed):hold;
     stopTour();document.body.dataset.previewRotation='paused';
     state.project=registry.get(id);state.mode=MODES.includes(mode)?mode:autoMode();state.screen=getScreen(state.project,state.mode);state.opener=opener;state.closing=false;++state.seq;
     state.source=devices.find(d=>d.button===opener)||deviceFor(state.screen);
