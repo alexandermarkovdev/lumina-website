@@ -108,7 +108,11 @@
     setThumbnail(screen,!dialog.open||state.screen!==screen);
     if(!doc.getElementById('lumina-tour-style')){
       const style=doc.createElement('style');style.id='lumina-tour-style';
+      // Posters use the full viewport width. A scrollbar in the passive live page
+      // would narrow its content at the handoff and make it appear to resize.
       style.textContent=`html[data-lumina-thumbnail],html[data-lumina-thumbnail] *{scroll-behavior:auto!important}
+        html[data-lumina-thumbnail]{scrollbar-width:none!important;scrollbar-gutter:auto!important}
+        html[data-lumina-thumbnail]::-webkit-scrollbar{display:none!important}
         html[data-lumina-thumbnail] *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
         html[data-lumina-thumbnail] .hero-pizza{filter:none!important}
         html[data-lumina-touring]{overflow:hidden!important;overscroll-behavior:none!important;touch-action:none!important}`;doc.head.append(style);
