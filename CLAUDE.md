@@ -40,7 +40,7 @@ Design review 2026-10-13 (Impeccable critique + audit, saved in `.impeccable/cri
 
 Projects in the portfolio change only when the visitor picks one (`data-auto-advance="false"` on `#portfolio`); the preview inside keeps scrolling.
 
-MyPizza is Bulgarian only since 2026-10-17 (owner's request): its EN button is `hidden` and a remembered `mypizza-language` choice is ignored (the English dictionary stays in the file, unused); the ring around the pizza reads „ПИЦА, ПАСТА И МАЛКО ЛЮБОВ“, the caption „Маргарита“, the footer „Пица, паста и още малко любов.“ Its posters and thumb were remade then (`?v=2`).
+MyPizza is Bulgarian only since 2026-10-17 (owner's request): its EN button is `hidden` and a remembered `mypizza-language` choice is ignored (the English dictionary stays in the file, unused); the ring around the pizza reads „ПИЦА, ПАСТА И МАЛКО ЛЮБОВ“, the caption „Маргарита“, the footer „Пица, паста и още малко любов.“ The heading „Хубава пица. Добра компания. Още една хапка.“ read as AI-written to the owner and became „Гладни ли сте? / Пицата е тук.“ (pick 5 of 10). Its posters and thumb were remade then (`?v=3`).
 
 `overview.css/js`, `portfolio.js` and `contact.js` are the previous versions of these sections; they are kept but no longer loaded. The new sections were designed in a separate Codex copy of the project and merged in on 2026-10-11; its standalone variation pages were deliberately not brought over.
 
