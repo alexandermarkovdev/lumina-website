@@ -66,7 +66,7 @@ window.LUMINA_PROJECTS = [
     kind: 'Пицария',
     blurb: 'Меню с категории, търсене и филтри, което се разглежда удобно и с една ръка.',
     paper: 'blue',
-    url: 'sites/mypizza/MyPizza-Red-Paper.html',
+    url: 'sites/mypizza/MyPizza-Red-Paper.html?v=2', // v=2: Bulgarian only (2026-10-17)
     // Public address is still a placeholder; show the working local preview.
     readySelector: 'main',
     resetSelector: '#reset-filters',
@@ -74,8 +74,8 @@ window.LUMINA_PROJECTS = [
     ink: '#fff7e9',
     colorScheme: 'light',
     modes: {
-      desktop: { width: 1440, height: 900, poster: 'assets/previews/mypizza-desktop.jpg' },
-      mobile: { width: 402, height: 778, poster: 'assets/previews/mypizza-mobile.jpg' }
+      desktop: { width: 1440, height: 900, poster: 'assets/previews/mypizza-desktop.jpg?v=2' },
+      mobile: { width: 402, height: 778, poster: 'assets/previews/mypizza-mobile.jpg?v=2' }
     }
   }
 ];

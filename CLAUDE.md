@@ -40,6 +40,8 @@ Design review 2026-10-13 (Impeccable critique + audit, saved in `.impeccable/cri
 
 Projects in the portfolio change only when the visitor picks one (`data-auto-advance="false"` on `#portfolio`); the preview inside keeps scrolling.
 
+MyPizza is Bulgarian only since 2026-10-17 (owner's request): its EN button is `hidden` and a remembered `mypizza-language` choice is ignored (the English dictionary stays in the file, unused); the ring around the pizza reads „ПИЦА, ПАСТА И МАЛКО ЛЮБОВ“, the caption „Маргарита“, the footer „Пица, паста и още малко любов.“ Its posters and thumb were remade then (`?v=2`).
+
 `overview.css/js`, `portfolio.js` and `contact.js` are the previous versions of these sections; they are kept but no longer loaded. The new sections were designed in a separate Codex copy of the project and merged in on 2026-10-11; its standalone variation pages were deliberately not brought over.
 
 Picking another project used to flash the still poster (the finished landing page) before the live site played its own opening, which read as a jump (reported by the owner on a phone, 2026-10-14). `select()` in `assets/site-preview.js` now sets `body[data-preview-switching]` for up to 2.5s or until the new site is live, and the CSS hides the posters meanwhile. To test the previews without a local server, serve the working copy through Playwright's `context.route` on a made-up https address.
