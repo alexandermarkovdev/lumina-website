@@ -68,6 +68,11 @@ body.red-shape.motion-paused .steam-wisp{animation-play-state:paused}
 .red-paper .table-copy p{color:var(--cream)}
 .red-paper .table-copy .text-link{border-color:#e69280}
 </style>
+  <!-- Lumina portfolio only (inside a frame): the preview draws this page scaled down while it auto-scrolls, and Chrome
+       redraws a sticky header a pixel up or down on many scroll steps, so the top bar flickered. A fixed header holds still;
+       the body padding keeps its room, so the page looks the same. -->
+  <script>if(window.self!==window.top)document.documentElement.classList.add('lumina-framed');</script>
+  <style>html.lumina-framed .header{position:fixed;top:0;left:0;right:0}html.lumina-framed body{padding-top:var(--header)}</style>
 </head>
 <body class="red-shape red-paper">
   <a class="skip" href="#menu" data-i18n="skip">Към менюто</a>
@@ -294,6 +299,35 @@ translatePage();
 if(location.hash){requestAnimationFrame(()=>{const target=document.getElementById(location.hash.slice(1));if(target)target.scrollIntoView({behavior:'instant',block:'start'});});}
 
 if("IntersectionObserver" in window)new IntersectionObserver(e=>document.body.classList.toggle("hero-offscreen",!e[0].isIntersecting),{rootMargin:"-"+document.querySelector(".header").offsetHeight+"px 0px 0px 0px"}).observe(document.querySelector(".hero"));document.addEventListener("visibilitychange",()=>document.body.classList.toggle("page-hidden",document.hidden));
+</script>
+<script>
+// Lumina portfolio only: the category bar is sticky inside the menu section and flickered in the preview like the top bar.
+// While it would be stuck, it is fixed at the same place instead; a spacer keeps its room in the page.
+(()=>{
+  if(!document.documentElement.classList.contains('lumina-framed'))return;
+  const bar=document.querySelector('.menu-toolbar'),section=document.getElementById('menu'),header=document.querySelector('.header');
+  if(!bar||!section||!header)return;
+  const spacer=document.createElement('div');spacer.hidden=true;spacer.setAttribute('aria-hidden','true');bar.before(spacer);
+  let fixed=false;
+  const place=()=>{
+    const top=header.offsetHeight,slot=(fixed?spacer:bar).getBoundingClientRect();
+    const stick=slot.top<=top;
+    if(stick!==fixed){
+      fixed=stick;
+      if(fixed){
+        // The spacer takes the bar's exact box (its margins stick out of the section a little) in the same step,
+        // so the page never sees both and does not shift.
+        const cs=getComputedStyle(bar);spacer.style.margin=cs.marginTop+' '+cs.marginRight+' '+cs.marginBottom+' '+cs.marginLeft;
+        spacer.style.height=bar.getBoundingClientRect().height+'px';spacer.hidden=false;bar.style.position='fixed';bar.style.margin='0';
+      }else{spacer.hidden=true;bar.style.position=bar.style.top=bar.style.left=bar.style.width=bar.style.margin='';return;}
+    }
+    if(!fixed)return;
+    const box=spacer.getBoundingClientRect(),end=section.getBoundingClientRect().bottom-parseFloat(getComputedStyle(section).paddingBottom);
+    // Same as sticky: held under the top bar, and pushed up by the end of the menu section.
+    Object.assign(bar.style,{top:Math.min(top,end-box.height)+'px',left:box.left+'px',width:box.width+'px'});
+  };
+  place();addEventListener('scroll',place,{passive:true});addEventListener('resize',place);
+})();
 </script>
 </body>
 </html>

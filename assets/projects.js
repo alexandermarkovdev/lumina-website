@@ -66,7 +66,7 @@ window.LUMINA_PROJECTS = [
     kind: 'Пицария',
     blurb: 'Меню с категории, търсене и филтри, което се разглежда удобно и с една ръка.',
     paper: 'blue',
-    url: 'sites/mypizza/MyPizza-Red-Paper.html?v=3', // v=3: Bulgarian only, new heading (2026-10-17)
+    url: 'sites/mypizza/MyPizza-Red-Paper.html?v=4', // v=4: Bulgarian only, new heading, still header in the preview (2026-10-17)
     // Public address is still a placeholder; show the working local preview.
     readySelector: 'main',
     resetSelector: '#reset-filters',
