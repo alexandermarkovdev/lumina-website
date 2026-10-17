@@ -30,12 +30,12 @@
     </div>`;
 
   // Direct contacts under the postcard. Fill in or change them here; an empty value hides that item.
-  // viber: opens a Viber chat with the owner's Viber number (+44 7842 833363), which is not the phone number shown.
+  // viber: opens a Viber chat with the owner's Viber number, the same as the phone shown (+359 877 776 563).
   // email: the form delivers to the same address, which is set separately at the top of send.php.
   const CONTACT = {
     phone: '0877 776 563',
     phoneLink: 'tel:+359877776563',
-    viber: 'viber://chat?number=%2B447842833363',
+    viber: 'viber://chat?number=%2B359877776563',
     email: 'info@luminastudio.bg'
   };
   const phoneIcon = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 3.5h3l1.5 4.2-2 1.5a12.4 12.4 0 0 0 5.7 5.7l1.5-2 4.2 1.5v3a2 2 0 0 1-2.2 2A16.6 16.6 0 0 1 4.6 5.700 2 2 0 0 1 6.600 3.500Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';

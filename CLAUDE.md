@@ -79,6 +79,6 @@ The portfolio previews need http(s): opened from `file://` they show still poste
 
 ## Known open items
 
-- The contact form posts to `send.php`, which emails the request to info@luminastudio.bg (address set at the top of `send.php`; written 2026-10-12, not yet tested on the server). It needs PHP, so on the local Python server or GitHub Pages the form shows its "not sent" message. Under the form is a row with the phone (0877 776 563), a Viber link and the email, set in `CONTACT` at the top of `contact-postcard.js`. The Viber link opens a chat with the owner's Viber number, +44 7842 833363 (set by the owner 2026-10-11; a different number from the phone shown).
+- The contact form posts to `send.php`, which emails the request to info@luminastudio.bg (address set at the top of `send.php`; written 2026-10-12, not yet tested on the server). It needs PHP, so on the local Python server or GitHub Pages the form shows its "not sent" message. Under the form is a row with the phone (0877 776 563), a Viber link and the email, set in `CONTACT` at the top of `contact-postcard.js`. The Viber link opens a chat with the owner's Viber number, +359 877 776 563, the same as the phone shown (changed by the owner 2026-10-17 from a UK number).
 - Hosting is moving to SiteGround shared hosting on luminastudio.bg (domain registered at jump.bg, pointed by nameservers, not transferred).
 - A design review is saved in `.impeccable/critique/`. The owner chose to act only on removing the "demo form" note for now.
