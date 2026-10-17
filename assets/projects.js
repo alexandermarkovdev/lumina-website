@@ -8,7 +8,7 @@ window.LUMINA_PROJECTS = [
     kind: 'Плувен комплекс',
     blurb: 'График, треньори, цени и новини за спортен комплекс с два басейна — подредени така, че родителят да намери всичко за минута.',
     paper: 'yellow',
-    url: 'sites/vsi/index.html?v=3', // v=3: skips browser-cached copies that still open the cookie bar inside the preview
+    url: 'sites/vsi/index.html?v=4', // v=4: SiteGround lets browsers keep this page 180 days; bump on every change (still menu bar, 2026-10-17)
     liveUrl: 'https://vsiswimming.com/',
     readySelector: 'main',
     background: '#edf7fa',

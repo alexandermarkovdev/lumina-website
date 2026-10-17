@@ -92,6 +92,25 @@
     if(seen.has(proofId)&&!proofFresh)showResult();else startQuery();
     proofFresh=false;
   }
+  function labelsHTML(story){
+    const proof=story.proof||null,labels=proof?.deliverables||story.deliverables||null;
+    if(!labels)return '';
+    return labels.map(item=>Array.isArray(item)?`<li class="ps-delivery-${item[1]}">${item[0]}</li>`:`<li>${item}</li>`).join('')+(proof?`<li class="ps-delivery-seo">${proof.ranked===false?'SEO оптимизация':'SEO оптимизация · <strong>№1 в Google</strong>'}</li>`:'');
+  }
+  // On computers the labels of some projects wrap to a second row at narrower widths, which made the preview (and its
+  // coloured paper) shrink and grow when switching projects. The label row keeps the height of the tallest project's
+  // labels at the current width, so the preview keeps one size (owner's report, 2026-10-17).
+  const labelProbe=document.createElement('ul');labelProbe.className='ps-deliverables';labelProbe.setAttribute('aria-hidden','true');
+  Object.assign(labelProbe.style,{position:'absolute',visibility:'hidden',pointerEvents:'none',left:'0',top:'0'});
+  function reserveLabels(){
+    if(!window.matchMedia('(min-width: 951px)').matches||deliverables.hidden){deliverables.style.minHeight='';return}
+    const width=deliverables.getBoundingClientRect().width;if(!width)return;
+    deliverables.after(labelProbe);labelProbe.style.width=width+'px';
+    let tallest=0;
+    projects.forEach(p=>{const html=stories[p.id]&&labelsHTML(stories[p.id]);if(!html)return;labelProbe.innerHTML=html;tallest=Math.max(tallest,labelProbe.getBoundingClientRect().height)});
+    labelProbe.remove();
+    deliverables.style.minHeight=tallest?tallest+'px':'';
+  }
   function setProof(id,story,name){
     clearTimeout(proofTimer);proofLooping=false;
     proof=story.proof||null;proofId=id;proofIndex=0;
@@ -100,7 +119,7 @@
     container.querySelector('.ps-kind').hidden=on;section.classList.toggle('ps-has-deliverables',on);
     if(!on)return;
     deliverables.setAttribute('aria-label',`Какво направихме за ${proof?.label||name}`);
-    deliverables.innerHTML=labels.map(item=>Array.isArray(item)?`<li class="ps-delivery-${item[1]}">${item[0]}</li>`:`<li>${item}</li>`).join('')+(proof?`<li class="ps-delivery-seo">${proof.ranked===false?'SEO оптимизация':'SEO оптимизация · <strong>№1 в Google</strong>'}</li>`:'');
+    deliverables.innerHTML=labelsHTML(story);
     if(!proof){
       plain.querySelector('.ps-plain-about p').textContent=story.about;
       plain.querySelector('.ps-google-note h4 span').textContent=story.highlight;
@@ -149,8 +168,12 @@
     const link=container.querySelector('.ps-open');link.href=p.liveUrl||p.url;link.setAttribute('aria-label',`Отворете ${p.name} в нов раздел`);
     container.querySelector('.ps-about').textContent=story.about;container.querySelector('.ps-features').innerHTML=story.features.map(f=>`<li>${check}<span>${f}</span></li>`).join('');
     container.querySelector('.ps-highlight h4').textContent=story.highlight;container.querySelector('.ps-highlight p').textContent=story.highlightDetail;
+    reserveLabels();
   }
   window.addEventListener('lumina:projectchange',event=>show(event.detail.id));
   picks.forEach(button=>button.addEventListener('click',()=>window.LuminaPreview?.select(button.dataset.select)));
   show(projects[0].id);
+  let lastWidth=0;
+  new ResizeObserver(()=>{const w=container.querySelector('.ps-caption').getBoundingClientRect().width;if(w!==lastWidth){lastWidth=w;reserveLabels()}}).observe(container.querySelector('.ps-caption'));
+  document.fonts?.ready.then(reserveLabels);
 })();
