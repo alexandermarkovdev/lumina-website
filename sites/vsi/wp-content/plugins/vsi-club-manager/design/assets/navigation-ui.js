@@ -32,3 +32,32 @@ document.addEventListener('focusin', event => {
 mobileNav.addEventListener('change', () => setMenu(false));
 window.addEventListener('resize', fitMenu);
 window.addEventListener('scroll', fitMenu, { passive: true });
+
+// Lumina portfolio only (the page is inside a frame there): the preview draws this page scaled down while it
+// auto-scrolls, and Chrome redraws a sticky header a pixel up or down on many scroll steps, so the menu and the
+// „Контакти“ button flickered. A fixed header holds still. It is fixed only once the top bar has scrolled away,
+// where sticky would pin it at the same place, and a spacer keeps its room in the page, so nothing looks different.
+if (window.self !== window.top) {
+  const header = document.querySelector('header.site-header');
+  const topbar = document.querySelector('.topbar');
+  if (header) {
+    const style = document.createElement('style');
+    style.textContent = 'html.lumina-pinned header.site-header{position:fixed;top:0;left:0;right:0}';
+    document.head.append(style);
+    const spacer = document.createElement('div');
+    spacer.hidden = true;
+    spacer.setAttribute('aria-hidden', 'true');
+    header.after(spacer);
+    const root = document.documentElement;
+    const pin = (resized = false) => {
+      const pinned = window.scrollY >= (topbar ? topbar.offsetHeight : 0);
+      if (pinned === root.classList.contains('lumina-pinned') && !resized) return;
+      if (pinned) spacer.style.height = header.offsetHeight + 'px';
+      spacer.hidden = !pinned;
+      root.classList.toggle('lumina-pinned', pinned);
+    };
+    pin();
+    window.addEventListener('scroll', () => pin(), { passive: true });
+    window.addEventListener('resize', () => pin(true));
+  }
+}
