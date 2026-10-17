@@ -61,6 +61,14 @@
     note.style.height = Math.max(rest, note.scrollHeight + 2) + 'px';
   };
   note.addEventListener('input', fitNote);
+  // Reflow existing text when a phone rotates or the form changes width.
+  let noteWidth = 0;
+  new ResizeObserver(([entry]) => {
+    if (entry.contentRect.width === noteWidth) return;
+    noteWidth = entry.contentRect.width;
+    fitNote();
+  }).observe(note);
+  document.fonts?.ready.then(fitNote);
   form.addEventListener('reset', () => { note.style.height = ''; });
   form.addEventListener('input', event => {
     if (!(event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement)) return;
@@ -122,7 +130,8 @@
       if (!field.reportValidity()) {
         // The browser's own bubble fades after a few seconds, so the same words also stay under the button.
         field.setAttribute('aria-invalid', 'true');
-        status.textContent = field.validationMessage;
+        // Keep source copy Bulgarian so the language switch can translate and restore it.
+        status.textContent = !value ? 'Моля, попълнете това поле.' : 'Въведете валиден имейл или телефон.';
         status.classList.add('is-error');
         status.hidden = false;
         return;
@@ -131,20 +140,29 @@
     // send.php emails the request. Say "received" only when the server confirms it; anything else is "not sent".
     submit.disabled = true;
     say('Изпращаме заявката…');
-    let delivered = false, refused = false;
+    let delivered = false, refused = false, timedOut = false;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => { timedOut = true; controller.abort(); }, 20000);
     try {
-      const response = await fetch('send.php', {method: 'POST', body: new FormData(form), headers: {Accept: 'application/json'}});
+      const response = await fetch('send.php', {method: 'POST', body: new FormData(form), headers: {Accept: 'application/json'}, signal: controller.signal});
       refused = response.status === 422;
       delivered = response.ok && (await response.json()).ok === true;
     } catch {
       delivered = false;
+    } finally {
+      clearTimeout(timeout);
     }
     submit.disabled = false;
+    if (timedOut) {
+      // A delayed server may have accepted the request: do not claim it was never sent.
+      say('Не успяхме да потвърдим изпращането навреме. Данните ви са запазени във формата. Моля, свържете се с нас на 0877 776 563 или info@luminastudio.bg, за да проверим заявката.', true);
+      return;
+    }
     if (refused) {
       // The server refuses only a request whose email or phone it cannot use: point at that field, not at "call us".
       const contact = form.elements.contact;
       contact.setAttribute('aria-invalid', 'true');
-      say(message('Въведете валиден имейл или телефон.', 'Enter a valid email or phone number.'), true);
+      say('Въведете валиден имейл или телефон.', true);
       contact.focus();
       return;
     }

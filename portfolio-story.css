@@ -6,7 +6,7 @@
 #portfolio .portfolio-intro h2 span:after{height:27%;bottom:4%;left:-3%;right:-3%}
 #portfolio .intro-aside{max-width:315px;padding:0}#portfolio .intro-aside p{font-size:13px;line-height:1.6;margin:0}
 #portfolio .ps-layout{display:grid;grid-template-columns:minmax(0,1fr) 354px;gap:42px;height:clamp(430px,calc(100svh - 268px),690px)}
-#portfolio .ps-main{display:flex;flex-direction:column;min-width:0;min-height:0}
+#portfolio .ps-main{position:relative;display:flex;flex-direction:column;min-width:0;min-height:0}
 #portfolio .live-stage{flex:1;min-height:0;aspect-ratio:auto}
 #portfolio .live-stage .lp-device--desktop{left:3%;top:6%;width:94%}
 #portfolio .ps-caption{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:16px}
@@ -93,11 +93,18 @@
 #portfolio .ps-deliverables strong{font-weight:800}
 @media(max-width:760px){#portfolio.ps-has-deliverables .ps-caption{grid-template-columns:1fr;gap:10px}#portfolio.ps-has-deliverables .ps-open{grid-row:3;justify-self:start;margin:0}#portfolio .ps-deliverables{grid-row:2}#portfolio .ps-deliverables li{padding:4px 7px}}
 
-/* One cell for whatever sits under the labels (Google block, or the plain summary for projects without one).
-   On wide screens the unused block keeps its space, so every project gets the same preview size. */
+/* The caption and story reserve the tallest project's content at the current width.
+   Hidden measuring copies also follow the language switch without affecting page layout. */
 #portfolio .ps-below{display:grid;flex-shrink:0}
 #portfolio .ps-below>*{grid-area:1/1;min-width:0}
-@media(min-width:951px){#portfolio .ps-below>.ps-google-proof[hidden]{display:grid!important;visibility:hidden;pointer-events:none}}
+#portfolio .ps-measure{display:none}
+@media(min-width:951px){
+#portfolio .ps-main>.ps-caption{min-height:var(--ps-caption-height,0px);flex-shrink:0;align-content:start}
+#portfolio .ps-main>.ps-below{min-height:var(--ps-story-height,0px);align-items:start}
+#portfolio .ps-measure{position:absolute;inset:0 0 auto;display:grid;visibility:hidden;pointer-events:none}
+#portfolio .ps-measure>.ps-caption{grid-area:1/1;align-self:start}
+#portfolio .ps-measure>:not(.ps-caption){grid-area:2/1;align-self:start}
+}
 #portfolio .ps-plain-about h4{font-size:12px;line-height:1.4;font-weight:800;margin:0 0 7px}
 #portfolio .ps-plain-about p{font-size:13px;line-height:1.6;color:#56534b;margin:0;max-width:46ch}
 @media(max-width:760px){#portfolio .ps-below{grid-row:3}#portfolio .ps-below>.ps-google-proof{grid-row:auto}}

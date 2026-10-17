@@ -57,6 +57,10 @@ html{scrollbar-gutter:stable}
 .lp-device>button{touch-action:pan-y pinch-zoom}
 .lp-status{position:absolute;left:0;top:0;width:100%;height:var(--device-top);display:flex;align-items:center;justify-content:space-between;padding:4px 31px 0;font:600 15px/1 system-ui,sans-serif;box-sizing:border-box;pointer-events:none;font-variant-numeric:tabular-nums}
 .lp-status svg{width:66px;height:16px}
+/* A scaled iframe can expose scrolling pixels along its top edge. Keep the desktop
+   browser bar above it and overlap that seam by one displayed pixel. */
+:is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-status{z-index:1}
+:is(.lp-surface,.lp-miniature)[data-mode=desktop] .lp-status::after{content:'';position:absolute;left:0;right:0;top:100%;height:var(--lp-edge-guard,1px);background:inherit;pointer-events:none}
 .lp-island{position:absolute;left:50%;top:12px;translate:-50% 0;width:120px;height:34px;border-radius:24px;background:#020303;pointer-events:none}
 .lp-island::after{content:'';position:absolute;width:10px;height:10px;border-radius:50%;right:10px;top:12px;background:radial-gradient(circle at 38% 35%,#263b56,#080d17 55%,#171b22 80%)}
 .lp-home{position:absolute;left:0;bottom:0;width:100%;height:var(--device-bottom);border:0;padding:0;display:grid;place-items:center;background:transparent;cursor:pointer;color:inherit}

@@ -29,7 +29,6 @@
   const googleBar=googleProof.querySelector('.ps-google-bar');
   const typedQuery=googleProof.querySelector('.ps-google-typed');
   const googleResult=googleProof.querySelector('.ps-google-result');
-  const resultLink=googleResult.querySelector('a');
   const searchLink=googleProof.querySelector('.ps-google-link');
   const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
   // Projects whose first result has already been shown; from then on only the result line blinks between searches.
@@ -97,19 +96,18 @@
     if(!labels)return '';
     return labels.map(item=>Array.isArray(item)?`<li class="ps-delivery-${item[1]}">${item[0]}</li>`:`<li>${item}</li>`).join('')+(proof?`<li class="ps-delivery-seo">${proof.ranked===false?'SEO оптимизация':'SEO оптимизация · <strong>№1 в Google</strong>'}</li>`:'');
   }
-  // On computers the labels of some projects wrap to a second row at narrower widths, which made the preview (and its
-  // coloured paper) shrink and grow when switching projects. The label row keeps the height of the tallest project's
-  // labels at the current width, so the preview keeps one size (owner's report, 2026-10-17).
-  const labelProbe=document.createElement('ul');labelProbe.className='ps-deliverables';labelProbe.setAttribute('aria-hidden','true');
-  Object.assign(labelProbe.style,{position:'absolute',visibility:'hidden',pointerEvents:'none',left:'0',top:'0'});
-  function reserveLabels(){
-    if(!window.matchMedia('(min-width: 951px)').matches||deliverables.hidden){deliverables.style.minHeight='';return}
-    const width=deliverables.getBoundingClientRect().width;if(!width)return;
-    deliverables.after(labelProbe);labelProbe.style.width=width+'px';
-    let tallest=0;
-    projects.forEach(p=>{const html=stories[p.id]&&labelsHTML(stories[p.id]);if(!html)return;labelProbe.innerHTML=html;tallest=Math.max(tallest,labelProbe.getBoundingClientRect().height)});
-    labelProbe.remove();
-    deliverables.style.minHeight=tallest?tallest+'px':'';
+  function fillPlain(element,story){
+    element.querySelector('.ps-plain-about p').textContent=story.about;
+    element.querySelector('.ps-google-note h4 span').textContent=story.highlight;
+    element.querySelector('.ps-google-note p').textContent=story.highlightDetail;
+  }
+  function fillProof(element,proof){
+    const link=element.querySelector('.ps-google-result a'),ranked=proof.ranked!==false;
+    link.href=proof.url;link.querySelector('strong').textContent=proof.title;link.querySelector('span').textContent=proof.domain;
+    element.querySelector('.ps-google-note p').textContent=proof.note;
+    element.querySelector('.ps-google-rank').hidden=!ranked;
+    element.querySelector('.ps-google-note h4 span').textContent=ranked?'Първи в Google.':'Направен, за да го намират.';
+    element.querySelector('.ps-google-source').textContent=ranked?'Визуализация · позиция по данни на Lumina.':'Визуализация · примерни търсения.';
   }
   function setProof(id,story,name){
     clearTimeout(proofTimer);proofLooping=false;
@@ -121,19 +119,12 @@
     deliverables.setAttribute('aria-label',`Какво направихме за ${proof?.label||name}`);
     deliverables.innerHTML=labelsHTML(story);
     if(!proof){
-      plain.querySelector('.ps-plain-about p').textContent=story.about;
-      plain.querySelector('.ps-google-note h4 span').textContent=story.highlight;
-      plain.querySelector('.ps-google-note p').textContent=story.highlightDetail;
+      fillPlain(plain,story);
       return;
     }
     googleProof.setAttribute('aria-label',`Видимост на ${proof.label} в Google`);
-    resultLink.href=proof.url;resultLink.querySelector('strong').textContent=proof.title;resultLink.querySelector('span').textContent=proof.domain;
-    googleProof.querySelector('.ps-google-note p').textContent=proof.note;
     // "ranked: false" keeps the searches but claims no position: no #1 badge, a different heading and source line.
-    const ranked=proof.ranked!==false;
-    googleProof.querySelector('.ps-google-rank').hidden=!ranked;
-    googleProof.querySelector('.ps-google-note h4 span').textContent=ranked?'Първи в Google.':'Направен, за да го намират.';
-    googleProof.querySelector('.ps-google-source').textContent=ranked?'Визуализация · позиция по данни на Lumina.':'Визуализация · примерни търсения.';
+    fillProof(googleProof,proof);
     if(reducedMotion.matches)finishProof();
     else{
       // Choosing a project always restarts its loop; one that has played before keeps its note showing meanwhile.
@@ -168,12 +159,45 @@
     const link=container.querySelector('.ps-open');link.href=p.liveUrl||p.url;link.setAttribute('aria-label',`Отворете ${p.name} в нов раздел`);
     container.querySelector('.ps-about').textContent=story.about;container.querySelector('.ps-features').innerHTML=story.features.map(f=>`<li>${check}<span>${f}</span></li>`).join('');
     container.querySelector('.ps-highlight h4').textContent=story.highlight;container.querySelector('.ps-highlight p').textContent=story.highlightDetail;
-    reserveLabels();
   }
   window.addEventListener('lumina:projectchange',event=>show(event.detail.id));
   picks.forEach(button=>button.addEventListener('click',()=>window.LuminaPreview?.select(button.dataset.select)));
   show(projects[0].id);
-  let lastWidth=0;
-  new ResizeObserver(()=>{const w=container.querySelector('.ps-caption').getBoundingClientRect().width;if(w!==lastWidth){lastWidth=w;reserveLabels()}}).observe(container.querySelector('.ps-caption'));
-  document.fonts?.ready.then(reserveLabels);
+  // Reserve the tallest complete caption and story, not just the service labels.
+  // These inert copies share the real width and translation/font updates, so every
+  // project keeps the same paper size, including on the very first switch.
+  const main=container.querySelector('.ps-main'),measurements=document.createElement('div');
+  measurements.className='ps-measure';measurements.setAttribute('aria-hidden','true');measurements.inert=true;
+  const captionProbes=[],storyProbes=[];
+  projects.forEach(project=>{
+    const story=stories[project.id];if(!story)return;
+    const caption=container.querySelector('.ps-caption').cloneNode(true),labels=labelsHTML(story);
+    caption.querySelector('.ps-name').textContent=project.name;
+    caption.querySelector('.ps-kind').textContent=project.kind;caption.querySelector('.ps-kind').hidden=Boolean(labels);
+    const list=caption.querySelector('.ps-deliverables');list.innerHTML=labels;list.hidden=!labels;
+    let panel;
+    if(story.proof){panel=googleProof.cloneNode(true);fillProof(panel,story.proof)}
+    else if(labels){panel=plain.cloneNode(true);fillPlain(panel,story)}
+    else{
+      panel=storyRow.cloneNode(true);
+      panel.querySelector('.ps-about').textContent=story.about;
+      panel.querySelector('.ps-features').innerHTML=story.features.map(f=>`<li>${check}<span>${f}</span></li>`).join('');
+      panel.querySelector('.ps-highlight h4').textContent=story.highlight;panel.querySelector('.ps-highlight p').textContent=story.highlightDetail;
+    }
+    panel.hidden=false;panel.removeAttribute('data-proof-state');
+    captionProbes.push(caption);storyProbes.push(panel);measurements.append(caption,panel);
+  });
+  main.append(measurements);
+  function reserveDetails(){
+    if(!matchMedia('(min-width: 951px)').matches){main.style.removeProperty('--ps-caption-height');main.style.removeProperty('--ps-story-height');return}
+    const tallest=nodes=>Math.max(0,...nodes.map(node=>{
+      const css=getComputedStyle(node);
+      return node.getBoundingClientRect().height+parseFloat(css.marginTop)+parseFloat(css.marginBottom);
+    }));
+    main.style.setProperty('--ps-caption-height',Math.ceil(tallest(captionProbes))+'px');
+    main.style.setProperty('--ps-story-height',Math.ceil(tallest(storyProbes))+'px');
+  }
+  reserveDetails();
+  new ResizeObserver(reserveDetails).observe(measurements);
+  document.fonts?.ready.then(reserveDetails);
 })();

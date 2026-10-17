@@ -473,6 +473,7 @@
     'Въведете валиден имейл или телефон.': 'Enter a valid email or phone number.',
     'Или направо:': "Or contact us here:",
     'Изпращаме заявката…': 'Sending your request…',
+    'Не успяхме да потвърдим изпращането навреме. Данните ви са запазени във формата. Моля, свържете се с нас на 0877 776 563 или info@luminastudio.bg, за да проверим заявката.': 'We couldn’t confirm your request in time. Your details are still in the form. Please contact us on 0877 776 563 or info@luminastudio.bg so we can check your request.',
     'Какво включва': 'What’s included',
     'Пишете ни.': 'Write to us.',
     'До 24 часа виждате демо на вашия сайт.': 'Within 24 hours you see a demo of your website.',

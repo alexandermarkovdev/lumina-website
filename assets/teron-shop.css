@@ -13,7 +13,8 @@
 #why-sites.compact .shop-variant .stock-label{font-size:9px;white-space:nowrap}
 #why-sites.compact .shop-variant .product-specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:8px 12px;gap:8px 9px;background:#ecefe7}
 #why-sites.compact .shop-variant .product-specs span{font-size:9px;line-height:1.2}
-#why-sites.compact .shop-variant .product-specs b{font-size:10px;line-height:1.3;font-weight:700;margin-top:3px;overflow-wrap:normal}
+#why-sites.compact .shop-variant .product-specs>div{min-width:0;overflow-wrap:anywhere}
+#why-sites.compact .shop-variant .product-specs b{font-size:10px;line-height:1.3;font-weight:700;margin-top:3px;overflow-wrap:anywhere}
 #why-sites.compact .shop-variant .shop-purchase{padding:9px 12px 0}
 #why-sites.compact .shop-variant .price-and-quantity{min-height:35px;padding:0 0 8px;align-items:center}
 #why-sites.compact .shop-variant .product-price{font-size:23px;line-height:1.05;margin:0}
@@ -32,7 +33,7 @@
 @media(max-width:1100px){
  #why-sites.compact .shop-variant .shop-product{min-height:44px;font-size:12px}
  #why-sites.compact .shop-variant .stock-label{font-size:10.5px}
- #why-sites.compact .shop-variant .product-specs{gap:8px 6px}
+ #why-sites.compact .shop-variant .product-specs{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 6px}
  #why-sites.compact .shop-variant .product-specs span{font-size:10.5px}
  #why-sites.compact .shop-variant .product-specs b{font-size:11.5px;letter-spacing:-.01em}
  #why-sites.compact .shop-variant .product-price small{font-size:11.5px}
@@ -40,6 +41,10 @@
  #why-sites.compact .shop-variant .quantity button:after{content:"";position:absolute;inset:-2px -5px}
  #why-sites.compact .shop-variant .product-faq summary{min-height:40px;font-size:12px}
  #why-sites.compact .shop-variant .product-faq details p,#why-sites.compact .shop-variant .shop-feedback{font-size:12px}
+}
+@media(max-width:600px){
+ #why-sites.compact .shop-variant .shop-product{flex-direction:column;gap:3px;text-align:center}
+ #why-sites.compact .shop-variant .price-and-quantity{flex-wrap:wrap;gap:8px}
 }
 @media(max-width:370px){
  #why-sites.compact .shop-variant .shop-product{font-size:11px}
