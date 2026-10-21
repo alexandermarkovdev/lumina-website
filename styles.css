@@ -246,7 +246,7 @@ html #why-sites.compact,html #services,html #portfolio,html #contact{border-top:
 .traffic-lights i:nth-child(2){background:var(--yellow)}
 .traffic-lights i:nth-child(3){background:var(--blue)}
 
-/* The 24-hour promise in the hero: a pale-blue cut-paper note of its own, shaped like the yellow demo note and
+/* The "no commitment" note in the hero: a pale-blue cut-paper note of its own, shaped like the yellow demo note and
    sitting clear of the blue shape (it used to be a white card lying on it). Positions are shares of the showcase. */
 .process-note{left:15.5%;right:auto;top:89%;bottom:auto;width:auto;padding:13px 22px 15px 20px;background:none;box-shadow:none;font-size:23px;line-height:1;transform:rotate(6deg);z-index:4;isolation:isolate;filter:drop-shadow(0 9px 9px #2723110f)}
 .process-note:before{content:"";position:absolute;inset:0;z-index:-1;background:var(--pale-blue);clip-path:polygon(7% 12%,58% 0,97% 16%,100% 62%,84% 100%,22% 94%,0 55%)}

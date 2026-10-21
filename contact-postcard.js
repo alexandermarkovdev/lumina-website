@@ -8,13 +8,13 @@
     <div class="cp-panel">
       <div class="cp-story">
         <h2 class="cp-headline" id="contact-title">Всичко започва<br>с една идея.</h2>
-        <ol class="cp-steps"><li><i>1</i><span>Пишете ни.</span></li><li><i>2</i><span>До 24 часа виждате демо на вашия сайт.</span></li><li><i>3</i><span>Харесва ли ви, уговаряме цена. Ако не, не дължите нищо.</span></li></ol>
-        <div class="cp-offer"><strong>До 24 часа<span>безплатно демо</span></strong><p>Първи дизайн,<br>с идея за вашия бизнес.</p></div>
+        <ol class="cp-steps"><li><i>1</i><span>Пишете ни.</span></li><li><i>2</i><span>Показваме ви демо на вашия сайт.</span></li><li><i>3</i><span>Харесва ли ви, уговаряме цена. Ако не, не дължите нищо.</span></li></ol>
+        <div class="cp-offer"><strong>Безплатно<span>демо по заявка</span></strong><p>Първи дизайн,<br>с идея за вашия бизнес.</p></div>
         <p class="cp-signature">Вие давате идеята,<br>а ние правим първия дизайн.<svg viewBox="0 0 100 74" fill="none" aria-hidden="true"><path d="M5 9C12 47 53 59 90 43M76 38l16 3-8 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
       </div>
       <form class="cp-letter" aria-label="Заявка за безплатно демо">
         <div class="cp-stamp" aria-hidden="true"><b>0 €</b><span>демо</span></div>
-        <svg class="cp-postmark" viewBox="0 0 128 76" aria-hidden="true"><circle cx="34" cy="38" r="27"/><circle cx="34" cy="38" r="20"/><text x="34" y="36" text-anchor="middle">LUMINA</text><text x="34" y="47" text-anchor="middle">до 24 ч.</text><path d="M66 22c8-5 14 5 22 0s14 5 22 0 10 4 16 1M66 33c8-5 14 5 22 0s14 5 22 0 10 4 16 1M66 44c8-5 14 5 22 0s14 5 22 0 10 4 16 1M66 55c8-5 14 5 22 0s14 5 22 0 10 4 16 1"/></svg>
+        <svg class="cp-postmark" viewBox="0 0 128 76" aria-hidden="true"><circle cx="34" cy="38" r="27"/><circle cx="34" cy="38" r="20"/><text x="34" y="36" text-anchor="middle">LUMINA</text><text x="34" y="47" text-anchor="middle">STUDIO</text><path d="M66 22c8-5 14 5 22 0s14 5 22 0 10 4 16 1M66 33c8-5 14 5 22 0s14 5 22 0 10 4 16 1M66 44c8-5 14 5 22 0s14 5 22 0 10 4 16 1M66 55c8-5 14 5 22 0s14 5 22 0 10 4 16 1"/></svg>
         <div class="cp-letter-head"><span class="cp-address">До: Lumina Studio</span><h3 class="cp-form-title">Здравейте, Lumina.</h3><p class="cp-form-lead">Имам бизнес и искам да го видя онлайн.</p></div>
         <div class="cp-field-pair">
           <label class="cp-field" for="demo-name"><span>Вашето име</span><input id="demo-name" name="name" type="text" autocomplete="name" maxlength="200" placeholder="Как да се обръщаме към вас?" required></label>
@@ -98,7 +98,7 @@
       <div class="ty-card" role="dialog" aria-modal="true" aria-labelledby="ty-title">
         <i class="ty-back"></i>
         <div class="ty-stamp" aria-hidden="true"><b>0 €</b><span>демо</span></div>
-        <div><h2 id="ty-title">Благодарим!</h2><p>Получихме заявката ви. До 24 часа ще ви покажем демо на вашия сайт.</p><button class="ty-ok" type="button">Добре</button></div>
+        <div><h2 id="ty-title">Благодарим!</h2><p>Получихме заявката ви. Ще се свържем с вас и ще ви покажем демо на вашия сайт.</p><button class="ty-ok" type="button">Добре</button></div>
         <div class="ty-lines" aria-hidden="true"><span>От: Lumina Studio</span><span>До: вас</span><span>&nbsp;</span></div>
         <button class="ty-x" type="button" aria-label="Затвори">×</button>
       </div>`;

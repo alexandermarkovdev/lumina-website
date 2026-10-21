@@ -43,7 +43,7 @@
   .sticky-demo.is-shown .sticky-marks i:nth-child(3){animation-delay:.71s}
 }
 
-/* The yellow "Безплатно демо до 24 часа" note on the phone hero picture: the same three ink marks, drop-in and
+/* The yellow "Заяви безплатно демо" note on the phone hero picture: the same three ink marks, drop-in and
    periodic nudge as the yellow note on wide screens. The marks sit outside the note because the note is clipped
    to its paper shape; they turn around the note's centre so the two move as one piece. */
 .note-marks{display:none}
