@@ -176,6 +176,8 @@
     if (delivered) {
       form.reset();
       status.hidden = true;
+      // Counted in Google Analytics as a lead; gtag exists only if the visitor accepted cookies.
+      window.gtag?.('event', 'generate_lead');
       thank();
     } else {
       say('', true);

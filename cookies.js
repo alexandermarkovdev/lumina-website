@@ -2,7 +2,7 @@
   'use strict';
   // Cookie notice. Google Analytics is loaded only after the visitor accepts.
   // Put the measurement ID here (looks like G-XXXXXXXXXX); while it is empty no analytics load at all.
-  const GA_ID = '';
+  const GA_ID = 'G-0YPK9LKDS8';
   const KEY = 'lumina-cookies';
   const read = () => { try { return localStorage.getItem(KEY); } catch { return null; } };
   const write = value => { try { localStorage.setItem(KEY, value); } catch {} };
