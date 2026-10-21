@@ -55,6 +55,7 @@
     'Примерен уебсайт SOLA за интериорен дизайн, показан на компютър и телефон. Безплатно демо до 24 часа.': 'Sample SOLA interior design website shown on a computer and a phone. Free demo within 24 hours.',
     'Студиото': 'Studio',
     'Проекти': 'Projects',
+    'Блог': 'Blog',
     'ИНТЕРИОРИ С ХАРАКТЕР': 'INTERIORS WITH CHARACTER',
     'Място': 'A place',
     'за хубавите': 'for the good',

@@ -5,3 +5,4 @@ Disallow: /previews/
 Disallow: /sites/
 
 Sitemap: https://luminastudio.bg/sitemap.xml
+Sitemap: https://luminastudio.bg/blog/wp-sitemap.xml

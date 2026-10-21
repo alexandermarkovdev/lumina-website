@@ -282,3 +282,11 @@ html #why-sites.compact,html #services,html #portfolio,html #contact{border-top:
  .expanded-menu a:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
  .menu-note{font:600 23px/1.1 Caveat,cursive;margin-top:14px;max-width:none}
 }
+
+/* The "Блог" link (2026-10-22): a sixth slip in the phone menu. Its arrow points up-right because it opens another page
+   instead of scrolling down, and "Контакт" after it turns pink so two yellow slips do not meet. */
+@media(max-width:850px){
+ .expanded-menu a:nth-of-type(6){transform:rotate(.8deg)}
+ .expanded-menu a:nth-of-type(6):before{background:var(--pink)}
+ .expanded-menu a[href="blog/"] .icon,.expanded-menu a[href="blog/"]:hover .icon{transform:none}
+}
