@@ -1,4 +1,4 @@
-/* Hero: three example sites (salon, pizza place, hotel) that change by themselves every 4 seconds in the
+/* Hero: three example sites (salon, pizza place, Bloom Nails) that change by themselves every 4 seconds in the
    browser and phone frames. Taken from the owner's zip (Lumina-complete-selected-homepage-v2, 2026-10-14)
    without its picker and pause buttons, and with nothing clickable (owner's request). */
 .hero-demo-stage{position:relative;isolation:isolate;overflow:hidden;background:#25251f;pointer-events:none}
@@ -42,3 +42,9 @@
   .hero-slide.is-entering{animation:hero-quiet-change .18s linear both}
   @keyframes hero-quiet-change{from{opacity:0}to{opacity:1}}
 }
+
+/* Bloom Nails: use the supplied desktop design; crop the mobile mockup to its screen
+   so the existing Lumina phone frame remains the only device frame. */
+.hero-slide--bloom .hero-preview-image{object-position:center top}
+.hero-demo-stage--phone .hero-slide--bloom{background:#fff5f4}
+.hero-demo-stage--phone .hero-slide--bloom .hero-preview-image{left:-39.25%;top:calc(14px - 11.18%);width:178.33%;height:calc(117.34% - 16.43px);object-fit:fill}

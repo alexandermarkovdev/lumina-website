@@ -6,10 +6,10 @@
   'use strict';
   const T = {
     // Rotating hero (assets/hero-demos.js); the screenshots themselves stay Bulgarian
-    "Три примерни сайта на компютър и телефон: салон, пицария и хотел.": "Three example websites on a computer and phone: a salon, a pizzeria and a hotel.",
+    "Три примерни сайта на компютър и телефон: фризьорски салон, пицария и салон за маникюр.": "Three example websites on a computer and phone: a hair salon, a pizzeria and a nail salon.",
     "Лиора — фризьорски салон с колаж от снимки": "Liora, a hair salon with a photo collage",
     "Forno — пицария с меню и резервации": "Forno, a pizzeria with a menu and table booking",
-    "Хотел край морето с онлайн резервации": "Seaside hotel with online booking",
+    "Bloom Nails — салон за маникюр в Пещера": "Bloom Nails, a nail salon in Peshtera",
     // Earlier static seaside hero
     "Запазете си няколко дни край морето.": "Book a few days by the sea.",
     "Стаи": "Rooms",
