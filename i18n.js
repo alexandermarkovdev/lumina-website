@@ -6,10 +6,13 @@
   'use strict';
   const T = {
     // Rotating hero (assets/hero-demos.js); the screenshots themselves stay Bulgarian
-    "Три примерни сайта на компютър и телефон: фризьорски салон, пицария и салон за маникюр.": "Three example websites on a computer and phone: a hair salon, a pizzeria and a nail salon.",
+    "Пет примерни сайта на компютър и телефон: фризьорски салон, маникюр, плувен комплекс, бръснарница и покривна компания.": "Five example websites on a computer and phone: a hair salon, a nail salon, a swimming complex, a barbershop and a roofing company.",
     "Лиора — фризьорски салон с колаж от снимки": "Liora, a hair salon with a photo collage",
     "Forno — пицария с меню и резервации": "Forno, a pizzeria with a menu and table booking",
     "Bloom Nails — салон за маникюр в Пещера": "Bloom Nails, a nail salon in Peshtera",
+    "VSI — плувен комплекс": "VSI, a swimming complex",
+    "Razor — бръснарница в Стамболийски": "Razor, a barbershop in Stamboliyski",
+    "JTN — покриви и фасадни панели": "JTN, roofing and facade panels",
     // Earlier static seaside hero
     "Запазете си няколко дни край морето.": "Book a few days by the sea.",
     "Стаи": "Rooms",
@@ -232,9 +235,9 @@
     'Целият ви склад —': 'Your whole warehouse —',
     'на един екран.': 'on one screen.',
     'Продукти, наличности и поръчки. Клиентите намират отговорите сами.': "Customers can check products and stock, then place an order.",
-    'Терон': 'Teron',
+    'JTN': 'JTN',
     'Строителни материали': 'Building materials',
-    'Терон · Строителни материали': 'Teron · Building materials',
+    'JTN · Строителни материали': 'JTN · Building materials',
     'Зидария': 'Masonry',
     'Керамични блокове': 'Ceramic blocks',
     'Керамичен блок': 'Ceramic block',

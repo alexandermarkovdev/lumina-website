@@ -1,4 +1,4 @@
-// Hero: shows the salon, the pizza place and Bloom Nails in turn, 4 seconds each, round and round.
+// Hero: shows Liora, Bloom Nails, VSI swimming, Razor barber and JTN roofing in turn, 4 seconds each, round and round.
 // Browser and phone change together. No buttons and nothing to click (owner's request, 2026-10-14).
 (() => {
   'use strict';

@@ -28,7 +28,7 @@ let salon={service:0,day:2,time:'13:00',confirmed:false};
 let materials={size:25,quantity:1,delivery:'delivery',open:false,completed:false};
 function chrome(type){const title={restaurant:'Меню и поръчки',salon:'Запази час',materials:'Строителни материали'}[type];return `<div class="browser-bar"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><span>${title}</span></div>`}
 function siteHeader(type){
- const brands={restaurant:{name:'Форно',category:'Пицария'},salon:{name:'Лиора',category:'Салон за красота'},materials:{name:'Терон',category:'Строителни материали'}};
+ const brands={restaurant:{name:'Форно',category:'Пицария'},salon:{name:'Лиора',category:'Салон за красота'},materials:{name:'JTN',category:'Строителни материали'}};
  const brand=brands[type];
  return `<nav class="site-nav" aria-label="${brand.name} · ${brand.category}"><span class="site-wordmark">${brand.name}<em aria-hidden="true">.</em></span><span class="site-nav-caption">${brand.category}</span>${type==='restaurant'?`<button type="button" class="nav-cart" data-food-cart aria-label="Отвори кошницата">${icon('bag')}<span class="cart-badge" data-cart-count>0</span></button>`:''}</nav>`;
 }
